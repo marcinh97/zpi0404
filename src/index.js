@@ -7,6 +7,7 @@ import LoginButton from './LoginButton';
 // import * as serviceWorker from './serviceWorker';
 import AfterLogging from "./AfterLogging";
 import LoginConfirmation from "./LoginConfirmation";
+import MapApp from "./MapApp";
 
 const routing = (
     <Router>
@@ -15,6 +16,8 @@ const routing = (
             <Route path="/logging" component={LoginButton} />
             <Route path="/logged" component = {AfterLogging}/>
             <Route path="/confirm" component = {LoginConfirmation}/>
+            <Route path="/map" component = {MapApp}/>
+
     </div>
     </Router>
 );

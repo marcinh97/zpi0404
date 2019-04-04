@@ -25,7 +25,8 @@ import {Button, Nav, Navbar} from "react-bootstrap";
 class App extends Component {
 
     state = {
-        redirect: false
+        redirect: false,
+        redirectMap : false
     }
     constructor() {
         super();
@@ -37,12 +38,22 @@ class App extends Component {
         })
     }
 
+    setRedirectMap = () => {
+        this.setState({
+            redirectMap: true
+        })
+    }
     renderRedirect = () => {
         if (this.state.redirect) {
             return <Redirect to='/logging'/>
         }
     }
 
+    renderRedirectMap = () => {
+        if (this.state.redirectMap) {
+            return <Redirect to='/map'/>
+        }
+    }
     render() {
         return (
             <div className="App">
@@ -57,7 +68,10 @@ class App extends Component {
                                 <Nav.Link href="#services">Działania</Nav.Link>
                                 <Nav.Link href="#portfolio">Portfolio</Nav.Link>
                                 <Nav.Link href="#contact">Kontakt</Nav.Link>
-                                <Nav.Link href="#Mapa.html">Mapa</Nav.Link>
+                                <div>
+                                    {this.renderRedirectMap()}
+                                    <Nav.Link onClick={this.setRedirectMap}>Mapa </Nav.Link>
+                                </div>
                                 <div>
                                     {this.renderRedirect()}
                                     <Nav.Link onClick={this.setRedirect}>Zaloguj się </Nav.Link>
