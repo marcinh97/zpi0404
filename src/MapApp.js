@@ -61,7 +61,7 @@ class MapApp extends Component {
     // our first get method that uses our backend api to
     // fetch data from our data base
     getDataFromDb = () => {
-        fetch("https://charytatywni.herokuapp.com:8080/users")
+        fetch("https://backendzpipwr.herokuapp.com/users")
             .then(data => data.json())
             .then(res => {console.log(res); this.setState({ data: res })});
         console.log("Fetched");
