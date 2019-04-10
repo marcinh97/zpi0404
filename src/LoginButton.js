@@ -62,6 +62,7 @@ class LoginButton extends Component {
                         <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet"/>
 
                     <link href="css/creative.min.css" rel="stylesheet"/>
+                    <link href="cssForLogin.css" rel="stylesheet"/>
 
                 </head>
                 <body id="page-top">
@@ -80,11 +81,11 @@ class LoginButton extends Component {
                 <header className="masthead">
                     <div id = "marginTopStylId" className="container_login">
                         {/*<div className="container_login" style="margin-top: 10%">*/}
-                        <div className="row_login">
+                        <div className="row_loginMy">
                             {/*<div>*/}
-                            <div className="col-md-9 col-lg-8 mx-auto">
+                            <div className="col-md-9 col-lg-8 mx-auto myHeader">
                                 <h3 className="login-heading mb-4">Witaj ponownie!</h3>
-                                <form>
+                                <form method="post" onSubmit={this.kot}>
                                     <div className="form-label-group">
                                         <input type="email" id="inputEmail" className="form-control"
                                                placeholder="Adres email" required autoFocus/>
@@ -133,7 +134,7 @@ class LoginButton extends Component {
                     </div>
                 </header>
 
-                <footer className="bg-light py-5">
+                <footer className="bg-light py-5My">
                     <div className="container">
                         <div className="small text-center text-muted">Copyright &copy; 2019 - Start Bootstrap oraz super
                             programistka frontu Ewa Łyko
@@ -183,6 +184,29 @@ class LoginButton extends Component {
     }
 
 
+    kot = (e) => {
+
+        e.preventDefault();
+
+        let emailValue = document.getElementById("inputEmail").value;
+        let passwordValue = document.getElementById("inputPassword").value;
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'https://backendzpipwr.herokuapp.com/tryLogin');
+        //xhr.open('POST', 'http://localhost:8083/tryLogin');
+        xhr.setRequestHeader('Content-Type', "application/json");
+        xhr.send(JSON.stringify({password:passwordValue, email:emailValue}));
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                window.open("/logged", "_self");
+            } else {
+                window.open("/logging", "_self");
+                //console.error(xhr.statusText);
+            }
+        };
+
+
+
+    }
 
 
     // componentDidMount() {

@@ -43,12 +43,24 @@ class App extends Component {
             redirectMap: true
         })
     }
+
+
+    setRedirectRegister = () => {
+        this.setState({
+            redirectReg: true
+        })
+    }
     renderRedirect = () => {
         if (this.state.redirect) {
             return <Redirect to='/logging'/>
         }
     }
 
+    renderRedirectRegister = () => {
+        if (this.state.redirectReg) {
+            return <Redirect to='/register'/>
+        }
+    }
     renderRedirectMap = () => {
         if (this.state.redirectMap) {
             return <Redirect to='/map'/>
@@ -242,7 +254,11 @@ class App extends Component {
                 <section className="page-section bg-dark text-white">
                     <div className="container text-center">
                         <h2 className="mb-4">Zainteresowany? Zarejestruj się już dziś!</h2>
-                        <button className="btn btn-light btn-xl" onClick='goToLogin' >Rejestracja</button>
+                        <div className="btn btn-light btn-xl" >
+                            {this.renderRedirectRegister()}
+                            <Nav.Link onClick={this.setRedirectRegister}>Zarejestuj się </Nav.Link>
+                        </div>
+                       {/* <button className="btn btn-light btn-xl" onClick='goToLogin' >Rejestracja</button>*/}
 
                         {/*<a className="btn btn-light btn-xl" href="Logowanie.html">Rejestracja</a>*/}
                     </div>

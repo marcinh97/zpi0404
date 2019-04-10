@@ -4,11 +4,10 @@ import './index.css';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
 import App from './App';
 import LoginButton from './LoginButton';
-// import * as serviceWorker from './serviceWorker';
 import AfterLogging from "./AfterLogging";
 import LoginConfirmation from "./LoginConfirmation";
 import MapApp from "./MapApp";
-
+import RegisterToPortal from "./Register";
 const routing = (
     <Router>
     <div>
@@ -17,6 +16,7 @@ const routing = (
             <Route path="/logged" component = {AfterLogging}/>
             <Route path="/confirm" component = {LoginConfirmation}/>
             <Route path="/map" component = {MapApp}/>
+            <Route path="/register" component ={RegisterToPortal}/>
 
     </div>
     </Router>
