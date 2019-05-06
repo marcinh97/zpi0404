@@ -25,8 +25,29 @@ import MapApp from "./MapApp";
 
 class Register extends Component {
 
+    constructor()
+    {
+        super();
+
+        this.state = {
+            hideText: true
+        }
+        this.handleChange = this.handleChange.bind(this);
+
+        this.alreadyRegistered = (
+            <p >Ten mail jest już zarejestrowany!</p>
+            );
+
+    };
+
+    handleChange(event)
+    {
+        this.setState({hideText: false});
+    }
+
     render() {
-        var partial = <p id="alreadyRegistered">Ten mail jest już zarejestrowany!</p>
+
+        const style= this.state.hideText ? {display: 'none'} :{};
         return (
             <div className="LoginButton">
                 <head>
@@ -98,8 +119,11 @@ class Register extends Component {
                                         type="submit">
                                         Zarejestruj
                                     </button>
+                                    <div className="App" style={style} id="textToShow">
+                                        {this.alreadyRegistered}
+                                    </div>
                                 </form>
-                                {partial}
+
 
                             </div>
                         </div>
@@ -121,29 +145,29 @@ class Register extends Component {
 
     }
 
-    pies = (e) => {
+    pies = (e) =>
+    {
 
         e.preventDefault();
-        document.getElementById("alreadyRegistered").style.visibility = "visible";
-
 
         let nameValue = document.getElementById("inputName").value;
         let surnameValue = document.getElementById("inputSurname").value;
         let emailValue = document.getElementById("inputEmail").value;
         let passwordValue = document.getElementById("inputPassword").value;
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'https://backendzpipwr.herokuapp.com/register');
-        //xhr.open('POST', 'http://localhost:8083/register');
+        xhr.open('POST', 'https://backendzpipwr.herokuapp.com/register',true);
+        //xhr.open('POST', 'http://localhost:8083/register',true);
         xhr.setRequestHeader('Content-Type', "application/json");
         xhr.send(JSON.stringify({name:nameValue, username: surnameValue, password:passwordValue, email:emailValue}));
         xhr.onload = function () {
             if (xhr.status === 200) {
                 window.open("/logged", "_self");
             } else {
-                window.open("/register", "_self");
-                 //console.error(xhr.statusText);
+                //window.open("/register", "_self");
             }
         };
+
+        this.setState({hideText: false});
 
 
 

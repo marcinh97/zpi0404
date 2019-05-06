@@ -191,8 +191,8 @@ class LoginButton extends Component {
         let emailValue = document.getElementById("inputEmail").value;
         let passwordValue = document.getElementById("inputPassword").value;
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'https://backendzpipwr.herokuapp.com/tryLogin');
-        //xhr.open('POST', 'http://localhost:8083/tryLogin');
+        xhr.open('POST', 'https://backendzpipwr.herokuapp.com/tryLogin',true);
+        //xhr.open('POST', 'http://localhost:8083/tryLogin',true);
         xhr.setRequestHeader('Content-Type', "application/json");
         xhr.send(JSON.stringify({password:passwordValue, email:emailValue}));
         xhr.onload = function () {
@@ -200,10 +200,10 @@ class LoginButton extends Component {
                 window.open("/logged", "_self");
             } else {
                 window.open("/logging", "_self");
-                //console.error(xhr.statusText);
             }
         };
 
+        return false;
 
 
     }
