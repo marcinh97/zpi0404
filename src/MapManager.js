@@ -85,7 +85,7 @@ class MapManager extends React.Component{
                         coordinates={this.state.popupInfo[0]}
                        // LngLatLike={this.state.popupInfo[0]}
                        // latitude={this.state.popupInfo[1]}
-                       closeOnClick={false}
+                       closeOnClick={true}
                        onClose={() => this.setState({popupInfo: null})} >
                     {cityInfo}
                 </Popup>
@@ -93,6 +93,17 @@ class MapManager extends React.Component{
         }
     }
 
+
+    _onClickMap(map, event){
+        //console.log("Hiiiiiiiiiiiiii")
+        //console.log(event.lngLat)v
+        window.document.getElementById("textInput").value = event.lngLat
+        window.document.getElementById("textInput").disabled = true
+    }
+
+    handleClick = (map, ev) => {
+        console.log(ev.lngLat);
+    }
 
     render(){
         // const popupLocations = this.state.locations;
@@ -150,9 +161,10 @@ class MapManager extends React.Component{
             <Map
                 style="mapbox://styles/mapbox/streets-v9"
                 containerStyle={{
-                    height: "70vh",
-                    width: "70vw"
+                    height: "90vh",
+                    width: "90vw"
                 }}
+                onDblClick={this._onClickMap}
                 center={[17.036956, 51.110694]}>
                 {/*{popups}*/}
                 {popupLocations.map(this._renderCityMarker)}

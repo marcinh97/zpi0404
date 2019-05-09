@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Map from './MapManager';
 import {Nav, Navbar} from "react-bootstrap";
-
+const axios = require('axios')
 
 const fullscreenControlStyle = {
     position: 'absolute',
@@ -28,7 +28,9 @@ class MapApp extends Component {
         intervalIsSet: false,
         idToDelete: null,
         idToUpdate: null,
-        objectToUpdate: null
+        objectToUpdate: null,
+        langlat: null,
+        categoryToAdd: null
     };
 
 
@@ -67,10 +69,29 @@ class MapApp extends Component {
         console.log("Fetched");
     };
 
+
+
     // our put method that uses our backend api
     // to create new query into our data base
     putDataToDB = message => {
         console.log("Insert");
+        console.log(message);
+
+        axios.post("http://localhost:3001/addOffer", {
+            langlat: 12312
+            ,message: "kakababa"
+        }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+        )
+            .then((res) => {
+                console.log(`statusCode: ${res.message}`)
+            })
+            .catch((error) => {
+                console.error(error)
+            })
         // let currentIds = this.state.data.map(data => data.id);
         // let idToBeAdded = 0;
         // while (currentIds.includes(idToBeAdded)) {
@@ -78,8 +99,10 @@ class MapApp extends Component {
         // }
         //
         // axios.post("http://localhost:3001/api/putData", {
-        //     id: idToBeAdded,
+        //     id: idToBeAdded,s
         //     message: message
+
+
         // });
     };
 
@@ -122,6 +145,11 @@ class MapApp extends Component {
         // });
     };
 
+    addToDatabase(){
+        console.log("Langlat: " + this.state.langlat)
+        console.log("Cat: " + this.state.categoryToAdd)
+    }
+
 
     // here is our UI
     // it is easy to understand their functions when you
@@ -158,7 +186,7 @@ class MapApp extends Component {
                 <body id="page-top">
 
                 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                    <Navbar.Brand href="/">Charytatywni.pl</Navbar.Brand>
+                    <Navbar.Brand href="#home">Charytatywni.pl</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto"></Nav>
@@ -177,12 +205,49 @@ class MapApp extends Component {
                                     this.state.data.length <= 0
                                         ? "NO DB ENTRIES YET"
                                         :
-                                        data.map(loc => (
-                                            <li>
-                                                {/*<span>{loc.Latitude}, {loc.Longitude}, {loc.Description}</span>*/}
-                                                <Map locations={data}/>
-                                            </li>
-                                        ))
+
+                                                <div>
+                                                    <div id={"popup"} style={{
+                                                        color: "red",
+                                                        zIndex: 9999,
+                                                        fontSize: '2em'
+                                                    }}>
+                                                        <form id={"addOfferForm"} action={"/saveNewOffer"} method={"get"}>
+
+                                                            <input type="text"
+                                                                   id={"textInput"}
+                                                                   style={{ width: "200px" }}
+                                                                   onChange={e => this.setState({ langlat: e.target.value })}
+                                                            />
+                                                            <input type={"text"} id={"categoryInput"}/>
+                                                            <select name={"category"} id={"categoryInput"}
+                                                                    onChange={e => this.setState({ categoryToAdd: e.target.value})}>
+                                                                <option value={"food"}>Jedzenie</option>
+                                                                <option value={"toys"}>Zabawki</option>
+                                                            </select>
+                                                            <input type={"submit"}
+                                                                   onClick={() =>
+                                                                       this.putDataToDB(this.state.langlat, this.state.categoryToAdd)
+                                                                   }
+                                                                   value={"Wyslij"}
+                                                            />
+                                                        </form>
+                                                    </div>
+                                                    {/*<span>{loc.Latitude}, {loc.Longitude}, {loc.Description}</span>*/}
+                                                    <Map locations={data}/>
+                                                </div>
+
+                                        // data.map(loc => (
+                                        //     <li>
+                                        //         <div id={"popup"} style={{
+                                        //             color: "red",
+                                        //             zIndex: 9999,
+                                        //             fontSize: '2em'
+                                        //         }}>Hello there</div>
+                                        //         {/*<span>{loc.Latitude}, {loc.Longitude}, {loc.Description}</span>*/}
+                                        //         <Map locations={data}/>
+                                        //     </li>
+                                        // ))
                                     // data.map(dat => (
                                     //     <li style={{ padding: "10px" }} key={data.message}>
                                     //         <span style={{ color: "gray" }}> id: </span> {dat.id} <br />
@@ -199,6 +264,7 @@ class MapApp extends Component {
                                     placeholder="add something in the database"
                                     style={{ width: "200px" }}
                                 />
+
                                 <button onClick={() => this.putDataToDB(this.state.message)}>
                                     ADD
                                 </button>
@@ -210,8 +276,9 @@ class MapApp extends Component {
                                     onChange={e => this.setState({ idToDelete: e.target.value })}
                                     placeholder="put id of item to delete here"
                                 />
-                                <button onClick={() => this.deleteFromDB(this.state.idToDelete)}>
-                                    DELETE
+                                /*onClick={() => this.deleteFromDB(this.state.idToDelete)}*/
+                                <button >
+                                    Wyślij
                                 </button>
                             </div>
                             <div>
@@ -230,13 +297,19 @@ class MapApp extends Component {
                                     onChange={e => this.setState({ updateToApply: e.target.value })}
                                     placeholder="put new value of the item here"
                                 />
-                                <button
-                                    onClick={() =>
-                                        this.updateDB(this.state.idToUpdate, this.state.updateToApply)
-                                    }
-                                >
-                                    UPDATE
-                                </button>
+                                <input type={"submit"}
+                                       onClick={() =>
+                                           this.updateDB(this.state.idToUpdate, this.state.updateToApply)
+                                       }
+                                       value={"Wyslij"}
+                                       />
+                                {/*<button*/}
+                                    {/*onClick={() =>*/}
+                                        {/*this.updateDB(this.state.idToUpdate, this.state.updateToApply)*/}
+                                    {/*}*/}
+                                {/*>*/}
+                                    {/*UPDATE*/}
+                                {/*</button>*/}
                             </div>
                         </div>
                     </div>
