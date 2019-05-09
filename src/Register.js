@@ -161,6 +161,7 @@ class Register extends Component {
         xhr.send(JSON.stringify({name:nameValue, username: surnameValue, password:passwordValue, email:emailValue}));
         xhr.onload = function () {
             if (xhr.status === 200) {
+                localStorage.setItem('isLogged', "true");
                 window.open("/logged", "_self");
             } else {
                 //window.open("/register", "_self");

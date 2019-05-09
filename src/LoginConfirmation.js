@@ -141,6 +141,7 @@ class LoginConfirmation extends Component {
                         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                         xhr.onload = function () {
                             if (xhr.status === 200) {
+                                localStorage.setItem('isLogged', "true");
                                 window.open("/logged", "_self");
 
                             } else {

@@ -66,6 +66,21 @@ class App extends Component {
             return <Redirect to='/map'/>
         }
     }
+
+    renderLogout() {
+        if(localStorage.getItem('isLogged')=='true') {
+            return (
+                <Nav.Link id="logOutId" onClick={signOut}>Wyloguj się</Nav.Link>
+            );
+        }
+        else {
+
+            return(
+            <Nav.Link onClick={this.setRedirect}>Zaloguj się </Nav.Link>
+        );
+        }
+    }
+
     render() {
         return (
             <div className="App">
@@ -84,10 +99,9 @@ class App extends Component {
                                     {this.renderRedirectMap()}
                                     <Nav.Link onClick={this.setRedirectMap}>Mapa </Nav.Link>
                                 </div>
-                                <div>
-                                    {this.renderRedirect()}
-                                    <Nav.Link onClick={this.setRedirect}>Zaloguj się </Nav.Link>
-                                </div>
+                                <div>{ this.renderRedirect()}{this.renderLogout()}</div>
+
+
                             </Nav>
                         </Navbar.Collapse>
                     </Navbar>
@@ -318,19 +332,15 @@ class App extends Component {
 }
 
 function signOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut();
-    // displayLogIn();
-    App.userState.isLogged = false;
+    localStorage.removeItem('isLogged');
 
 }
 function displayLogOut()
 {
     ReactDOM.render(
-        <div><button id="logOutId" onClick={
-                signOut
-        }>Sign out</button></div>, document.getElementById("log_in_out"))
-        ;
+        <div><Nav.Link id="logOutId" onClick={signOut}>Sign out</Nav.Link></div>, document.getElementById("log_in_out")
+    )
+    ;
 }
 
 

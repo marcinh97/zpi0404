@@ -287,6 +287,8 @@ function signOut() {
     // gapi.auth2.init({
     //     client_id: '545384910825-14gu3jrktnjfcjrntbv4t3akclpk2hn2.apps.googleusercontent.com'
     // });
+    // setter
+    localStorage.removeItem('isLogged');
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then( function () {
         window.open("/", "_self");
@@ -302,7 +304,7 @@ function goToMap() {
 function displayLogOut()
 {
     ReactDOM.render(
-        <div><Nav.Link id="logOutId" onClick={signOut}>Sign out</Nav.Link></div>, document.getElementById("log_in_out")
+        <div><Nav.Link id="logOutId" onClick={signOut}>Wyloguj się</Nav.Link></div>, document.getElementById("log_in_out")
     )
     ;
 }
