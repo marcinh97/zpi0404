@@ -22,9 +22,10 @@ import './solid';
 import ReactDOM from 'react-dom';
 import {Link} from "react-router-dom";
 import App from "./App";
+import {Redirect} from "react-router-dom";
 import {Nav, Navbar} from "react-bootstrap";
 
-class AfterLogging extends React.Component {
+class AfterLogging extends Component {
 
     render() {
         return (
@@ -52,10 +53,12 @@ class AfterLogging extends React.Component {
                 <body id="page-top">
 
                 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                    <Navbar.Brand href="#home">Charytatywni.pl</Navbar.Brand>
+                    <Navbar.Brand href="/">Charytatywni.pl</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto"></Nav>
+                        <Nav><div id="map_button"></div></Nav>
+                        <Nav><div id="offer_button"></div></Nav>
                         <Nav>
                             <div id="log_in_out"></div>
                         </Nav>
@@ -262,9 +265,15 @@ class AfterLogging extends React.Component {
 
         onLoad();
         displayLogOut();
+        displayMap();
+        displayOffer();
     }
 
+
+
 }
+
+
 
 
 function onLoad() {
@@ -286,12 +295,30 @@ function signOut() {
 
 }
 
+function goToMap() {
+    window.open("/map","_self");
+}
+
 function displayLogOut()
 {
     ReactDOM.render(
-        <div><Nav.Link id="logOutId" onClick={
-            signOut
-        }>Sign out</Nav.Link></div>, document.getElementById("log_in_out"))
+        <div><Nav.Link id="logOutId" onClick={signOut}>Sign out</Nav.Link></div>, document.getElementById("log_in_out")
+    )
+    ;
+}
+
+function displayMap()
+{
+    ReactDOM.render(
+        <div><Nav.Link id="mapId" onClick={goToMap}>Mapa</Nav.Link></div>, document.getElementById("map_button")
+    )
+    ;
+}
+function displayOffer()
+{
+    ReactDOM.render(
+        <div><Nav.Link id="offerId">Dodaj ofertę</Nav.Link></div>, document.getElementById("offer_button")
+    )
     ;
 }
 export default AfterLogging;

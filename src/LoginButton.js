@@ -41,6 +41,18 @@ class LoginButton extends Component {
         }
     }
 
+    setRedirectRegister = () => {
+        this.setState({
+            redirectReg: true
+        })
+    }
+
+    renderRedirectRegister = () => {
+        if (this.state.redirectReg) {
+            return <Redirect to='/register'/>
+        }
+    }
+
     render() {
         return (
             <div className="LoginButton">
@@ -68,7 +80,7 @@ class LoginButton extends Component {
                 <body id="page-top">
 
                 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                    <Navbar.Brand href="#home">Charytatywni.pl</Navbar.Brand>
+                    <Navbar.Brand href="/">Charytatywni.pl</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto"></Nav>
@@ -98,11 +110,11 @@ class LoginButton extends Component {
                                         <label htmlFor="inputPassword">Hasło</label>
                                     </div>
 
-                                    <div className="custom-control custom-checkbox mb-3">
-                                        <input type="checkbox" className="custom-control-input" id="customCheck1"/>
-                                        <label className="custom-control-label" htmlFor="customCheck1">Zapamiętaj
-                                            hasło</label>
-                                    </div>
+                                    {/*<div className="custom-control custom-checkbox mb-3">*/}
+                                        {/*<input type="checkbox" className="custom-control-input" id="customCheck1"/>*/}
+                                        {/*<label className="custom-control-label" htmlFor="customCheck1">Zapamiętaj*/}
+                                            {/*hasło</label>*/}
+                                    {/*</div>*/}
                                     <button
                                         className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
                                         type="submit">Zaloguj sie
@@ -126,7 +138,12 @@ class LoginButton extends Component {
                                         </button>
                                     </div>
                                     <div className="text-center">
-                                        <a className="small" href="#">Zapomniałeś hasła?</a></div>
+                                        {/*<div className="btn btn-light btn-xl" >*/}
+                                            {this.renderRedirectRegister()}
+                                            <Nav.Link onClick={this.setRedirectRegister}>Nie masz konta? Zarejstruj się tutaj </Nav.Link>
+                                    </div>
+                                        {/*</div>*/}
+                                        {/*<a className="small" href="#">Nie masz konta? Zarejstruj się tutaj</a></div>*/}
 
                                 </form>
                             </div>

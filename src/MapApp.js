@@ -158,7 +158,7 @@ class MapApp extends Component {
                 <body id="page-top">
 
                 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                    <Navbar.Brand href="#home">Charytatywni.pl</Navbar.Brand>
+                    <Navbar.Brand href="/">Charytatywni.pl</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto"></Nav>
