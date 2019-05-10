@@ -155,8 +155,8 @@ class Register extends Component {
         let emailValue = document.getElementById("inputEmail").value;
         let passwordValue = document.getElementById("inputPassword").value;
         var xhr = new XMLHttpRequest();
-        //xhr.open('POST', 'https://backendzpipwr.herokuapp.com/register',true);
-        xhr.open('POST', 'http://localhost:8083/register',true);
+        xhr.open('POST', 'https://backendzpipwr.herokuapp.com/register',true);
+        //xhr.open('POST', 'http://localhost:8083/register',true);
         xhr.setRequestHeader('Content-Type', "application/json");
         xhr.send(JSON.stringify({name:nameValue, username: surnameValue, password:passwordValue, email:emailValue}));
         xhr.onload = function () {
