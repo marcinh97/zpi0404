@@ -8,6 +8,7 @@ import AfterLogging from "./AfterLogging";
 import LoginConfirmation from "./LoginConfirmation";
 import MapApp from "./MapApp";
 import RegisterToPortal from "./Register";
+import UserOffers from "./UserOffers";
 const routing = (
     <Router>
     <div>
@@ -17,6 +18,8 @@ const routing = (
             <Route path="/confirm" component = {LoginConfirmation}/>
             <Route path="/map" component = {MapApp}/>
             <Route path="/register" component ={RegisterToPortal}/>
+            <Route path="/myOffers" component ={UserOffers}/>
+
 
     </div>
     </Router>

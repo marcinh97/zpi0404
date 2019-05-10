@@ -59,6 +59,7 @@ class AfterLogging extends Component {
                         <Nav className="mr-auto"></Nav>
                         <Nav><div id="map_button"></div></Nav>
                         <Nav><div id="offer_button"></div></Nav>
+                        <Nav><div id="my_offer_button"></div></Nav>
                         <Nav>
                             <div id="log_in_out"></div>
                         </Nav>
@@ -264,16 +265,16 @@ class AfterLogging extends Component {
     {
 
         onLoad();
+        //getUserID();
         displayLogOut();
         displayMap();
         displayOffer();
+        displayMyOffers();
     }
 
 
 
 }
-
-
 
 
 function onLoad() {
@@ -301,6 +302,10 @@ function goToMap() {
     window.open("/map","_self");
 }
 
+function goToMyOffers() {
+    window.open("/myOffers","_self");
+}
+
 function displayLogOut()
 {
     ReactDOM.render(
@@ -320,6 +325,13 @@ function displayOffer()
 {
     ReactDOM.render(
         <div><Nav.Link id="offerId">Dodaj ofertę</Nav.Link></div>, document.getElementById("offer_button")
+    )
+    ;
+}
+function displayMyOffers()
+{
+    ReactDOM.render(
+        <div><Nav.Link id="myOfferId" onClick={goToMyOffers}>Moje oferty</Nav.Link></div>, document.getElementById("my_offer_button")
     )
     ;
 }
