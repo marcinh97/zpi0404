@@ -238,7 +238,7 @@ function signOut() {
 }
 
 function goToSingleOffer(offerId) {
-    window.open("/offer?"+offerId,"_self");
+    window.open("/offer?id="+offerId,"_self");
 }
 
 
