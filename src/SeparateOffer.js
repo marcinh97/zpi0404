@@ -125,7 +125,7 @@ export default class SeparateOffer extends Component{
 
     getDataFromDb = () => {
         var id = this.state.offerId.id;
-        fetch("http://backendzpipwr.herokuapp.com/offer?id="+id)
+        fetch("https://backendzpipwr.herokuapp.com/offer?id="+id)
             .then(data => data.json())
             .then(res => {console.log("ssss " + res); this.setState({data: res})});
     };
