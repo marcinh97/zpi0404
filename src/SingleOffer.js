@@ -3,12 +3,14 @@ import React, {PureComponent} from 'react';
 export default class SingleOffer extends React.Component {
 
     state={
-        info:''
+        info:'',
+        offerId:-1
     }
 
     constructor(props){
         super(props)
         this.state.info = props.info
+        this.state.offerId = props.offerId
         console.log("------_)))))))) " + this.state.info)
     }
 
@@ -19,14 +21,14 @@ export default class SingleOffer extends React.Component {
     }
 
     render() {
-        const displayName = 'Hello here';
+        const offerId = this.state.offerId;
 
         return (
             <div>
                 <div>
                     {this.state.info} | <a target="_new"
-                                       href={`http://en.wikipedia.org/w/index.php?title=Special:Search&search=${displayName}`}>
-                    Wikipedia
+                                       href={`http://localhost:3000/offer?id=${offerId}`}>
+                    Szczegóły
                 </a>
                 </div>
                 {/*<img width={240} src={'./views'} />*/}
