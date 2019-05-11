@@ -19,7 +19,9 @@ class MapManager extends React.Component{
             pitch: 0
         },
         popupInfo: null,
-        count: 0
+        count: 0,
+        checked: [],
+        offerId: -1
     };
 
 
@@ -30,18 +32,44 @@ class MapManager extends React.Component{
         this.state.vals = this.state.locations.map(loc => [loc.Latitude, loc.Longitude]);
         this.state.vals.map(val => console.log("Sem tu: " + val))
         this.state.popupInfo = null
+        this.myRef = React.createRef();
+        this.layer = React.createRef();
+        this.state.checked = props.checked;
     }
     _updateViewport = (viewport) => {
         this.setState({viewport});
     }
 
+    componentWillReceiveProps(props){
+        console.log("Otrzymalem " + props.checked)
+        this.state.checked = props.checked
+    }
+
+    refreshMap = res => this.setState({checked: res.data.checked})
+
     _renderCityMarker = (place, index) => {
+        this.state.checked.forEach(val => console.log("buzbuzbuzbzu " + val))
+        console.log("--->Kategoria: " + this.getCategory(place));
+        var kat = this.getCategory(place);
+        if (kat === 1){
+            if (!this.state.checked.includes("zabawki")){
+                return;
+            }
+        }
+        else{
+            if (!this.state.checked.includes("jedzenie")){
+                return;
+            }
+        }
         return (
             <Marker
                 key={`marker-${index}`}
                 coordinates={place} anchor="top">
                 <CityPin category={this.getCategory(place)} size={20}
-                         onClick={() => this.setState({popupInfo: [place, this.getDescription(place)]})} />
+                         onClick={() => {
+                             this.setState({popupInfo: [place, this.getDescription(place)]});
+                             this.setState({offerId: this.getOfferId(place)})
+                         }} />
             </Marker>
         );
     };
@@ -53,6 +81,18 @@ class MapManager extends React.Component{
             if (this.state.locations[i].Latitude === place[0] && this.state.locations[i].Longitude === place[1]){
                 console.log("************* " + this.state.locations[i].Description)
                 return this.state.locations[i].Description;
+            }
+        }
+        return "Not found u";
+    }
+
+    getOfferId(coordinates){
+        const place = coordinates
+        console.log("Current place: " + place)
+        for (var i=0; i<this.state.locations.length; i++){
+            if (this.state.locations[i].Latitude === place[0] && this.state.locations[i].Longitude === place[1]){
+                console.log("&&&&&&&####### " + this.state.locations[i].id)
+                return this.state.locations[i].id;
             }
         }
         return "Not found u";
@@ -75,7 +115,8 @@ class MapManager extends React.Component{
             //const {popupInfo} = this.state.popupInfo;
             const description = this.state.popupInfo[1];
             console.log("Hello in render popup: " + description)
-            var cityInfo = <CityInfo key={this.state.count} info={this.getDescription(this.state.popupInfo[0])}/>
+            var offerId = this.state.offerId;
+            var cityInfo = <CityInfo key={this.state.count} info={this.getDescription(this.state.popupInfo[0])} offerId={offerId}/>
             this.state.count++
             // cityInfo.stateSetter(description)
             return (
@@ -85,9 +126,13 @@ class MapManager extends React.Component{
                         coordinates={this.state.popupInfo[0]}
                        // LngLatLike={this.state.popupInfo[0]}
                        // latitude={this.state.popupInfo[1]}
+                       closeButton={true}
                        closeOnClick={true}
-                       onClose={() => this.setState({popupInfo: null})} >
+                    // closeOnClick={true}
+                       // onClose={() => this.setState({popupInfo: null})}
+                >
                     {cityInfo}
+                    {offerId}
                 </Popup>
             );
         }
@@ -97,12 +142,29 @@ class MapManager extends React.Component{
     _onClickMap(map, event){
         //console.log("Hiiiiiiiiiiiiii")
         //console.log(event.lngLat)v
-        window.document.getElementById("textInput").value = event.lngLat
-        window.document.getElementById("textInput").disabled = true
+        // window.document.getElementById("textInput").value = event.lngLat
+        // window.document.getElementById("textInput").disabled = true
     }
 
     handleClick = (map, ev) => {
         console.log(ev.lngLat);
+    }
+
+    _createFilter(){
+
+    }
+
+    doSomething(checkedValues){
+        console.log("I just did something!")
+        checkedValues.forEach(value => console.log("-----> " + value))
+        var layer = this.layer;
+        console.log("bababaa:  " + layer)
+    }
+
+    componentDidMount(){
+        var filterGroup = document.getElementById('mojaMapka');
+        console.log("Ezekelemene " + this.layer)
+        this.state.checked.forEach(value => console.log("--------------> " + value))
     }
 
     render(){
@@ -159,10 +221,12 @@ class MapManager extends React.Component{
 
         return (
             <Map
-                style="mapbox://styles/mapbox/streets-v9"
+                style="mapbox://styles/marcinhorak/cjvgz67wl00dv1drk7b71mcpx"
+                ref={map => {this.map = map}}
+                id={"mojaMapka"}
                 containerStyle={{
-                    height: "90vh",
-                    width: "90vw"
+                    height: "100vh",
+                    width: "100vw"
                 }}
                 onDblClick={this._onClickMap}
                 center={[17.036956, 51.110694]}>
@@ -170,11 +234,15 @@ class MapManager extends React.Component{
                 {popupLocations.map(this._renderCityMarker)}
                 {this._renderPopup()}
                 {/*{markersToAdd}*/}
+                {this._createFilter()}
                 <Layer
                     type="symbol"
                     id="marker"
+                    ref={elem => {
+                        console.log("Moj layer");
+                        this.layer = elem;
+                    }}
                     layout={{ "icon-image": "marker-15" }}>
-                    <Feature coordinates={[17.036956, 51.110694]}/>
                 </Layer>
             </Map>
         )
