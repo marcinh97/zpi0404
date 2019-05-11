@@ -120,6 +120,7 @@ class UserOffers extends Component {
                     <td>{description}</td>
                     <td>{cat}</td>
                     <td>{statusTrans}</td>
+                    <td><Nav.Link onClick={() => goToMap2(offerid)}>Edycja i podgląd</Nav.Link></td>
                 </tr>
             )
         })
@@ -184,6 +185,7 @@ class UserOffers extends Component {
                                         <th>Opis</th>
                                         <th>Kategoria</th>
                                         <th>Status</th>
+                                        <th>Przejrzyj szczegóły</th>
                                     </tr>
                                     </thead>
 
@@ -234,6 +236,11 @@ function signOut() {
     );
 
 }
+
+function goToMap2(offerId) {
+    window.open("/map?"+offerId,"_self");
+}
+
 
 function goToMap() {
     window.open("/map","_self");

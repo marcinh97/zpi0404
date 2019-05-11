@@ -1,5 +1,6 @@
 const CACHE_NAME = 'zpi-1.2.10';
 const CACHED_FILES = [
+    '/',
     '/index.html'
 ];
 

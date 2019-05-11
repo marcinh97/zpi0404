@@ -215,6 +215,7 @@ class LoginButton extends Component {
         xhr.onload = function () {
             if (xhr.status === 200) {
                 localStorage.setItem('idUser',xhr.responseText);
+                alert(localStorage.getItem('idUser'));
                 localStorage.setItem('isLogged', "true");
                 window.open("/logged", "_self");
             } else {
