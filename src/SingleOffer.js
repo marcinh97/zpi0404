@@ -27,7 +27,7 @@ export default class SingleOffer extends React.Component {
             <div>
                 <div>
                     {this.state.info} | <a target="_new"
-                                       href={`http://localhost:3000/offer?id=${offerId}`}>
+                                       href={`https://charytatywni.herokuapp.com/offer?id=${offerId}`}>
                     Szczegóły
                 </a>
                 </div>
