@@ -334,6 +334,7 @@ class App extends Component {
 function signOut() {
     localStorage.removeItem('isLogged');
 
+    window.location.reload();
 }
 function displayLogOut()
 {
