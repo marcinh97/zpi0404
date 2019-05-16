@@ -63,8 +63,8 @@ class AllOffers extends Component {
 
     getDataFromDb = () => {
 
-        //fetch("https://backendzpipwr.herokuapp.com/allOffers", {
-        fetch("http://localhost:8083/allOffers", {
+        fetch("https://backendzpipwr.herokuapp.com/allOffers", {
+        //fetch("http://localhost:8083/allOffers", {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
