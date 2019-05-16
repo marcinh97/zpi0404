@@ -302,6 +302,10 @@ function goToMap() {
     window.open("/map","_self");
 }
 
+function goToAddOffer() {
+    window.open("/additem","_self");
+}
+
 function goToMyOffers() {
     window.open("/myOffers","_self");
 }
@@ -324,7 +328,7 @@ function displayMap()
 function displayOffer()
 {
     ReactDOM.render(
-        <div><Nav.Link id="offerId">Dodaj ofertę</Nav.Link></div>, document.getElementById("offer_button")
+        <div><Nav.Link id="offerId" onClick={goToAddOffer}>Dodaj ofertę</Nav.Link></div>, document.getElementById("offer_button")
     )
     ;
 }

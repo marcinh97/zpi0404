@@ -23,7 +23,7 @@ const routing = (
             <Route path="/register" component ={RegisterToPortal}/>
             <Route path="/myOffers" component ={UserOffers}/>
             <Route path="/offer" component ={SeparateOffer}/>
-            <Route path="additem" component ={AddItem}/>
+            <Route path="/additem" component ={AddItem}/>
     </div>
     </Router>
 );
