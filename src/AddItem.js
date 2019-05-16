@@ -71,7 +71,7 @@ class AddItem extends Component {
         var dropdown = document.getElementById("categorySelect");
         var category = dropdown.options[dropdown.selectedIndex].value;
         const formData = new FormData();
-        formData.append('userId',"1");
+        formData.append('userId',localStorage.getItem('idUser'));
         formData.append('name',document.getElementById('nameInput').value);
         formData.append('description',document.getElementById('descriptionInput').value);
         formData.append('category',category);
@@ -125,6 +125,7 @@ class AddItem extends Component {
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto"></Nav>
                         <Nav><div id="map_button"></div></Nav>
+                        <Nav><div id="all_offer_button"></div></Nav>
                         <Nav><div id="offer_button"></div></Nav>
                         <Nav><div id="my_offer_button"></div></Nav>
                         <Nav>
@@ -234,6 +235,7 @@ class AddItem extends Component {
         displayMap();
         displayOffer();
         displayMyOffers();
+        displayAllOffers();
     }
 
 }
@@ -251,26 +253,33 @@ function signOut() {
     // });
     // setter
     localStorage.removeItem('isLogged');
-    var auth2 = gapi.auth2.getAuthInstance();
+    localStorage.removeItem('idUser');
+    /*var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then( function () {
             window.open("/", "_self");
         }
-    );
+    );*/
+    window.open("/",'_self');
 
 }
+
+
 
 function goToMap() {
     window.open("/map","_self");
-}
-
-function goToAddOffer() {
-    window.open("/additem","_self");
 }
 
 function goToMyOffers() {
     window.open("/myOffers","_self");
 }
 
+function goToAllOffers() {
+    window.open("/all","_self");
+}
+
+function goToAddOffer() {
+    window.open("/additem","_self");
+}
 function displayLogOut()
 {
     ReactDOM.render(
@@ -290,6 +299,13 @@ function displayOffer()
 {
     ReactDOM.render(
         <div><Nav.Link id="offerId" onClick={goToAddOffer}>Dodaj ofertę</Nav.Link></div>, document.getElementById("offer_button")
+    )
+    ;
+}
+function displayAllOffers()
+{
+    ReactDOM.render(
+        <div><Nav.Link id="allOfferId" onClick={goToAllOffers}>Wszystkie oferty</Nav.Link></div>, document.getElementById("all_offer_button")
     )
     ;
 }

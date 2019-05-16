@@ -1,3 +1,4 @@
+/* global gapi */
 import React, { Component } from "react";
 import ReactDOM from "react-dom"
 import Map from './MapManager';
@@ -61,6 +62,12 @@ class MapApp extends Component {
         var filters = this.filterGroup.current;
         console.log("Dupa: " + filters)
         this.state.checked.forEach(value => console.log("&&&&&&&&&& po: " + value))
+        onLoad();
+        displayLogOut();
+        displayMap();
+        displayOffer();
+        displayMyOffers();
+        displayAllOffers();
     }
 
     // never let a process live forever
@@ -228,10 +235,15 @@ class MapApp extends Component {
                     <Navbar.Brand href="/">Charytatywni.pl</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
-                        {/*<Nav className="mr-auto"></Nav>*/}
-                        {/*<Nav>*/}
-                            {/*<Nav.Link to="/" classname="nav-link js-scroll-trigger">Strona główna</Nav.Link>*/}
-                        {/*</Nav>*/}
+                        <Nav className="mr-auto"></Nav>
+                        <Nav className="mr-auto"></Nav>
+                        <Nav><div id="map_button"></div></Nav>
+                        <Nav><div id="all_offer_button"></div></Nav>
+                        <Nav><div id="offer_button"></div></Nav>
+                        <Nav><div id="my_offer_button"></div></Nav>
+                        <Nav>
+                            <div id="log_in_out"></div>
+                        </Nav>
                     </Navbar.Collapse>
                 </Navbar>
 
@@ -351,6 +363,96 @@ class MapApp extends Component {
 
         );
     }
+}
+
+function onLoad() {
+    gapi.load('auth2', function() {
+        gapi.auth2.init();
+    });
+}
+
+
+function signOut() {
+    // gapi.auth2.init({
+    //     client_id: '545384910825-14gu3jrktnjfcjrntbv4t3akclpk2hn2.apps.googleusercontent.com'
+    // });
+    // setter
+    localStorage.removeItem('isLogged');
+    localStorage.removeItem('idUser');
+    /*var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then( function () {
+            window.open("/", "_self");
+        }
+    );*/
+    window.open("/",'_self');
+
+}
+
+
+
+function goToMap() {
+    window.open("/map","_self");
+}
+
+function goToMyOffers() {
+    window.open("/myOffers","_self");
+}
+
+function goToAllOffers() {
+    window.open("/all","_self");
+}
+
+function goToAddOffer() {
+    window.open("/additem","_self");
+}
+function SignIn() {
+    window.open("/logging","_self");
+}
+function displayLogOut()
+{
+    if(localStorage.getItem('isLogged')=='true') {
+        ReactDOM.render(
+            <div><Nav.Link id="logOutId" onClick={signOut}>Wyloguj się</Nav.Link></div>, document.getElementById("log_in_out")
+        )
+        ;}
+    else{
+        ReactDOM.render(
+            <div><Nav.Link id="logOutId" onClick={SignIn}>Zaloguj się</Nav.Link>
+            </div>, document.getElementById("log_in_out")
+        )
+        ;
+    }
+}
+
+function displayMap()
+{
+    ReactDOM.render(
+        <div><Nav.Link id="mapId" onClick={goToMap}>Mapa</Nav.Link></div>, document.getElementById("map_button")
+    )
+    ;
+}
+function displayOffer()
+{
+    if(localStorage.getItem('isLogged')=='true') {
+        ReactDOM.render(
+            <div><Nav.Link id="offerId" onClick={goToAddOffer}>Dodaj ofertę</Nav.Link></div>, document.getElementById("offer_button")
+        )
+        ;}
+}
+function displayAllOffers()
+{
+    ReactDOM.render(
+        <div><Nav.Link id="allOfferId" onClick={goToAllOffers}>Wszystkie oferty</Nav.Link></div>, document.getElementById("all_offer_button")
+    )
+    ;
+}
+function displayMyOffers()
+{
+    if(localStorage.getItem('isLogged')=='true') {
+        ReactDOM.render(
+            <div><Nav.Link id="myOfferId" onClick={goToMyOffers}>Moje oferty</Nav.Link></div>, document.getElementById("my_offer_button")
+        )
+        ;}
 }
 
 export default MapApp;

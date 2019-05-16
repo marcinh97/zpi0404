@@ -11,6 +11,7 @@ import RegisterToPortal from "./Register";
 import UserOffers from "./UserOffers";
 import SeparateOffer from "./SeparateOffer"
 import AddItem from "./AddItem";
+import AllOffers from "./AllOffers";
 
 const routing = (
     <Router>
@@ -24,6 +25,7 @@ const routing = (
             <Route path="/myOffers" component ={UserOffers}/>
             <Route path="/offer" component ={SeparateOffer}/>
             <Route path="/additem" component ={AddItem}/>
+            <Route path="/all" component ={AllOffers}/>
     </div>
     </Router>
 );

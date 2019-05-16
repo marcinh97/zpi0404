@@ -195,7 +195,8 @@ class LoginButton extends Component {
                                 // doRedirect = true;
 
                                 localStorage.setItem('isLogged', "true");
-                                window.open("/logged", "_self");
+                                //window.open("/logged", "_self");
+                                window.open("/", "_self");
 
 
                             } else {
@@ -227,7 +228,8 @@ class LoginButton extends Component {
             if (xhr.status === 200) {
                 localStorage.setItem('idUser',xhr.responseText);
                 localStorage.setItem('isLogged', "true");
-                window.open("/logged", "_self");
+                //window.open("/logged", "_self");
+                window.open("/", "_self");
             } else {
                 window.open("/logging", "_self");
             }

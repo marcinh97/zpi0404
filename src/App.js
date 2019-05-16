@@ -26,7 +26,8 @@ class App extends Component {
 
     state = {
         redirect: false,
-        redirectMap : false
+        redirectMap : false,
+        redirectOffers: false,
     }
     constructor() {
         super();
@@ -41,6 +42,12 @@ class App extends Component {
     setRedirectMap = () => {
         this.setState({
             redirectMap: true
+        })
+    }
+
+    setRedirectOffers = () => {
+        this.setState({
+            redirectOffers: true
         })
     }
 
@@ -67,6 +74,12 @@ class App extends Component {
         }
     }
 
+    renderRedirectOffers = () => {
+        if (this.state.redirectOffers) {
+            return <Redirect to='/all'/>
+        }
+    }
+
     renderLogout() {
         if(localStorage.getItem('isLogged')=='true') {
             return (
@@ -81,6 +94,44 @@ class App extends Component {
         }
     }
 
+    renderContentMenu()
+    {
+        if(localStorage.getItem('isLogged')=='true') {
+            return (
+                <div>
+                    <div>
+                        <Nav.Link onClick={this.setRedirectMap}>Mapa </Nav.Link>
+                    </div>
+                    <div>
+                        <Nav.Link onClick={this.setRedirectOffers}>Oferty </Nav.Link>
+                    </div>
+                    <div>
+                        <Nav.Link id="logOutId" onClick={signOut}>Wyloguj się</Nav.Link>
+                    </div>
+
+                </div>
+            );
+        }
+        else {
+
+            return(
+                <div>
+                <div>
+                <Nav.Link href="#about">O nas</Nav.Link>
+                </div>
+                <div>
+                <Nav.Link href="#services">Działania</Nav.Link>
+                </div>
+                <Nav.Link href="#portfolio">Portfolio</Nav.Link>
+                <Nav.Link href="#contact">Kontakt</Nav.Link>
+                    <Nav.Link onClick={this.setRedirectMap}>Mapa </Nav.Link>
+                    <Nav.Link onClick={this.setRedirectOffers}>Oferty </Nav.Link>
+                    <Nav.Link onClick={this.setRedirect}>Zaloguj się </Nav.Link>
+                </div>
+            );
+        }
+    }
+
     render() {
         return (
             <div className="App">
@@ -91,15 +142,28 @@ class App extends Component {
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="mr-auto"></Nav>
                             <Nav>
-                                <Nav.Link href="#about">O nas</Nav.Link>
-                                <Nav.Link href="#services">Działania</Nav.Link>
-                                <Nav.Link href="#portfolio">Portfolio</Nav.Link>
-                                <Nav.Link href="#contact">Kontakt</Nav.Link>
-                                <div>
-                                    {this.renderRedirectMap()}
-                                    <Nav.Link onClick={this.setRedirectMap}>Mapa </Nav.Link>
-                                </div>
-                                <div>{ this.renderRedirect()}{this.renderLogout()}</div>
+                                <Nav><div id="o_nas"></div></Nav>
+                                <Nav><div id="dzialania"></div></Nav>
+                                <Nav><div id="portfolio"></div></Nav>
+                                <Nav><div id="kontakt"></div></Nav>
+                                <Nav><div id="map_button"></div></Nav>
+                                <Nav><div id="all_offer_button"></div></Nav>
+                                <Nav><div id="offer_button"></div></Nav>
+                                <Nav><div id="my_offer_button"></div></Nav>
+                                <Nav>
+                                    <div id="log_in_out"></div>
+                                </Nav>
+                                    {/*{this.renderContentMenu()}*/}
+
+                                {/*<div>*/}
+                                    {/*{this.renderRedirectMap()}*/}
+                                    {/*<Nav.Link onClick={this.setRedirectMap}>Mapa </Nav.Link>*/}
+                                {/*</div>*/}
+                                {/*<div>*/}
+                                    {/*{this.renderRedirectOffers()}*/}
+                                    {/*<Nav.Link onClick={this.setRedirectOffers}>Oferty </Nav.Link>*/}
+                                {/*</div>*/}
+                                {/*<div>{ this.renderRedirect()}{this.renderLogout()}</div>*/}
 
 
                             </Nav>
@@ -322,26 +386,129 @@ class App extends Component {
             </div>
         );
     }
-    componentDidMount()
-    {
-        // displayLogIn();
+    componentDidMount() {
+
+        displayLogOut();
+        displayMap();
+        displayAddOffer();
+        displayMyOffers();
+        displayAllOffers();
+        displayAboutUs();
+        displayAboutServices();
+        displayPortfolio();
+        displayContact();
+
     }
 
 
 
 }
 
+function goToMap() {
+    window.open("/map","_self");
+}
+
+function goToMyOffers() {
+    window.open("/myOffers","_self");
+}
+
+function goToAllOffers() {
+    window.open("/all","_self");
+}
+
+function goToAddOffer() {
+    window.open("/additem","_self");
+}
+
 function signOut() {
     localStorage.removeItem('isLogged');
-
     window.location.reload();
+}
+
+function SignIn() {
+    window.open("/logging","_self");
 }
 function displayLogOut()
 {
+    if(localStorage.getItem('isLogged')=='true') {
+        ReactDOM.render(
+            <div><Nav.Link id="logOutId" onClick={signOut}>Wyloguj się</Nav.Link>
+            </div>, document.getElementById("log_in_out")
+        )
+        ;
+    }else{
+        ReactDOM.render(
+            <div><Nav.Link id="logOutId" onClick={SignIn}>Zaloguj się</Nav.Link>
+            </div>, document.getElementById("log_in_out")
+        )
+        ;
+    }
+}
+
+function displayMap()
+{
     ReactDOM.render(
-        <div><Nav.Link id="logOutId" onClick={signOut}>Sign out</Nav.Link></div>, document.getElementById("log_in_out")
+        <div><Nav.Link id="mapId" onClick={goToMap}>Mapa</Nav.Link></div>, document.getElementById("map_button")
     )
     ;
+}
+function displayAddOffer()
+{
+    if(localStorage.getItem('isLogged')=='true') {
+    ReactDOM.render(
+        <div><Nav.Link id="offerId" onClick={goToAddOffer}>Dodaj ofertę</Nav.Link></div>, document.getElementById("offer_button")
+    )
+    ;}
+}
+function displayAllOffers()
+{
+
+    ReactDOM.render(
+        <div><Nav.Link id="allOfferId" onClick={goToAllOffers}>Wszystkie oferty</Nav.Link></div>, document.getElementById("all_offer_button")
+    )
+    ;
+}
+function displayMyOffers()
+{
+    if(localStorage.getItem('isLogged')=='true') {
+    ReactDOM.render(
+        <div><Nav.Link id="myOfferId" onClick={goToMyOffers}>Moje oferty</Nav.Link></div>, document.getElementById("my_offer_button")
+    )
+    ;}
+}
+
+function displayAboutUs()
+{
+    if(localStorage.getItem('isLogged')==null) {
+        ReactDOM.render(
+            <div><Nav.Link id="allOfferIdss" href="#about">O nas</Nav.Link></div>, document.getElementById("o_nas")
+        )
+        ;}
+}
+function displayAboutServices()
+{
+    if(localStorage.getItem('isLogged')==null) {
+        ReactDOM.render(
+            <div><Nav.Link id="servicesBut" href="#services">Działania</Nav.Link></div>, document.getElementById("dzialania")
+        )
+        ;}
+}
+function displayPortfolio()
+{
+    if(localStorage.getItem('isLogged')==null) {
+        ReactDOM.render(
+            <div><Nav.Link id="servicesButaaaa" href="#portfolio">Zdjęcia</Nav.Link></div>, document.getElementById("portfolio")
+        )
+        ;}
+}
+
+function displayContact()
+{
+    if(localStorage.getItem('isLogged')==null) {
+        ReactDOM.render(
+            <div><Nav.Link id="servicesButaa" href="#contact">Kontakt</Nav.Link></div>, document.getElementById("kontakt")
+        )
+        ;}
 }
 
 
