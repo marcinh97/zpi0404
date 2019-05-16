@@ -79,17 +79,18 @@ class AddItem extends Component {
         var list = this.state.selectedFiles;
         Array.prototype.forEach.call(list, function(file){ formData.append('fileItem', file,file.name)});
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'http://localhost:8080/images',false);
+        xhr.open('POST', 'https://backendzpipwr.herokuapp.com/images',false);
+        //xhr.open('POST', 'http://localhost:8083/images',false);
+        xhr.send(formData);
         xhr.onload = function () {
             if (xhr.status === 200) {
-
-                alert("Dodano nową ofertę");
-
+                window.open("/myOffers", "_self");
             } else {
                 console.error(xhr.statusText);
             }
         };
-        xhr.send(formData);
+
+
     }
 
 
@@ -119,13 +120,19 @@ class AddItem extends Component {
                 <body id="page-top">
 
                 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                    <Navbar.Brand href="#home">Charytatywni.pl</Navbar.Brand>
+                    <Navbar.Brand href="/">Charytatywni.pl</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto"></Nav>
+                        <Nav><div id="map_button"></div></Nav>
+                        <Nav><div id="offer_button"></div></Nav>
+                        <Nav><div id="my_offer_button"></div></Nav>
                         <Nav>
-                            <Nav.Link to="/" className="nav-link js-scroll-trigger">Strona główna</Nav.Link>
+                            <div id="log_in_out"></div>
                         </Nav>
+                        {/*<Nav>*/}
+                            {/*<Nav.Link to="/" className="nav-link js-scroll-trigger">Strona główna</Nav.Link>*/}
+                        {/*</Nav>*/}
                     </Navbar.Collapse>
                 </Navbar>
 
@@ -218,7 +225,81 @@ class AddItem extends Component {
         });
     }
 
+    componentDidMount()
+    {
+
+        onLoad();
+        //getUserID();
+        displayLogOut();
+        displayMap();
+        displayOffer();
+        displayMyOffers();
+    }
 
 }
+
+function onLoad() {
+    gapi.load('auth2', function() {
+        gapi.auth2.init();
+    });
+}
+
+
+function signOut() {
+    // gapi.auth2.init({
+    //     client_id: '545384910825-14gu3jrktnjfcjrntbv4t3akclpk2hn2.apps.googleusercontent.com'
+    // });
+    // setter
+    localStorage.removeItem('isLogged');
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then( function () {
+            window.open("/", "_self");
+        }
+    );
+
+}
+
+function goToMap() {
+    window.open("/map","_self");
+}
+
+function goToAddOffer() {
+    window.open("/additem","_self");
+}
+
+function goToMyOffers() {
+    window.open("/myOffers","_self");
+}
+
+function displayLogOut()
+{
+    ReactDOM.render(
+        <div><Nav.Link id="logOutId" onClick={signOut}>Wyloguj się</Nav.Link></div>, document.getElementById("log_in_out")
+    )
+    ;
+}
+
+function displayMap()
+{
+    ReactDOM.render(
+        <div><Nav.Link id="mapId" onClick={goToMap}>Mapa</Nav.Link></div>, document.getElementById("map_button")
+    )
+    ;
+}
+function displayOffer()
+{
+    ReactDOM.render(
+        <div><Nav.Link id="offerId" onClick={goToAddOffer}>Dodaj ofertę</Nav.Link></div>, document.getElementById("offer_button")
+    )
+    ;
+}
+function displayMyOffers()
+{
+    ReactDOM.render(
+        <div><Nav.Link id="myOfferId" onClick={goToMyOffers}>Moje oferty</Nav.Link></div>, document.getElementById("my_offer_button")
+    )
+    ;
+}
+
 AddItem.contextType = AppContext;
 export default AddItem;

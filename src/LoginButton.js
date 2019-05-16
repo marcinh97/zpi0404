@@ -84,9 +84,10 @@ class LoginButton extends Component {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto"></Nav>
-                        <Nav>
-                            <Nav.Link to="/" classname="nav-link js-scroll-trigger">Strona główna</Nav.Link>
-                        </Nav>
+                        {/*<Nav>*/}
+                            {/*<Nav.Link to="/" classname="nav-link js-scroll-trigger">Strona główna</Nav.Link>*/}
+                        {/*</Nav>*/}
+
                     </Navbar.Collapse>
                 </Navbar>
 
@@ -184,7 +185,7 @@ class LoginButton extends Component {
 
 
                         var xhr = new XMLHttpRequest();
-                        xhr.open('POST', 'http://localhost:8080/try');
+                        xhr.open('POST', 'https://backendzpipwr.herokuapp.com/try');
                         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                         xhr.onload = function () {
                             if (xhr.status === 200) {
@@ -193,6 +194,7 @@ class LoginButton extends Component {
                                 // alert("LOCAL" + localStorage.getItem('authToken'));
                                 // doRedirect = true;
 
+                                localStorage.setItem('isLogged', "true");
                                 window.open("/logged", "_self");
 
 

@@ -229,6 +229,7 @@ function signOut() {
     // });
     // setter
     localStorage.removeItem('isLogged');
+    localStorage.removeItem('idUser');
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then( function () {
             window.open("/", "_self");
@@ -250,6 +251,9 @@ function goToMyOffers() {
     window.open("/myOffers","_self");
 }
 
+function goToAddOffer() {
+    window.open("/additem","_self");
+}
 function displayLogOut()
 {
     ReactDOM.render(
@@ -268,7 +272,7 @@ function displayMap()
 function displayOffer()
 {
     ReactDOM.render(
-        <div><Nav.Link id="offerId">Dodaj ofertę</Nav.Link></div>, document.getElementById("offer_button")
+        <div><Nav.Link id="offerId" onClick={goToAddOffer}>Dodaj ofertę</Nav.Link></div>, document.getElementById("offer_button")
     )
     ;
 }

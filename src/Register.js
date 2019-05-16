@@ -22,6 +22,7 @@ import {Nav, Navbar} from "react-bootstrap";
 import {Redirect} from "react-router-dom";
 import NavLink from "react-bootstrap/NavLink";
 import MapApp from "./MapApp";
+import ReactDOM from "react-dom";
 
 class Register extends Component {
 
@@ -78,7 +79,9 @@ class Register extends Component {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto"></Nav>
-
+                        <Nav>
+                            <div id="log_in"></div>
+                        </Nav>
                     </Navbar.Collapse>
                 </Navbar>
 
@@ -144,6 +147,11 @@ class Register extends Component {
 
 
     }
+    componentDidMount()
+    {
+        displayLogIn();
+
+    }
 
     pies = (e) =>
     {
@@ -176,7 +184,21 @@ class Register extends Component {
     }
 
 
+
+
 }
+
+function displayLogIn()
+{
+    ReactDOM.render(
+        <div><Nav.Link id="logId" onClick={signIn}>Zaloguj się</Nav.Link></div>, document.getElementById("log_in")
+    )
+    ;
+}
+function signIn() {
+    window.open("/logging","_self");
+}
+
 Register.contextType = AppContext;
 export default Register;
 

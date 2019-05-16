@@ -225,19 +225,18 @@ class MapApp extends Component {
                 <body id="page-top">
 
                 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                    <Navbar.Brand href="#home">Charytatywni.pl</Navbar.Brand>
+                    <Navbar.Brand href="/">Charytatywni.pl</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
-                        <Nav className="mr-auto"></Nav>
-                        <Nav>
-                            <Nav.Link to="/" classname="nav-link js-scroll-trigger">Strona główna</Nav.Link>
-                        </Nav>
+                        {/*<Nav className="mr-auto"></Nav>*/}
+                        {/*<Nav>*/}
+                            {/*<Nav.Link to="/" classname="nav-link js-scroll-trigger">Strona główna</Nav.Link>*/}
+                        {/*</Nav>*/}
                     </Navbar.Collapse>
                 </Navbar>
 
                 <header className="mapHeader">
                     <div>
-                        {/*<div className="container_login" style="margin-top: 10%">*/}
                         <div>
                                 {
                                     this.state.data.length <= 0
@@ -250,28 +249,7 @@ class MapApp extends Component {
                                                         zIndex: 9999,
                                                         fontSize: '2em'
                                                     }}>
-                                                        {/*<form id={"addOfferForm"} action={"/saveNewOffer"} method={"get"}>*/}
-
-                                                            {/*<input type="text"*/}
-                                                                   {/*id={"textInput"}*/}
-                                                                   {/*style={{ width: "200px" }}*/}
-                                                                   {/*onChange={e => this.setState({ langlat: e.target.value })}*/}
-                                                            {/*/>*/}
-                                                            {/*<input type={"text"} id={"categoryInput"}/>*/}
-                                                            {/*<select name={"category"} id={"categoryInput"}*/}
-                                                                    {/*onChange={e => this.setState({ categoryToAdd: e.target.value})}>*/}
-                                                                {/*<option value={"food"}>Jedzenie</option>*/}
-                                                                {/*<option value={"toys"}>Zabawki</option>*/}
-                                                            {/*</select>*/}
-                                                            {/*<input type={"submit"}*/}
-                                                                   {/*onClick={() =>*/}
-                                                                       {/*this.putDataToDB(this.state.langlat, this.state.categoryToAdd)*/}
-                                                                   {/*}*/}
-                                                                   {/*value={"Wyslij"}*/}
-                                                            {/*/>*/}
-                                                        {/*</form>*/}
                                                     </div>
-                                                    {/*<span>{loc.Latitude}, {loc.Longitude}, {loc.Description}</span>*/}
                                                     <div className={"mapContainer"}>
                                                         <div id={"optionsMap"}>
                                                             <div className={"dropdown"}>
@@ -299,24 +277,9 @@ class MapApp extends Component {
                                                                                 name='filter' id='bar'
                                                                                 value='bar'/><label
                                                                         htmlFor='bar'>bar</label></div>
-                                                                    {/*<nav id='filter-group'*/}
-                                                                         {/*className='filter-group'*/}
-                                                                         {/*onChange={console.log("SIE ZMIENILO XD")}*/}
-                                                                        {/*>*/}
-                                                                        {/*<input type="checkbox" id="poi-theatre" />*/}
-                                                                        {/*<label htmlFor="poi-theatre">theatre</label>*/}
-                                                                        {/*<input type="checkbox" id="poi-theatre2" />*/}
-                                                                        {/*<label htmlFor="poi-theatre2">dwo</label>*/}
-                                                                    {/*</nav>*/}
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        {/*<div className="dropdown">*/}
-                                                            {/*<span>Mouse over me</span>*/}
-                                                            {/*<div className="dropdown-content">*/}
-                                                                {/*<p>Hello World!</p>*/}
-                                                            {/*</div>*/}
-                                                        {/*</div>*/}
                                                         <div>
                                                             {console.log("Kalarepka: " + this.state.checked)}
                                                             <Map id={"mojaMapa"} ref={this.myRef} locations={data} checked={this.state.checked}/>
@@ -371,31 +334,7 @@ class MapApp extends Component {
                                 {/*{this.state.data.length <= 0 ? <Map locations={this.state.data}/> : <div id={"testerid"}>Ahaa</div>}*/}
                             {/*</div>*/}
                             <div style={{ padding: "10px" }}>
-                                {/*<input*/}
-                                    {/*type="text"*/}
-                                    {/*style={{ width: "200px" }}*/}
-                                    {/*onChange={e => this.setState({ idToUpdate: e.target.value })}*/}
-                                    {/*placeholder="id of item to update here"*/}
-                                {/*/>*/}
-                                {/*<input*/}
-                                    {/*type="text"*/}
-                                    {/*style={{ width: "200px" }}*/}
-                                    {/*onChange={e => this.setState({ updateToApply: e.target.value })}*/}
-                                    {/*placeholder="put new value of the item here"*/}
-                                {/*/>*/}
-                                {/*<input type={"submit"}*/}
-                                       {/*onClick={() =>*/}
-                                           {/*this.updateDB(this.state.idToUpdate, this.state.updateToApply)*/}
-                                       {/*}*/}
-                                       {/*value={"Wyslij"}*/}
-                                       {/*/>*/}
-                                {/*<button*/}
-                                    {/*onClick={() =>*/}
-                                        {/*this.updateDB(this.state.idToUpdate, this.state.updateToApply)*/}
-                                    {/*}*/}
-                                {/*>*/}
-                                    {/*UPDATE*/}
-                                {/*</button>*/}
+
                             </div>
                         </div>
                     </div>
