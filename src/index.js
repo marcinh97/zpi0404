@@ -12,6 +12,7 @@ import UserOffers from "./UserOffers";
 import SeparateOffer from "./SeparateOffer"
 import AddItem from "./AddItem";
 import AllOffers from "./AllOffers";
+import {PrivateRoute} from "./PrivateRoute";
 
 const routing = (
     <Router>
@@ -22,9 +23,9 @@ const routing = (
             <Route path="/confirm" component = {LoginConfirmation}/>
             <Route path="/map" component = {MapApp}/>
             <Route path="/register" component ={RegisterToPortal}/>
-            <Route path="/myOffers" component ={UserOffers}/>
+            <PrivateRoute exact path="/myOffers" component ={UserOffers}/>
             <Route path="/offer" component ={SeparateOffer}/>
-            <Route path="/additem" component ={AddItem}/>
+            <PrivateRoute exact path="/additem" component ={AddItem}/>
             <Route path="/all" component ={AllOffers}/>
     </div>
     </Router>

@@ -1,3 +1,4 @@
+/* global gapi */
 import React, { Component } from "react";
 import {Nav, Navbar} from "react-bootstrap";
 import Glide, { Controls, Breakpoints } from '@glidejs/glide/dist/glide.modular.esm'
@@ -7,6 +8,7 @@ import ReactMapboxGl, {Layer} from "react-mapbox-gl";
 import queryString from 'query-string'
 import CityPin from "./OfferPin";
 import Marker from "react-mapbox-gl/lib/marker";
+import ReactDOM from "react-dom";
 
 const Map = ReactMapboxGl({
     accessToken: 'pk.eyJ1Ijoib3pvbmVsYXllcjk3IiwiYSI6ImNqdDc5YW9majAyZjU0NXBscjJkMXR2OHQifQ.aQH1Wz9_4MG4xcC6Wr4NbQ'
@@ -31,7 +33,12 @@ export default class SeparateOffer extends Component{
     }
 
     componentDidMount(){
-
+        onLoad();
+        displayLogOut();
+        displayMap();
+        displayOffer();
+        displayMyOffers();
+        displayAllOffers();
     }
 
     manageGlass(ev){
@@ -210,12 +217,16 @@ export default class SeparateOffer extends Component{
                 <body id="offerBody">
 
                 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                    <Navbar.Brand href="#home">Charytatywni.pl</Navbar.Brand>
+                    <Navbar.Brand href="/">Charytatywni.pl</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
-                        <Nav className="mr-auto"></Nav>
+                        <Nav className="mr-auto"/>
+                        <Nav><div id="map_button"/></Nav>
+                        <Nav><div id="all_offer_button"/></Nav>
+                        <Nav><div id="offer_button"/></Nav>
+                        <Nav><div id="my_offer_button"/></Nav>
                         <Nav>
-                            <Nav.Link to="/" classname="nav-link js-scroll-trigger">Strona główna</Nav.Link>
+                            <div id="log_in_out"/>
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
@@ -310,4 +321,94 @@ export default class SeparateOffer extends Component{
             </div>
         );
     }
+}
+
+function onLoad() {
+    gapi.load('auth2', function() {
+        gapi.auth2.init();
+    });
+}
+
+
+function signOut() {
+    // gapi.auth2.init({
+    //     client_id: '545384910825-14gu3jrktnjfcjrntbv4t3akclpk2hn2.apps.googleusercontent.com'
+    // });
+    // setter
+    localStorage.removeItem('isLogged');
+    localStorage.removeItem('idUser');
+    /*var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then( function () {
+            window.open("/", "_self");
+        }
+    );*/
+    window.open("/",'_self');
+
+}
+
+
+
+function goToMap() {
+    window.open("/map","_self");
+}
+
+function goToMyOffers() {
+    window.open("/myOffers","_self");
+}
+
+function goToAllOffers() {
+    window.open("/all","_self");
+}
+
+function goToAddOffer() {
+    window.open("/additem","_self");
+}
+function SignIn() {
+    window.open("/logging","_self");
+}
+function displayLogOut()
+{
+    if(localStorage.getItem('isLogged')==='true') {
+        ReactDOM.render(
+            <div><Nav.Link id="logOutId" onClick={signOut}>Wyloguj się</Nav.Link></div>, document.getElementById("log_in_out")
+        )
+        ;}
+    else{
+        ReactDOM.render(
+            <div><Nav.Link id="logOutId" onClick={SignIn}>Zaloguj się</Nav.Link>
+            </div>, document.getElementById("log_in_out")
+        )
+        ;
+    }
+}
+
+function displayMap()
+{
+    ReactDOM.render(
+        <div><Nav.Link id="mapId" onClick={goToMap}>Mapa</Nav.Link></div>, document.getElementById("map_button")
+    )
+    ;
+}
+function displayOffer()
+{
+    if(localStorage.getItem('isLogged')==='true') {
+        ReactDOM.render(
+            <div><Nav.Link id="offerId" onClick={goToAddOffer}>Dodaj ofertę</Nav.Link></div>, document.getElementById("offer_button")
+        )
+        ;}
+}
+function displayAllOffers()
+{
+    ReactDOM.render(
+        <div><Nav.Link id="allOfferId" onClick={goToAllOffers}>Wszystkie oferty</Nav.Link></div>, document.getElementById("all_offer_button")
+    )
+    ;
+}
+function displayMyOffers()
+{
+    if(localStorage.getItem('isLogged')==='true') {
+        ReactDOM.render(
+            <div><Nav.Link id="myOfferId" onClick={goToMyOffers}>Moje oferty</Nav.Link></div>, document.getElementById("my_offer_button")
+        )
+        ;}
 }
