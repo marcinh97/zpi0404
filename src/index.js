@@ -10,6 +10,7 @@ import MapApp from "./MapApp";
 import RegisterToPortal from "./Register";
 import UserOffers from "./UserOffers";
 import SeparateOffer from "./SeparateOffer"
+import AddItem from "./AddItem";
 
 const routing = (
     <Router>
@@ -22,6 +23,7 @@ const routing = (
             <Route path="/register" component ={RegisterToPortal}/>
             <Route path="/myOffers" component ={UserOffers}/>
             <Route path="/offer" component ={SeparateOffer}/>
+            <Route path="additem" component ={AddItem}/>
     </div>
     </Router>
 );
