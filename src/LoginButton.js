@@ -189,7 +189,9 @@ class LoginButton extends Component {
                         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                         xhr.onload = function () {
                             if (xhr.status === 200) {
-                                localStorage.setItem('authToken', id_token);
+                                alert(xhr.responseText);
+                                localStorage.setItem('idUser',xhr.responseText);
+                                //localStorage.setItem('authToken', id_token);
                                 // alert(id_token);
                                 // alert("LOCAL" + localStorage.getItem('authToken'));
                                 // doRedirect = true;

@@ -37,6 +37,9 @@ class UserOffers extends Component {
         intervalIsSet: false,
         redirect: false,
         countItems: 0,
+        isFood: false,
+        isToy: false,
+        all: true,
     };
 
     setRedirect = () => {
@@ -45,6 +48,36 @@ class UserOffers extends Component {
         })
     }
 
+    setFood = () => {
+        this.setState({
+            isFood: true,
+            all: false,
+            isToy: false
+        })
+        window.document.getElementById("food").className ="active";
+        window.document.getElementById("all").className ="";
+        window.document.getElementById("toy").className ="";
+    }
+    setAll = () => {
+        this.setState({
+            isFood: false,
+            all: true,
+            isToy: false
+        })
+        window.document.getElementById("food").className ="";
+        window.document.getElementById("all").className ="active";
+        window.document.getElementById("toy").className ="";
+    }
+    setToy = () => {
+        this.setState({
+            isFood: false,
+            all: false,
+            isToy: true
+        })
+        window.document.getElementById("food").className ="";
+        window.document.getElementById("all").className ="";
+        window.document.getElementById("toy").className ="active";
+    }
     renderRedirect = () => {
         if (this.state.redirect) {
             return <Redirect to='/confirm'/>
@@ -159,6 +192,7 @@ class UserOffers extends Component {
 
         return this.state.data.map((offer, index) => {
             const { offerid, name, description, categoryNum, status, url } = offer
+
             var cat = getCatById(categoryNum);
             var statusTrans = getStatusByID(status);
             var photo = getPhoto(url);
@@ -191,6 +225,108 @@ class UserOffers extends Component {
         })
     }
 
+    renderTableData1() {
+        function getCatById(categoryNum) {
+            return categoryNum===1 ? "Zabawki" : categoryNum ===2 ? "Jedzenie" : "Inne";
+        }
+
+        function getStatusByID(status) {
+            return status===1 ? "Otwarta" : status ===2 ? "Zarezerwowana" : "Zamknięta";
+        }
+
+        function getPhoto(url) {
+            return url===null? "http://res.cloudinary.com/daiq9mb50/image/upload/v1558020887/demo/m39s5w1s5vhuzh18dtfx.png" : url;
+        }
+
+        return this.state.data.map((offer, index) => {
+            const { offerid, name, description, categoryNum, status, url } = offer
+
+            if(this.state.isFood)
+            {
+                if(categoryNum===2)
+                {
+                    var cat = getCatById(categoryNum);
+                    var statusTrans = getStatusByID(status);
+                    var photo = getPhoto(url);
+                    this.state.countItems++;
+                    return (
+                        <div className="col-lg-4 col-md-4 col-sm-6 brand manipul design print">
+                            <div className="h_gallery_item">
+
+                                <img className="img-fluid" src={photo} width="350px" height="250px" alt=""/>
+                                <div className="g_item_text">
+                                    <h4> <Nav.Link style={{paddingLeft:0}} onClick={() => goToSingleOffer(offerid)}>{name}</Nav.Link></h4>
+                                    <h5>{cat}</h5>
+                                    <p>{description}</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                    )
+                }
+
+            }
+            else if(this.state.all)
+            {
+                    var cat = getCatById(categoryNum);
+                    var statusTrans = getStatusByID(status);
+                    var photo = getPhoto(url);
+                    this.state.countItems++;
+                    return (
+                        <div className="col-lg-4 col-md-4 col-sm-6 brand manipul design print">
+                            <div className="h_gallery_item">
+
+                                <img className="img-fluid" src={photo} width="350px" height="250px" alt=""/>
+                                <div className="g_item_text">
+                                    <h4> <Nav.Link style={{paddingLeft:0}} onClick={() => goToSingleOffer(offerid)}>{name}</Nav.Link></h4>
+                                    <h5>{cat}</h5>
+                                    <p>{description}</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                    )
+            }
+            else if(this.state.isToy)
+            {
+                if(categoryNum===1)
+                {
+                    var cat = getCatById(categoryNum);
+                    var statusTrans = getStatusByID(status);
+                    var photo = getPhoto(url);
+                    this.state.countItems++;
+                    return (
+                        <div className="col-lg-4 col-md-4 col-sm-6 brand manipul design print">
+                            <div className="h_gallery_item">
+
+                                <img className="img-fluid" src={photo} width="350px" height="250px" alt=""/>
+                                <div className="g_item_text">
+                                    <h4> <Nav.Link style={{paddingLeft:0}} onClick={() => goToSingleOffer(offerid)}>{name}</Nav.Link></h4>
+                                    <h5>{cat}</h5>
+                                    <p>{description}</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                    )
+                }
+
+            }
+
+        })
+    }
 
     render() {
         // return (
@@ -276,7 +412,10 @@ class UserOffers extends Component {
         // );
 
         return (
+
             <div className="LoginButton">
+
+
                 <head>
                     <meta charSet="utf-8"/>
                     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -305,28 +444,30 @@ class UserOffers extends Component {
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
-
-                <div className="myClassName">
+                <section className="home_gallery_area p_120">
                     <div className="container">
+                        <div className="main_title">
+                            <h2>Twoje oferty</h2>
+                        </div>
+                    </div>
+                    <div className="isotope_fillter">
+                        <ul className="gallery_filter list">
+                            <li data-filter="*" className="active" id="all"><a href="#" onClick={this.setAll}>Wszystkie</a></li>
+                            <li data-filter=".brand" id="food"><a href="#" onClick={this.setFood}>Jedzenie</a></li>
+                            <li data-filter=".manipul" id="toy"><a href="#" onClick={this.setToy}>Zabawki</a></li>
+                            <li data-filter=".creative"><a href="#">UI/UX</a></li>
+                            <li data-filter=".design"><a href="#">Printing</a></li>
+                        </ul>
+                    </div>
+                    <div className="container">
+                        <div className="gallery_f_inner row imageGallery1">
+                            {this.renderTableData1()}
 
-                        <div className="row">
-
-
-                            <div className="col-lg-9">
-
-                                <h3>Oferty: </h3>
-                                <div className="row">
-                                    {this.renderTableData()}
-
-                                </div>
-
-                            </div>
 
                         </div>
 
                     </div>
-                </div>
-
+                </section>
                 <footer className="bg-light py-5My">
                     <div className="container">
                         <div className="small text-center text-muted">Copyright &copy; 2019 - Start Bootstrap oraz super
@@ -341,7 +482,6 @@ class UserOffers extends Component {
             </div>
 
         );
-
 
 
     }
