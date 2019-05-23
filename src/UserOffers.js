@@ -344,7 +344,7 @@ class UserOffers extends Component {
 
             if(this.state.isFood)
             {
-                if(categoryNum===2)
+                if(categoryNum===1)
                 {
                     var cat = getCatById(categoryNum);
                     var statusTrans = getStatusByID(status);
@@ -398,7 +398,7 @@ class UserOffers extends Component {
             }
             else if(this.state.isToy)
             {
-                if(categoryNum===1)
+                if(categoryNum===2)
                 {
                     var cat = getCatById(categoryNum);
                     var statusTrans = getStatusByID(status);

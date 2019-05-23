@@ -154,7 +154,7 @@ class App extends Component {
                                                         <div id="log_in_out"></div>
                                                        </Nav>
                                                          {/*{this.renderContentMenu()}*/}
-                                                      //     //                             {/*<div>*/}
+                                                         {/*<div>*/}
                                                      {/*{this.renderRedirectMap()}*/}
                                                          {/*<Nav.Link onClick={this.setRedirectMap}>Mapa </Nav.Link>*/}
                                                    {/*</div>*/}

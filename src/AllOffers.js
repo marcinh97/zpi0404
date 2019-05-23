@@ -279,7 +279,7 @@ class AllOffers extends Component {
 
             if(this.state.isFood)
             {
-                if(categoryNum===2)
+                if(categoryNum===1)
                 {
                     var cat = getCatById(categoryNum);
                     var statusTrans = getStatusByID(status);
@@ -333,7 +333,123 @@ class AllOffers extends Component {
             }
             else if(this.state.isToy)
             {
-                if(categoryNum===1)
+                if(categoryNum===2)
+                {
+                    var cat = getCatById(categoryNum);
+                    var statusTrans = getStatusByID(status);
+                    var photo = getPhoto(url);
+                    this.state.countItems++;
+                    return (
+                        <div className="col-lg-4 col-md-4 col-sm-6 brand manipul design print">
+                            <div className="h_gallery_item">
+
+                                <img className="img-fluid" src={photo} width="350px" height="250px" alt=""/>
+                                <div className="g_item_text">
+                                    <h4> <Nav.Link style={{paddingLeft:0}} onClick={() => goToSingleOffer(offerid)}>{name}</Nav.Link></h4>
+                                    <h5>{cat}</h5>
+                                    <p>{description}</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                    )
+                }
+
+            }
+            else if(this.state.isRtv)
+            {
+                if(categoryNum===3)
+                {
+                    var cat = getCatById(categoryNum);
+                    var statusTrans = getStatusByID(status);
+                    var photo = getPhoto(url);
+                    this.state.countItems++;
+                    return (
+                        <div className="col-lg-4 col-md-4 col-sm-6 brand manipul design print">
+                            <div className="h_gallery_item">
+
+                                <img className="img-fluid" src={photo} width="350px" height="250px" alt=""/>
+                                <div className="g_item_text">
+                                    <h4> <Nav.Link style={{paddingLeft:0}} onClick={() => goToSingleOffer(offerid)}>{name}</Nav.Link></h4>
+                                    <h5>{cat}</h5>
+                                    <p>{description}</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                    )
+                }
+
+            }
+            else if(this.state.isClothes)
+            {
+                if(categoryNum===4)
+                {
+                    var cat = getCatById(categoryNum);
+                    var statusTrans = getStatusByID(status);
+                    var photo = getPhoto(url);
+                    this.state.countItems++;
+                    return (
+                        <div className="col-lg-4 col-md-4 col-sm-6 brand manipul design print">
+                            <div className="h_gallery_item">
+
+                                <img className="img-fluid" src={photo} width="350px" height="250px" alt=""/>
+                                <div className="g_item_text">
+                                    <h4> <Nav.Link style={{paddingLeft:0}} onClick={() => goToSingleOffer(offerid)}>{name}</Nav.Link></h4>
+                                    <h5>{cat}</h5>
+                                    <p>{description}</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                    )
+                }
+
+            }
+            else if(this.state.isSport)
+            {
+                if(categoryNum===5)
+                {
+                    var cat = getCatById(categoryNum);
+                    var statusTrans = getStatusByID(status);
+                    var photo = getPhoto(url);
+                    this.state.countItems++;
+                    return (
+                        <div className="col-lg-4 col-md-4 col-sm-6 brand manipul design print">
+                            <div className="h_gallery_item">
+
+                                <img className="img-fluid" src={photo} width="350px" height="250px" alt=""/>
+                                <div className="g_item_text">
+                                    <h4> <Nav.Link style={{paddingLeft:0}} onClick={() => goToSingleOffer(offerid)}>{name}</Nav.Link></h4>
+                                    <h5>{cat}</h5>
+                                    <p>{description}</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                    )
+                }
+
+            }
+            else if(this.state.isFurniture)
+            {
+                if(categoryNum===6)
                 {
                     var cat = getCatById(categoryNum);
                     var statusTrans = getStatusByID(status);
