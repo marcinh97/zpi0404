@@ -138,7 +138,7 @@ class AddItem extends Component {
                 </Navbar>
 
                 <header className="masthead">
-                        <div className="formDiv" id="formDiv">
+                        <div className="formDiv">
 
                             <Form onSubmit={this.sendPhoto.bind(this)} enctype="multipart/form-data">
                                 <Form.Group as={Row} controlId="formHorizontalEmail">
@@ -150,6 +150,9 @@ class AddItem extends Component {
                                         <option value="jedzenie">Jedzenie</option>
                                         <option value="zabawki">Zabawki</option>
                                         <option value="RTV/AGD">RTV/AGD</option>
+                                        <option value="ubrania">Ubrania</option>
+                                        <option value="akcesoria sportowe">Sport</option>
+                                        <option value="meble">Meble</option>
                                     </select>
                                     </Col>
                                 </Form.Group>

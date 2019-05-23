@@ -40,6 +40,10 @@ class UserOffers extends Component {
         isFood: false,
         isToy: false,
         all: true,
+        isFurniture: false,
+        isClothes: false,
+        isSport: false,
+        isRtv: false
     };
 
     setRedirect = () => {
@@ -52,31 +56,128 @@ class UserOffers extends Component {
         this.setState({
             isFood: true,
             all: false,
-            isToy: false
+            isToy: false,
+            isSport: false,
+            isFurniture: false,
+            isClothes: false,
+            isRtv: false
         })
         window.document.getElementById("food").className ="active";
         window.document.getElementById("all").className ="";
         window.document.getElementById("toy").className ="";
+        window.document.getElementById("sport").className ="";
+        window.document.getElementById("clothes").className ="";
+        window.document.getElementById("rtv").className ="";
+        window.document.getElementById("furniture").className ="";
+
     }
     setAll = () => {
         this.setState({
             isFood: false,
             all: true,
-            isToy: false
+            isToy: false,
+            isSport: false,
+            isFurniture: false,
+            isClothes: false,
+            isRtv: false
         })
         window.document.getElementById("food").className ="";
         window.document.getElementById("all").className ="active";
         window.document.getElementById("toy").className ="";
+        window.document.getElementById("sport").className ="";
+        window.document.getElementById("clothes").className ="";
+        window.document.getElementById("rtv").className ="";
+        window.document.getElementById("furniture").className ="";
     }
     setToy = () => {
         this.setState({
             isFood: false,
             all: false,
-            isToy: true
+            isToy: true,
+            isSport: false,
+            isFurniture: false,
+            isClothes: false,
+            isRtv: false
         })
         window.document.getElementById("food").className ="";
         window.document.getElementById("all").className ="";
         window.document.getElementById("toy").className ="active";
+        window.document.getElementById("sport").className ="";
+        window.document.getElementById("clothes").className ="";
+        window.document.getElementById("rtv").className ="";
+        window.document.getElementById("furniture").className ="";
+    }
+    setSport = () => {
+        this.setState({
+            isFood: false,
+            all: false,
+            isToy: false,
+            isSport: true,
+            isFurniture: false,
+            isClothes: false,
+            isRtv: false
+        })
+        window.document.getElementById("food").className ="";
+        window.document.getElementById("all").className ="";
+        window.document.getElementById("toy").className ="";
+        window.document.getElementById("sport").className ="active";
+        window.document.getElementById("clothes").className ="";
+        window.document.getElementById("rtv").className ="";
+        window.document.getElementById("furniture").className ="";
+    }
+    setFurniture = () => {
+        this.setState({
+            isFood: false,
+            all: false,
+            isToy: false,
+            isSport: false,
+            isFurniture: true,
+            isClothes: false,
+            isRtv: false
+        })
+        window.document.getElementById("food").className ="";
+        window.document.getElementById("all").className ="";
+        window.document.getElementById("toy").className ="";
+        window.document.getElementById("sport").className ="";
+        window.document.getElementById("clothes").className ="";
+        window.document.getElementById("rtv").className ="";
+        window.document.getElementById("furniture").className ="active";
+    }
+    setClothes = () => {
+        this.setState({
+            isFood: false,
+            all: false,
+            isToy: false,
+            isSport: false,
+            isFurniture: false,
+            isClothes: true,
+            isRtv: false
+        })
+        window.document.getElementById("food").className ="";
+        window.document.getElementById("all").className ="";
+        window.document.getElementById("toy").className ="";
+        window.document.getElementById("sport").className ="";
+        window.document.getElementById("clothes").className ="active";
+        window.document.getElementById("rtv").className ="";
+        window.document.getElementById("furniture").className ="";
+    }
+    setRtv= () => {
+        this.setState({
+            isFood: false,
+            all: false,
+            isToy: false,
+            isSport: false,
+            isFurniture: false,
+            isClothes: false,
+            isRtv: true
+        })
+        window.document.getElementById("food").className ="";
+        window.document.getElementById("all").className ="";
+        window.document.getElementById("toy").className ="";
+        window.document.getElementById("sport").className ="";
+        window.document.getElementById("clothes").className ="";
+        window.document.getElementById("rtv").className ="active";
+        window.document.getElementById("furniture").className ="";
     }
     renderRedirect = () => {
         if (this.state.redirect) {
@@ -227,7 +328,7 @@ class UserOffers extends Component {
 
     renderTableData1() {
         function getCatById(categoryNum) {
-            return categoryNum===1 ? "Zabawki" : categoryNum ===2 ? "Jedzenie" : "Inne";
+            return categoryNum===1 ? "Jedzenie" : categoryNum ===2 ? "Zabawki" : categoryNum==3 ? "RTV/AGD" : categoryNum==4 ? "Ubrania" : categoryNum==5 ? "Sport" : categoryNum==6 ? "Meble" :"Inne";
         }
 
         function getStatusByID(status) {
@@ -298,6 +399,122 @@ class UserOffers extends Component {
             else if(this.state.isToy)
             {
                 if(categoryNum===1)
+                {
+                    var cat = getCatById(categoryNum);
+                    var statusTrans = getStatusByID(status);
+                    var photo = getPhoto(url);
+                    this.state.countItems++;
+                    return (
+                        <div className="col-lg-4 col-md-4 col-sm-6 brand manipul design print">
+                            <div className="h_gallery_item">
+
+                                <img className="img-fluid" src={photo} width="350px" height="250px" alt=""/>
+                                <div className="g_item_text">
+                                    <h4> <Nav.Link style={{paddingLeft:0}} onClick={() => goToSingleOffer(offerid)}>{name}</Nav.Link></h4>
+                                    <h5>{cat}</h5>
+                                    <p>{description}</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                    )
+                }
+
+            }
+            else if(this.state.isRtv)
+            {
+                if(categoryNum===3)
+                {
+                    var cat = getCatById(categoryNum);
+                    var statusTrans = getStatusByID(status);
+                    var photo = getPhoto(url);
+                    this.state.countItems++;
+                    return (
+                        <div className="col-lg-4 col-md-4 col-sm-6 brand manipul design print">
+                            <div className="h_gallery_item">
+
+                                <img className="img-fluid" src={photo} width="350px" height="250px" alt=""/>
+                                <div className="g_item_text">
+                                    <h4> <Nav.Link style={{paddingLeft:0}} onClick={() => goToSingleOffer(offerid)}>{name}</Nav.Link></h4>
+                                    <h5>{cat}</h5>
+                                    <p>{description}</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                    )
+                }
+
+            }
+            else if(this.state.isClothes)
+            {
+                if(categoryNum===4)
+                {
+                    var cat = getCatById(categoryNum);
+                    var statusTrans = getStatusByID(status);
+                    var photo = getPhoto(url);
+                    this.state.countItems++;
+                    return (
+                        <div className="col-lg-4 col-md-4 col-sm-6 brand manipul design print">
+                            <div className="h_gallery_item">
+
+                                <img className="img-fluid" src={photo} width="350px" height="250px" alt=""/>
+                                <div className="g_item_text">
+                                    <h4> <Nav.Link style={{paddingLeft:0}} onClick={() => goToSingleOffer(offerid)}>{name}</Nav.Link></h4>
+                                    <h5>{cat}</h5>
+                                    <p>{description}</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                    )
+                }
+
+            }
+            else if(this.state.isSport)
+            {
+                if(categoryNum===5)
+                {
+                    var cat = getCatById(categoryNum);
+                    var statusTrans = getStatusByID(status);
+                    var photo = getPhoto(url);
+                    this.state.countItems++;
+                    return (
+                        <div className="col-lg-4 col-md-4 col-sm-6 brand manipul design print">
+                            <div className="h_gallery_item">
+
+                                <img className="img-fluid" src={photo} width="350px" height="250px" alt=""/>
+                                <div className="g_item_text">
+                                    <h4> <Nav.Link style={{paddingLeft:0}} onClick={() => goToSingleOffer(offerid)}>{name}</Nav.Link></h4>
+                                    <h5>{cat}</h5>
+                                    <p>{description}</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                    )
+                }
+
+            }
+            else if(this.state.isFurniture)
+            {
+                if(categoryNum===6)
                 {
                     var cat = getCatById(categoryNum);
                     var statusTrans = getStatusByID(status);
@@ -455,8 +672,10 @@ class UserOffers extends Component {
                             <li data-filter="*" className="active" id="all"><a href="#" onClick={this.setAll}>Wszystkie</a></li>
                             <li data-filter=".brand" id="food"><a href="#" onClick={this.setFood}>Jedzenie</a></li>
                             <li data-filter=".manipul" id="toy"><a href="#" onClick={this.setToy}>Zabawki</a></li>
-                            <li data-filter=".creative"><a href="#">UI/UX</a></li>
-                            <li data-filter=".design"><a href="#">Printing</a></li>
+                            <li data-filter=".manipul" id="clothes"><a href="#" onClick={this.setClothes}>Ubrania</a></li>
+                            <li data-filter=".manipul" id="sport"><a href="#" onClick={this.setSport}>Sport</a></li>
+                            <li data-filter=".manipul" id="rtv"><a href="#" onClick={this.setRtv}>RTV/AGD</a></li>
+                            <li data-filter=".manipul" id="furniture"><a href="#" onClick={this.setFurniture}>Meble</a></li>
                         </ul>
                     </div>
                     <div className="container">

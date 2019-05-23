@@ -23,11 +23,16 @@ export default class OfferPin extends PureComponent {
     render() {
         const {size = 20, onClick} = this.props;
         const cat = this.state.category;
-        var source = cat === 1 ? './views/kids.png' : cat === 2 ? './views/food.png' : './views/clothes.png';
+        var source = cat === 2 ? './views/kids.png' : cat === 1 ? './views/food.png' : './views/clothes.png';
         return (
             <img
                 height={size}
-                src={this.state.category === 1 ? require('./views/kids.png') : require('./views/food.png')}
+                src={this.state.category === 1 ? require('./views/food.png')
+                    : this.state.category === 2 ? require('./views/kids.png')
+                        : this.state.category === 3 ? require('./views/rtv.png')
+                            :this.state.category === 4 ? require('./views/clothes.png')
+                                : this.state.category === 5 ? require('./views/sport.png')
+                                    : require('./views/furniture.png')}
                 style={{...pinStyle, transform: `translate(${-size / 2}px,${-size}px)`}}
                 onClick={onClick}
             />

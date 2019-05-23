@@ -40,37 +40,139 @@ class AllOffers extends Component {
         isFood: false,
         isToy: false,
         all: true,
+        isFurniture: false,
+        isClothes: false,
+        isSport: false,
+        isRtv: false
     };
-
     setFood = () => {
         this.setState({
             isFood: true,
             all: false,
-            isToy: false
+            isToy: false,
+            isSport: false,
+            isFurniture: false,
+            isClothes: false,
+            isRtv: false
         })
         window.document.getElementById("food").className ="active";
         window.document.getElementById("all").className ="";
         window.document.getElementById("toy").className ="";
+        window.document.getElementById("sport").className ="";
+        window.document.getElementById("clothes").className ="";
+        window.document.getElementById("rtv").className ="";
+        window.document.getElementById("furniture").className ="";
+
     }
     setAll = () => {
         this.setState({
             isFood: false,
             all: true,
-            isToy: false
+            isToy: false,
+            isSport: false,
+            isFurniture: false,
+            isClothes: false,
+            isRtv: false
         })
         window.document.getElementById("food").className ="";
         window.document.getElementById("all").className ="active";
         window.document.getElementById("toy").className ="";
+        window.document.getElementById("sport").className ="";
+        window.document.getElementById("clothes").className ="";
+        window.document.getElementById("rtv").className ="";
+        window.document.getElementById("furniture").className ="";
     }
     setToy = () => {
         this.setState({
             isFood: false,
             all: false,
-            isToy: true
+            isToy: true,
+            isSport: false,
+            isFurniture: false,
+            isClothes: false,
+            isRtv: false
         })
         window.document.getElementById("food").className ="";
         window.document.getElementById("all").className ="";
         window.document.getElementById("toy").className ="active";
+        window.document.getElementById("sport").className ="";
+        window.document.getElementById("clothes").className ="";
+        window.document.getElementById("rtv").className ="";
+        window.document.getElementById("furniture").className ="";
+    }
+
+
+    setSport = () => {
+        this.setState({
+            isFood: false,
+            all: false,
+            isToy: false,
+            isSport: true,
+            isFurniture: false,
+            isClothes: false,
+            isRtv: false
+        })
+        window.document.getElementById("food").className ="";
+        window.document.getElementById("all").className ="";
+        window.document.getElementById("toy").className ="";
+        window.document.getElementById("sport").className ="active";
+        window.document.getElementById("clothes").className ="";
+        window.document.getElementById("rtv").className ="";
+        window.document.getElementById("furniture").className ="";
+    }
+    setFurniture = () => {
+        this.setState({
+            isFood: false,
+            all: false,
+            isToy: false,
+            isSport: false,
+            isFurniture: true,
+            isClothes: false,
+            isRtv: false
+        })
+        window.document.getElementById("food").className ="";
+        window.document.getElementById("all").className ="";
+        window.document.getElementById("toy").className ="";
+        window.document.getElementById("sport").className ="";
+        window.document.getElementById("clothes").className ="";
+        window.document.getElementById("rtv").className ="";
+        window.document.getElementById("furniture").className ="active";
+    }
+    setClothes = () => {
+        this.setState({
+            isFood: false,
+            all: false,
+            isToy: false,
+            isSport: false,
+            isFurniture: false,
+            isClothes: true,
+            isRtv: false
+        })
+        window.document.getElementById("food").className ="";
+        window.document.getElementById("all").className ="";
+        window.document.getElementById("toy").className ="";
+        window.document.getElementById("sport").className ="";
+        window.document.getElementById("clothes").className ="active";
+        window.document.getElementById("rtv").className ="";
+        window.document.getElementById("furniture").className ="";
+    }
+    setRtv= () => {
+        this.setState({
+            isFood: false,
+            all: false,
+            isToy: false,
+            isSport: false,
+            isFurniture: false,
+            isClothes: false,
+            isRtv: true
+        })
+        window.document.getElementById("food").className ="";
+        window.document.getElementById("all").className ="";
+        window.document.getElementById("toy").className ="";
+        window.document.getElementById("sport").className ="";
+        window.document.getElementById("clothes").className ="";
+        window.document.getElementById("rtv").className ="active";
+        window.document.getElementById("furniture").className ="";
     }
 
     componentDidMount() {
@@ -161,7 +263,7 @@ class AllOffers extends Component {
 
     renderTableData1() {
         function getCatById(categoryNum) {
-            return categoryNum===1 ? "Zabawki" : categoryNum ===2 ? "Jedzenie" : "Inne";
+            return categoryNum===1 ? "Jedzenie" : categoryNum ===2 ? "Zabawki" : categoryNum==3 ? "RTV/AGD" : categoryNum==4 ? "Ubrania" : categoryNum==5 ? "Sport" : categoryNum==6 ? "Meble" :"Inne";
         }
 
         function getStatusByID(status) {
@@ -376,8 +478,10 @@ class AllOffers extends Component {
                             <li data-filter="*" className="active" id="all"><a href="#" onClick={this.setAll}>Wszystkie</a></li>
                             <li data-filter=".brand" id="food"><a href="#" onClick={this.setFood}>Jedzenie</a></li>
                             <li data-filter=".manipul" id="toy"><a href="#" onClick={this.setToy}>Zabawki</a></li>
-                            <li data-filter=".creative"><a href="#">UI/UX</a></li>
-                            <li data-filter=".design"><a href="#">Printing</a></li>
+                            <li data-filter=".manipul" id="clothes"><a href="#" onClick={this.setClothes}>Ubrania</a></li>
+                            <li data-filter=".manipul" id="sport"><a href="#" onClick={this.setSport}>Sport</a></li>
+                            <li data-filter=".manipul" id="rtv"><a href="#" onClick={this.setRtv}>RTV/AGD</a></li>
+                            <li data-filter=".manipul" id="furniture"><a href="#" onClick={this.setFurniture}>Meble</a></li>
                         </ul>
                     </div>
                     <div className="container">
