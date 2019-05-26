@@ -178,7 +178,7 @@ class AllOffers extends Component {
     componentDidMount() {
         this.getDataFromDb();
         if (!this.state.intervalIsSet) {
-            let interval = setInterval(this.getDataFromDb, 100000);
+            let interval = setInterval(this.getDataFromDb, 1000000);
             this.setState({ intervalIsSet: interval });
         }
         onLoad();

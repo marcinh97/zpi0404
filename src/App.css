@@ -798,7 +798,9 @@ hr.someClass {
 }
 
 .back{
-    background-image: url("zdj.jpg");
+    /*background-image: url("zdj.jpg");*/
+    background-image: url("./img/bg-masthead1.jpg");
+    /*background-image: url("https://images.pexels.com/photos/459469/pexels-photo-459469.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&fbclid=IwAR0L4tQYpmzD-l8xy6afKzmSWl0BBAN7DMH1pBeJsiSbSJo6aPMQ31h0aNE");*/
 
     /* Full height */background-attachment: fixed;
     width: 100%;
@@ -1146,6 +1148,7 @@ hr.someClass {
     }
     .main_title h2 {
         font-size: 25px;
+        color: orangered;
     }
     /* Elements Area css
     ============================================================================================ */
@@ -1339,8 +1342,8 @@ button:focus {
     padding-right: 0px; }
 
 .p_120 {
-    padding-top: 120px;
-    padding-bottom: 120px; }
+    padding-top: 50px;
+    padding-bottom: 50px; }
 
 .p_100 {
     padding-top: 100px;
@@ -1375,7 +1378,7 @@ button:focus {
 .main_title h2 {
     font-family: "Heebo", sans-serif;
     font-size: 36px;
-    color: #222222;
+    color: orangered;
     margin-bottom: 15px;
     text-transform: uppercase; }
 .main_title p {
@@ -4040,14 +4043,14 @@ h6 {
 .isotope_fillter .gallery_filter li:last-child {
     margin-right: 0px; }
 .isotope_fillter .gallery_filter li a {
-    font-size: 12px;
+    font-size: 16px;
     font-family: "Roboto", sans-serif;
     font-weight: 500;
-    color: #222222;
+    color: orangered;
     transition: all 300ms linear 0s;
     text-transform: uppercase; }
 .isotope_fillter .gallery_filter li:hover a, .isotope_fillter .gallery_filter li.active a {
-    color: #766dff; }
+    color: whitesmoke; }
 
 .gallery_f_inner {
     margin-bottom: -45px; }
