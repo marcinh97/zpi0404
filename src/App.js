@@ -120,7 +120,7 @@ class App extends Component {
                 <Nav.Link href="#about">O nas</Nav.Link>
                 </div>
                 <div>
-                <Nav.Link href="#services">Działania</Nav.Link>
+                <Nav.Link href="#services">Funkcjonalności</Nav.Link>
                 </div>
                 <Nav.Link href="#portfolio">Portfolio</Nav.Link>
                 <Nav.Link href="#contact">Kontakt</Nav.Link>
@@ -137,7 +137,7 @@ class App extends Component {
             <div className="App">
                 <body id="page-top">
                 <Navbar collapseOnSelect fixed="top" expand="lg" bg="dark" variant="dark">
-                    <Navbar.Brand href="/">Charytatywni.pl</Navbar.Brand>
+                    <Navbar.Brand href="/">CharytatywniRazem.pl</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto"></Nav>
@@ -192,15 +192,16 @@ class App extends Component {
                     <div className="container">
                         <div className="row justify-content-center">
                             <div className="col-lg-8 text-center">
-                                <h2 className="text-white mt-0">Mamy wszystko czego potrzebujesz!</h2>
+                                <h2 className="text-white mt-0">Jak powstała ta strona?</h2>
                                 <hr className="divider light my-4"/>
-                                <p className="text-white-50 mb-4">Nie wiesz co zrobić z niezjedzonym pożywieniem? Masz
-                                    potrzebę niesienia pomocy?
-                                    Może potrzebujesz pomocy? Dzięki tej stronie możesz otrzymać pomoc oraz ofiarować ją
-                                    drugiej osobie.</p>
+                                <p className="text-white-50 mb-4">Projekt aplikacji webowej "CharytatywniRazem" powstał w reamach realizacji przedsięwzięcia
+                                    na kursie Zespołowe Przedsięwzięcie Inżynierskie na Politechnice Wrocławskiej.
+                                    Aplikacja wykorzystuje środowisko NodeJS od strony back-endowej oraz React od strony front-endowej.
+                                    Baza danych produktów i użytkowników umieszczona jest w chmurze platformy Azure, zarządzana przez SZBD PostgreSQL.
+                                    Dodatkowo aplikacja wykorzystuje technologię PWA (progressive web apps).
+                                </p>
                                 <a className="btn btn-light btn-xl js-scroll-trigger" href="#services">Przyjrzyj się
-                                    naszym
-                                    działaniom!</a>
+                                    funkcjonalnościom!</a>
                             </div>
                         </div>
                     </div>
@@ -208,28 +209,35 @@ class App extends Component {
 
                 <section className="page-section" id="services">
                     <div className="container">
-                        <h2 className="text-center mt-0">Działania</h2>
+                        <h2 className="text-center mt-0">Funkcjonalności</h2>
                         <hr className="divider my-4"/>
                         <div className="row">
                             <div className="col-lg-3 col-md-6 text-center">
                                 <div className="mt-5">
                                     <i className="fas fa-4x fa-utensils text-primary mb-4"></i>
-                                    <h3 className="h4 mb-2">Dziel się jedzeniem</h3>
-                                    <p className="text-muted mb-0">Nie wyrzucaj jedzenia, oddaj innym</p>
+                                    <h3 className="h4 mb-2">Dziel się z innymi</h3>
+                                    <p className="text-muted mb-0">Dodawanie ofert różnych kategorii</p>
                                 </div>
                             </div>
                             <div className="col-lg-3 col-md-6 text-center">
                                 <div className="mt-5">
-                                    <i className="fas fa-4x fa-laptop-code text-primary mb-4"></i>
-                                    <h3 className="h4 mb-2">On-line i off-line</h3>
-                                    <p className="text-muted mb-0">Korzystaj ze strony on-line oraz offline</p>
+                                    <i className="far fa-4x fa-comment-alt text-primary mb-4"></i>
+                                    <h3 className="h4 mb-2">Przeglądanie ofert</h3>
+                                    <p className="text-muted mb-0">Przeglądanie wszystkich ofert oraz ofert użytkownika</p>
                                 </div>
                             </div>
                             <div className="col-lg-3 col-md-6 text-center">
                                 <div className="mt-5">
-                                    <i className="fas fa-4x fa-globe text-primary mb-4"></i>
-                                    <h3 className="h4 mb-2">W całej Polsce</h3>
-                                    <p className="text-muted mb-0">Pomoc możesz nieść w każdym miejscu w Polsce!</p>
+                                    <i className="fas fa-4x fa-globe-americas text-primary mb-4"></i>
+                                    <h3 className="h4 mb-2">Mapa</h3>
+                                    <p className="text-muted mb-0">Poszukiwanie ofert na mapie w celu szybszego zlokalizowania</p>
+                                </div>
+                            </div>
+                            <div className="col-lg-3 col-md-6 text-center">
+                                <div className="mt-5">
+                                    <i className="fab fa-4x fa-google text-primary mb-4"></i>
+                                    <h3 className="h4 mb-2">Łatwa rejestracja</h3>
+                                    <p className="text-muted mb-0">Bezpośrednia rejestracja poprzez formularz lub z wykorzystaniem autoryzacji Google</p>
                                 </div>
                             </div>
                             <div className="col-lg-3 col-md-6 text-center">
@@ -237,6 +245,20 @@ class App extends Component {
                                     <i className="fas fa-4x fa-heart text-primary mb-4"></i>
                                     <h3 className="h4 mb-2">Zbieraj odznaczenia</h3>
                                     <p className="text-muted mb-0">Zbieraj odznaczenia super bohatera</p>
+                                </div>
+                            </div>
+                            <div className="col-lg-3 col-md-6 text-center">
+                                <div className="mt-5">
+                                    <i className="fas fa-4x fa-laptop-code text-primary mb-4"></i>
+                                    <h3 className="h4 mb-2">On-line i off-line</h3>
+                                    <p className="text-muted mb-0">Korzystaj ze strony on-line oraz off-line</p>
+                                </div>
+                            </div>
+                            <div className="col-lg-3 col-md-6 text-center">
+                                <div className="mt-5">
+                                    <i className="fas fa-4x fa-mobile text-primary mb-4"></i>
+                                    <h3 className="h4 mb-2">Na każdym urządzeniu</h3>
+                                    <p className="text-muted mb-0">Korzystaj ze strony bez względu na urządzienie</p>
                                 </div>
                             </div>
                         </div>
@@ -374,8 +396,7 @@ class App extends Component {
 
                 <footer className="bg-light py-5">
                     <div className="container">
-                        <div className="small text-center text-muted">Copyright &copy; 2019 - Start Bootstrap oraz super
-                            programistka frontu Ewa Łyko
+                        <div className="small text-center text-muted">Copyright &copy; 2019 - Horak & Łyko & Rychter & Sinicki
                         </div>
                     </div>
                 </footer>

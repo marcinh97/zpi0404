@@ -217,7 +217,7 @@ export default class SeparateOffer extends Component{
                 <body id="offerBody">
 
                 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                    <Navbar.Brand href="/">Charytatywni.pl</Navbar.Brand>
+                    <Navbar.Brand href="/">CharytatywniRazem.pl</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto"/>
@@ -312,8 +312,7 @@ export default class SeparateOffer extends Component{
                 </div>
                 <footer className="footerMap">
                     <div className="container">
-                        <div className="small text-center text-muted">Copyright &copy; 2019 - Start Bootstrap oraz super
-                            programistka frontu Ewa Łyko
+                        <div className="small text-center text-muted">Copyright &copy; 2019 - Horak & Łyko & Rychter & Sinicki
                         </div>
                     </div>
                 </footer>

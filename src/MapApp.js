@@ -232,7 +232,7 @@ class MapApp extends Component {
                 <body id="page-top">
 
                 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                    <Navbar.Brand href="/">Charytatywni.pl</Navbar.Brand>
+                    <Navbar.Brand href="/">CharytatywniRazem.pl</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto"></Nav>
@@ -353,8 +353,7 @@ class MapApp extends Component {
                 </header>
                 <footer className="footerMap">
                     <div className="container">
-                        <div className="small text-center text-muted">Copyright &copy; 2019 - Start Bootstrap oraz super
-                            programistka frontu Ewa Łyko
+                        <div className="small text-center text-muted">Copyright &copy; 2019 - Horak & Łyko & Rychter & Sinicki
                         </div>
                     </div>
                 </footer>
