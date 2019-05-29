@@ -21,6 +21,9 @@ import './solid';
 import ReactDOM from 'react-dom';
 import {Redirect} from "react-router-dom";
 import {Button, Nav, Navbar} from "react-bootstrap";
+import mapa from './img/portfolio/fullsize/mapascreen.PNG'; // with import
+import oferta from './img/portfolio/fullsize/ofertyscreen.PNG'; // with import
+import telefon from './img/portfolio/fullsize/app.jpg'; // with import
 
 class App extends Component {
 
@@ -271,43 +274,46 @@ class App extends Component {
                             <div className="col-lg-4 col-sm-6">
                                 <a className="portfolio-box" id="img1">
                                     <img className="img-fluid"
-                                         src={"https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"}
-                                         alt=""/>
-                                    <div className="portfolio-box-caption">
-                                        <div className="project-category text-white-50">
-                                            Żywność
-                                        </div>
-                                        <div className="project-name">
-                                            Podziel się jedzeniem
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div className="col-lg-4 col-sm-6">
-                                <a className="portfolio-box" id="img1">
-                                    <img className="img-fluid"
-                                         src={"https://images.pexels.com/photos/697243/pexels-photo-697243.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"}/>
-                                    <div className="portfolio-box-caption">
-                                        <div className="project-category text-white-50">
-                                            Znajomość
-                                        </div>
-                                        <div className="project-name">
-                                            Nawiąż nowe znajomości
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div className="col-lg-4 col-sm-6">
-                                <a className="portfolio-box" id="img1">
-                                    <img className="img-fluid"
-                                         src={"https://images.pexels.com/photos/34753/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"}
+                                         // src={"https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"}
+                                         src={mapa}
                                          alt=""/>
                                     <div className="portfolio-box-caption">
                                         <div className="project-category text-white-50">
                                             Mapa
                                         </div>
                                         <div className="project-name">
-                                            Zaznacz gdzie chcesz pomagać
+                                            Znajdź oferty na mapie
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div className="col-lg-4 col-sm-6">
+                                <a className="portfolio-box" id="img1">
+                                    <img className="img-fluid"
+                                         //src={"https://images.pexels.com/photos/697243/pexels-photo-697243.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"}/>
+                                         src={oferta}/>
+                                    <div className="portfolio-box-caption">
+                                        <div className="project-category text-white-50">
+                                            Oferty
+                                        </div>
+                                        <div className="project-name">
+                                            Przeglądaj dostępne oferty
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div className="col-lg-4 col-sm-6">
+                                <a className="portfolio-box" id="img1">
+                                    <img className="img-fluid"
+                                         //src={"https://images.pexels.com/photos/34753/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"}
+                                         src={telefon}
+                                         alt=""/>
+                                    <div className="portfolio-box-caption">
+                                        <div className="project-category text-white-50">
+                                            Dostępność
+                                        </div>
+                                        <div className="project-name">
+                                            Korzystaj ze strony przez telefon
                                         </div>
                                     </div>
                                 </a>

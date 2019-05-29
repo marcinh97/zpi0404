@@ -278,17 +278,32 @@ class MapApp extends Component {
                                                                                 className='filter'
                                                                                 name='filter' id='food'
                                                                                 value='food'/><label
-                                                                        htmlFor='food'>jedzenie</label></div>
+                                                                        htmlFor='food'>Jedzenie</label></div>
                                                                     <div><input type='checkbox'
                                                                                 className='filter'
                                                                                 name='filter' id='toys'
                                                                                 value='toys'/><label
-                                                                        htmlFor='toys'>zabawki</label></div>
+                                                                        htmlFor='toys'>Zabawki</label></div>
                                                                     <div><input type='checkbox'
                                                                                 className='filter'
-                                                                                name='filter' id='bar'
-                                                                                value='bar'/><label
-                                                                        htmlFor='bar'>bar</label></div>
+                                                                                name='filter' id='clothes'
+                                                                                value='clothes'/><label
+                                                                        htmlFor='bar'>Ubrania</label></div>
+                                                                    <div><input type='checkbox'
+                                                                                className='filter'
+                                                                                name='filter' id='sport'
+                                                                                value='sport'/><label
+                                                                        htmlFor='bar'>Sport</label></div>
+                                                                    <div><input type='checkbox'
+                                                                                className='filter'
+                                                                                name='filter' id='rtv'
+                                                                                value='rtv'/><label
+                                                                        htmlFor='bar'>RTV/AGD</label></div>
+                                                                    <div><input type='checkbox'
+                                                                                className='filter'
+                                                                                name='filter' id='futniture'
+                                                                                value='furniture'/><label
+                                                                        htmlFor='bar'>Meble</label></div>
                                                                 </div>
                                                             </div>
                                                         </div>
