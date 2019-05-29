@@ -27,13 +27,115 @@ import queryString from "query-string";
 import Carousel from "react-bootstrap/Carousel";
 import Popup from "reactjs-popup";
 import ReactMapboxGl from "react-mapbox-gl";
+import Web3 from 'web3'
 
 const Map = ReactMapboxGl({
     accessToken: 'pk.eyJ1Ijoib3pvbmVsYXllcjk3IiwiYSI6ImNqdDc5YW9majAyZjU0NXBscjJkMXR2OHQifQ.aQH1Wz9_4MG4xcC6Wr4NbQ'
 });
 
-class SeparateOfferNew extends Component {
+const abi = [
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "name": "offerId",
+                "type": "uint256"
+            }
+        ],
+        "name": "deleteReservation",
+        "outputs": [],
+        "payable": true,
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [],
+        "name": "kill",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "name": "offerId",
+                "type": "uint256"
+            }
+        ],
+        "name": "reserveOffer",
+        "outputs": [],
+        "payable": true,
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    },
+    {
+        "constant": true,
+        "inputs": [
+            {
+                "name": "offerId",
+                "type": "uint256"
+            }
+        ],
+        "name": "checkReserverSet",
+        "outputs": [
+            {
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "owner",
+        "outputs": [
+            {
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "name": "users",
+        "outputs": [
+            {
+                "name": "offerId",
+                "type": "uint256"
+            },
+            {
+                "name": "offerReserver",
+                "type": "address"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    }
+]
 
+class SeparateOfferNew extends Component {
 
 
     state={
@@ -47,12 +149,56 @@ class SeparateOfferNew extends Component {
         this.manageGlass = this.manageGlass.bind(this)
         this.changeMain = this.changeMain.bind(this)
         this.mainPicture = React.createRef()
+        this.reserveOffer = this.reserveOffer.bind(this)
+
         const value=queryString.parse(this.props.location.search);
 
         this.state.offerId = value;
         this.getDataFromDb()
+
+        // if (typeof window.web3 !== 'undefined'){
+        //     console.log("Using web3 detected from external source like Metamask, ");
+        //     this.web3 = new Web3("http://localhost:8545");
+        //     console.log(this.web3)
+        // }
+        if (typeof window.web3 === 'undefined'){
+            return;
+            //console.log("Estoy aqui")
+            //this.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"))
+        }
+        const MyContract = window.web3.eth.contract(abi)
+        this.state.ContractInstance = MyContract.at("0x0f7df62d6f8382eb312f09c6a86dbb1a5c2c17f2")
+        this.loadData = this.loadData.bind(this)
+        this.reserveButton = React.createRef()
+        this.loadData().then(console.log("Jest dobrze"));
+        this.state.isReserved = false
+        this.offerStatusText = React.createRef();
     }
 
+    async loadData(){
+        if (window.ethereum){
+            console.log("yass new 2222")
+            window.web3 = new Web3(window.ethereum);
+            try{
+                await window.ethereum.enable();
+                console.log("oki")
+                var userAccount = window.web3.eth.defaultAccount;
+                console.log("wiec: ", userAccount)
+                console.log("id: ", this.state.offerId.id)
+                var isReserved = true;
+                await this.state.ContractInstance.checkReserverSet(this.state.offerId.id, (err, result)=>{
+                    if (result){
+                        // window.alert("Nie mozna zarezerwowac - juz zarezerwowane")
+                        this.state.isReserved = true;
+                    }
+                    return;
+                })
+            }
+            catch (e) {
+                console.log("Cos sie zjebalo :( ", e)
+            }
+        }
+    }
 
     manageGlass(ev){
         var isShown = this.state.isGlassShown
@@ -294,7 +440,7 @@ class SeparateOfferNew extends Component {
                             <div className="banner_content">
                                 <div className="media">
                                     <div className="d-flex">
-                                        <Carousel showArrows={true}>
+                                        <Carousel showArrows={true} interval={null}>
                                             {/*<div>*/}
                                                 {/*<img id="myMainPicture" ref={elem => this.mainPicture = elem} src={mainPicture} />*/}
                                             {/*</div>*/}
@@ -334,6 +480,9 @@ class SeparateOfferNew extends Component {
                                                 >
                                                 </Map>
                                             </Popup>
+                                            <button id={"butonik"} onClick={this.reserveOffer}
+                                                    ref={this.reserveButton}>Rezerwuj</button>
+                                            {/*<button onClick={console.log("Yyyyy")}>Hallo</button>*/}
 
                                         </div>
                                     </div>
@@ -355,14 +504,54 @@ class SeparateOfferNew extends Component {
             </div>
         );
 
-
-
     }
+    async reserveOffer(){
+        if (typeof window.web3 === 'undefined') {
+            console.log("Nie podlaczono ethereum account")
+            return;
+        }
 
+        if (this.state.isReserved){
+            window.alert("Za pozno xd")
+            return;
+        }
 
-
-
-
+        if (window.ethereum){
+            console.log("yass new")
+            window.web3 = new Web3(window.ethereum);
+            try{
+                await window.ethereum.enable();
+                console.log("oki")
+                var userAccount = window.web3.eth.defaultAccount;
+                console.log("wiec: ", userAccount)
+                var isReserved = true;
+                await this.state.ContractInstance.checkReserverSet(this.state.offerId.id, (err, result)=>{
+                    isReserved = result;
+                    console.log("Czy juz? ", result)
+                    if (result){
+                        window.alert("Nie mozna zarezerwowac - juz zarezerwowane")
+                        return;
+                    }
+                    else{
+                        this.state.ContractInstance.reserveOffer(this.state.offerId.id, {
+                            gas: 300000,
+                            from: userAccount
+                        }, (err, result) => console.log("AAA : " + result));
+                    }
+                });
+            }
+            catch (e) {
+                console.log("Cos sie zjebalo :(")
+            }
+        }
+        else{
+            console.log("Nie pozwolono na polaczenie konta ethereum");
+            return;
+        }
+        console.log("Zarezerwowano kurwa")
+        console.log(this.state.ContractInstance)
+        console.log(window.web3.eth.accounts)
+    }
 }
 
 function onLoad() {
