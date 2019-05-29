@@ -71,26 +71,26 @@ Form {
     color: #777;
 }
 .our-team .icon{
-    list-style: none;
-    padding: 0;
-    margin: 10px 0 0 0;
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 10px 0 0 0 !important;
 }
-.our-team .icon li{ display: inline-block; }
+.our-team .icon li{ display: inline-block !important; }
 .our-team .icon li a{
-    display: inline-block;
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
-    border-radius: 50%;
-    background: #e0e0e0;
-    font-size: 14px;
-    color: #999;
-    margin-right: 5px;
-    transition: all 0.3s ease-out 0s;
+    display: inline-block !important;
+    width: 30px !important;
+    height: 30px !important;
+    line-height: 30px !important;
+    border-radius: 50% !important;
+    background: #e0e0e0 !important;
+    font-size: 14px !important;
+    color: #999 !important;
+    margin-right: 5px !important;
+    transition: all 0.3s ease-out 0s !important;
 }
 .our-team .icon li a:hover{
-    background: orangered;
-    color: #fff;
+    background: orangered !important;
+    color: #fff !important;
 }
 @media only screen and (max-width: 990px){
     .our-team{ margin-bottom: 30px; }

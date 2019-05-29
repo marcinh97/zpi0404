@@ -209,6 +209,7 @@ class App extends Component {
                                     Aplikacja wykorzystuje środowisko NodeJS od strony back-endowej oraz React od strony front-endowej.
                                     Baza danych produktów i użytkowników umieszczona jest w chmurze platformy Azure, zarządzana przez SZBD PostgreSQL.
                                     Dodatkowo aplikacja wykorzystuje technologię PWA (progressive web apps).
+                                    Transakcja rezerwacji produktu z oferty oparta na smart contractach w technologii Ethereum blockchain
                                 </p>
                                 <a className="btn btn-light btn-xl js-scroll-trigger" href="#services">Przyjrzyj się
                                     funkcjonalnościom!</a>
@@ -259,7 +260,7 @@ class App extends Component {
                             </div>
                             <div className="col-lg-3 col-md-6 text-center">
                                 <div className="mt-5">
-                                    <i className="fas fa-4x fa-heart text-primary mb-4"></i>
+                                    <i className="fab fa-4x fa-ethereum text-primary mb-4"></i>
                                     <h3 className="h4 mb-2">Zbieraj odznaczenia</h3>
                                     <p className="text-muted mb-0">Zbieraj odznaczenia super bohatera</p>
                                 </div>
@@ -397,9 +398,9 @@ class App extends Component {
                                         <h3 className="title">Marcin Horak</h3>
                                         <span className="post">Student PWr</span>
                                         <ul className="icon">
-                                            <li><a href="https://www.facebook.com/marcin.horak" className="fab fa-facebook"></a></li>
-                                            <li><a href="https://www.linkedin.com/in/marcin-horak-a3887a15b/" className="fab fa-linkedin"></a></li>
-                                            <li><a href="https://github.com/marcinh97" className="fab fa-github"></a></li>
+                                            <li><a href="https://www.facebook.com/marcin.horak" ><i className="fab fa-facebook"></i></a></li>
+                                            <li><a href="https://www.linkedin.com/in/marcin-horak-a3887a15b/"><i  className="fab fa-linkedin"></i></a></li>
+                                            <li><a href="https://github.com/marcinh97" ><i className="fab fa-github"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -409,9 +410,9 @@ class App extends Component {
                                         <h3 className="title">Ewa Łyko</h3>
                                         <span className="post">Studentka PWr</span>
                                         <ul className="icon">
-                                            <li><a href="https://www.facebook.com/ewa.lyko" className="fab fa-facebook"></a></li>
-                                            <li><a href="https://www.linkedin.com/in/ewa-%C5%82yko-a12081156/" className="fab fa-linkedin"></a></li>
-                                            <li><a href="https://github.com/effcixx/" className="fab fa-github"></a></li>
+                                            <li><a href="https://www.facebook.com/ewa.lyko" ><i className="fab fa-facebook"></i></a></li>
+                                            <li><a href="https://www.linkedin.com/in/ewa-%C5%82yko-a12081156/"><i  className="fab fa-linkedin"></i></a></li>
+                                            <li><a href="https://github.com/effcixx/" ><i className="fab fa-github"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -421,9 +422,9 @@ class App extends Component {
                                         <h3 className="title">Agata Rychter</h3>
                                         <span className="post">Studentka PWr</span>
                                         <ul className="icon">
-                                            <li><a href="https://www.facebook.com/agata.rychter.5" className="fab fa-facebook"></a></li>
-                                            <li><a href="https://www.linkedin.com/in/agata-rychter-0a710817a/" className="fab fa-linkedin"></a></li>
-                                            <li><a href="https://github.com/agatarychter" className="fab fa-github"></a></li>
+                                            <li><a href="https://www.facebook.com/agata.rychter.5" ><i className="fab fa-facebook"></i></a></li>
+                                            <li><a href="https://www.linkedin.com/in/agata-rychter-0a710817a/" ><i  className="fab fa-linkedin"></i></a></li>
+                                            <li><a href="https://github.com/agatarychter" ><i className="fab fa-github"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -434,9 +435,9 @@ class App extends Component {
                                         <h3 className="title">Maciek Sinicki</h3>
                                         <span className="post">Student PWr</span>
                                         <ul className="icon">
-                                            <li><a href="https://www.facebook.com/maciek.sinicki.5" className="fab fa-facebook"></a></li>
-                                            <li><a href="https://www.linkedin.com/in/maciej-sinicki-9b973b185/" className="fab fa-linkedin"></a></li>
-                                            <li><a href="#" className="fab fa-github"></a></li>
+                                            <li><a href="https://www.facebook.com/maciek.sinicki.5" ><i className="fab fa-facebook"></i></a></li>
+                                            <li><a href="https://www.linkedin.com/in/maciej-sinicki-9b973b185/" ><i  className="fab fa-linkedin"></i></a></li>
+                                            <li><a href="#" ><i className="fab fa-github"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
