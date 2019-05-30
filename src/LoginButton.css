@@ -4,7 +4,7 @@
 }
 
 #formPhoto{
-    background-image: url("https://images.pexels.com/photos/1645634/pexels-photo-1645634.jpeg?cs=srgb&dl=bonding-daylight-friends-1645634.jpg&fm=jpg");
+    background-image: url("./img/bg-masthead1.jpg");
     background-position: center;
     background-repeat: repeat;
     background-size: cover;
@@ -13,23 +13,26 @@
 #formDiv{
     background-color : rgba(255, 255, 255, 0.8);
     width: 510px;
+    height: 800px;
     top: 60px;
-    padding-top: 100px;
+    padding-top: 150px;
     padding-left: 30px;
     padding-right: 30px;
     padding-bottom: 170px;
     margin-left: -30px;
+    margin-left: 0%;
     margin-right: -30px;
     margin-left: auto;
     margin-right: auto;
 }
 
-#hstylee{
-    font-family: 'Meiryo';
-}
+/*#hstylee{*/
+    /*font-family: 'Meiryo';*/
+/*}*/
 
 @media only screen and (max-width: 510px) {
     #formDiv{
+        padding-top: 100px;
         width: auto;
     }
     #marginTopStylId{
@@ -217,19 +220,7 @@ Form {
 
 }
 
-.fake-btn {
-    position: absolute;
-    flex-shrink: 0;
-    background-color: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 3px;
-    padding: 8px 15px;
-    margin-right: 10px;
-    font-size: 12px;
-    text-transform: uppercase;
-    overflow: hidden;
-    margin-left:15%;
-}
+
 
 .file-msg {
     position:absolute;
@@ -417,10 +408,16 @@ p.fb {
     width: 100%;
 }
 
-#offerSubmit {
-    margin-right: 0;
-    margin-left: 35%;
+
+.mojePrzyciski{
+    border-color: white;
+    border-width: 2px;
 }
+
+/*#offerSubmit {*/
+    /*margin-right: 0;*/
+    /*margin-left: 35%;*/
+/*}*/
 
 #offerStatus{
     border-width: 1px;

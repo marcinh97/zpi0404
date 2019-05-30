@@ -1,3 +1,110 @@
+#img1{
+    width: 100%;
+    margin: 0 auto;
+}
+
+.form-control, .login-btn {
+    min-height: 38px;
+    border-radius: 2px;
+}
+.input-group-addon .fa {
+    font-size: 18px;
+}
+.login-btn {
+    font-size: 15px;
+    font-weight: bold;
+}
+.social-btn .btn {
+    border: none;
+    margin: 10px 3px 0;
+    opacity: 1;
+}
+.social-btn .btn:hover {
+    opacity: 0.9;
+}
+.social-btn .btn-primary {
+    background: #507cc0;
+}
+.social-btn .btn-info {
+    background: #64ccf1;
+}
+.social-btn .btn-danger {
+    background: #df4930;
+}
+.or-seperator {
+    margin-top: 20px;
+    text-align: center;
+    border-top: 1px solid #ccc;
+}
+.or-seperator i {
+    padding: 0 10px;
+    background: #f7f7f7;
+    position: relative;
+    top: -11px;
+    z-index: 1;
+}
+
+.fake-btn {
+    position: absolute;
+    height: 100px;
+    width: 540px;
+    flex-shrink: 0;
+    background-color: rgba(255, 175, 150, 0.5);
+    border: 1px solid rgba(255, 175, 150, 0.8);
+    font-size: 14px;
+    font-family: 'Meiryo';
+    text-align: center;
+    text-transform: uppercase;
+    overflow: hidden;
+}
+
+#coverPhoto{
+    background: url("./img/bg-masthead1.jpg");
+    background-position: center;
+    background-repeat: repeat;
+    background-size: cover;
+}
+
+#myDescriptionInput{
+    height: 100px;
+}
+
+#divForm{
+    font-family: 'Meiryo';
+    width: 600px;
+    height: 850px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 90px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color : rgba(255, 255, 255, 0.4);
+}
+
+@media only screen and (max-width: 650px) {
+    #divForm{
+        width: 490px;
+        padding-left: 10px;
+        padding-right: 10px;
+        background-color : rgba(255, 255, 255, 0.4);
+    }
+    .fake-btn{
+        width: 470px;
+    }
+}
+
+@media only screen and (max-width: 520px) {
+    #divForm{
+        width: 400px;
+        padding-left: 10px;
+        padding-right: 10px;
+        background-color : rgba(255, 255, 255, 0.4);
+    }
+    .fake-btn{
+        width: 380px;
+    }
+}
+
 .App {
   text-align: center;
 }
@@ -282,19 +389,7 @@ Form
 
 }
 
-.fake-btn {
-    position: absolute;
-    flex-shrink: 0;
-    background-color: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 3px;
-    padding: 8px 15px;
-    margin-right: 10px;
-    font-size: 12px;
-    text-transform: uppercase;
-    overflow: hidden;
-    margin-left:15%;
-}
+
 
 .file-msg {
     position:absolute;
@@ -482,9 +577,14 @@ p.fb {
     width: 100%;
 }
 
-#offerSubmit {
-    margin-right: 0;
-    margin-left: 35%;
+#offerSubmit{
+    border-color: white !important;
+    border-width: 2px !important;
+}
+
+#addonmap{
+    border-color: white !important;
+    border-width: 2px !important;
 }
 
 #offerStatus{

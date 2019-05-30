@@ -22,11 +22,18 @@ import ReactDOM from 'react-dom';
 import {Link} from "react-router-dom";
 import {AppContext} from './App';
 import { Redirect } from 'react-router-dom'
-import {Nav, Navbar} from "react-bootstrap";
+import {Nav, Navbar, ButtonGroup} from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Popup from "reactjs-popup";
+import ReactMapboxGl from "react-mapbox-gl";
+import queryString from "query-string";
+const Map = ReactMapboxGl({
+    accessToken: 'pk.eyJ1Ijoib3pvbmVsYXllcjk3IiwiYSI6ImNqdDc5YW9majAyZjU0NXBscjJkMXR2OHQifQ.aQH1Wz9_4MG4xcC6Wr4NbQ'
+});
+
 class AddItem extends Component {
 
     constructor(props) {
@@ -96,28 +103,8 @@ class AddItem extends Component {
 
     render() {
         return (
+
             <div className="LoginButton">
-                <head>
-                    <meta charSet="utf-8"/>
-                    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-                    <meta name="description" content=""/>
-                    <meta name="author" content=""/>
-                    <meta name='google-signin-client_id'
-                          content='545384910825-14gu3jrktnjfcjrntbv4t3akclpk2hn2.apps.googleusercontent.com'/>
-                    <title>Charytatywni</title>
-                    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
-                          type="text/css"/>
-                    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700"
-                          rel="stylesheet"/>
-                    <link
-                        href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic'
-                        rel='stylesheet' type='text/css'/>
-                    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet"/>
-
-                    <link href="css/creative.min.css" rel="stylesheet"/>
-
-                </head>
-                <body id="page-top">
 
                 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                     <Navbar.Brand href="/">CharytatywniRazem.pl</Navbar.Brand>
@@ -132,20 +119,18 @@ class AddItem extends Component {
                             <div id="log_in_out"></div>
                         </Nav>
                         {/*<Nav>*/}
-                            {/*<Nav.Link to="/" className="nav-link js-scroll-trigger">Strona główna</Nav.Link>*/}
+                        {/*<Nav.Link to="/" className="nav-link js-scroll-trigger">Strona główna</Nav.Link>*/}
                         {/*</Nav>*/}
                     </Navbar.Collapse>
                 </Navbar>
-
-                <header className="masthead">
-                        <div className="formDiv">
-
-                            <Form onSubmit={this.sendPhoto.bind(this)} enctype="multipart/form-data">
-                                <Form.Group as={Row} controlId="formHorizontalEmail">
-                                    <Form.Label column sm={2}>
-                                        Kategoria
-                                    </Form.Label>
-                                    <Col  sm={10}>
+                <div id={"coverPhoto"}>
+                    <div className="formDiv"  id = "divForm">
+                        <Form onSubmit={this.sendPhoto.bind(this)} enctype="multipart/form-data">
+                            <Form.Group as={Row} controlId="formHorizontalEmail">
+                                <Form.Label column sm={2}>
+                                    Kategoria
+                                </Form.Label>
+                                <Col  sm={10}>
                                     <select id="categorySelect" name="categorySelect" onChange={this.setCategoryState.bind(this)}>Kategoria
                                         <option value="jedzenie">Jedzenie</option>
                                         <option value="zabawki">Zabawki</option>
@@ -154,63 +139,76 @@ class AddItem extends Component {
                                         <option value="akcesoria sportowe">Sport</option>
                                         <option value="meble">Meble</option>
                                     </select>
-                                    </Col>
-                                </Form.Group>
-                                <Form.Group as={Row} controlId="nameControlId">
-                                    <Form.Label column sm={2}>
-                                        Nazwa
-                                    </Form.Label>
-                                    <Col  sm={10}>
-                                        <Form.Control placeholder="Nazwa" id="nameInput" />
-                                    </Col>
-                                </Form.Group>
+                                </Col>
+                            </Form.Group>
+                            <Form.Group as={Row} controlId="nameControlId">
+                                <Form.Label column sm={2}>
+                                    Nazwa
+                                </Form.Label>
+                                <Col  sm={10}>
+                                    <Form.Control placeholder="Nazwa" id="nameInput" />
+                                </Col>
+                            </Form.Group>
 
-                                <Form.Group as={Row} controlId="descrControlId">
-                                    <Form.Label column sm={2}>
-                                        Dodaj opis
-                                    </Form.Label>
-                                    <Col  sm={10}>
-                                        <Form.Control placeholder="Opis" id="descriptionInput" />
-                                    </Col>
-                                </Form.Group>
-                                <Form.Group as={Row} controlId="contactControlId">
-                                    <Form.Label column sm={2}>
-                                        Telefon kontaktowy
-                                    </Form.Label>
-                                    <Col  sm={10}>
-                                        <Form.Control placeholder="Telefon" id="phoneInput" />
-                                    </Col>
-                                </Form.Group>
+                            <Form.Group as={Row} controlId="descrControlId">
+                                <Form.Label column sm={2}>
+                                    Dodaj opis
+                                </Form.Label>
+                                <Col  sm={10}>
+                                    <Form.Control placeholder="Opis" id = "myDescriptionInput"/>
+                                </Col>
+                            </Form.Group>
+                            <Form.Group as={Row} controlId="contactControlId">
+                                <Form.Label column sm={2}>
+                                    Telefon kontaktowy
+                                </Form.Label>
+                                <Col  sm={10}>
+                                    <Form.Control placeholder="Telefon" id="phoneInput" />
+                                </Col>
+                            </Form.Group>
 
-                                <Form.Group>
-                                    <div className="file-drop-area">
-                                        <span className="fake-btn" id="fake-btn">Wybierz pliki lub upuść tutaj</span>
-                                        <input className="file-input" type="file" id= "fileItem" multiple onChange={this.fileSelectedHandler} />
-                                    </div>
-                                </Form.Group>
-
-                                <Form.Group as={Row}>
-                                    <Col sm={{ span: 5, offset: 2 }}>
-                                    </Col>
-                                </Form.Group>
-                                <div>
-                                <Button  variant="primary" type="submit" id="offerSubmit">
-                                    Dodaj ofertę
-                                </Button>
+                            <Form.Group>
+                                <div className="file-drop-area">
+                                    <span className="fake-btn" id="fake-btn">Wybierz pliki lub upuść tutaj</span>
+                                    <input className="file-input" type="file" id= "fileItem" multiple onChange={this.fileSelectedHandler} />
                                 </div>
+                            </Form.Group>
 
-                            </Form>
-                        </div>
-                </header>
+                            <Form.Group as={Row}>
+                                <Col sm={{ span: 5, offset: 2 }}>
+                                </Col>
+                            </Form.Group>
+                            <div className="d-flex flex-column">
+                                <Map
+                                    style="mapbox://styles/marcinhorak/cjvgz67wl00dv1drk7b71mcpx"
+                                    containerStyle={{
+                                        height: "20vh",
+                                        width: "10  0vh"
+                                    }}
+                                    center={[17.036956, 51.110694]}
+                                >
+                                </Map>
+                                <ButtonGroup size="lg">
 
+
+
+                                    <Button  variant="primary" type="submit" id="offerSubmit" classname="mojePrzyciski">
+                                        Dodaj ofertę
+                                    </Button>
+                                </ButtonGroup>
+                            </div>
+
+                        </Form>
+                    </div>
+                </div>
                 <footer className="bg-light py-5">
                     <div className="container">
                         <div className="small text-center text-muted">Copyright &copy; 2019 - Horak & Łyko & Rychter & Sinicki
                         </div>
                     </div>
                 </footer>
-                </body>
             </div>
+
 
         );
 

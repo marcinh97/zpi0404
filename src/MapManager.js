@@ -132,7 +132,6 @@ class MapManager extends React.Component{
                        // onClose={() => this.setState({popupInfo: null})}
                 >
                     {cityInfo}
-                    {offerId}
                 </Popup>
             );
         }

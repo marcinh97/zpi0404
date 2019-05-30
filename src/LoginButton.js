@@ -90,13 +90,13 @@ class LoginButton extends Component {
                             <div className="form-label-group">
                                 <input type="email" id="inputEmail" className="form-control"
                                        placeholder="Adres email" required autoFocus/>
-                                <label id="hstylee" htmlFor="inputEmail">Adres email</label>
+                                <label id="hstylee" htmlFor="inputEmail"></label>
                             </div>
 
                             <div className="form-label-group">
                                 <input type="password" id="inputPassword" className="form-control"
                                        placeholder="Hasło" required/>
-                                <label id="hstylee" htmlFor="inputPassword">Hasło</label>
+                                <label id="hstylee" htmlFor="inputPassword"></label>
                             </div>
                             <button
                                 className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"

@@ -23,7 +23,12 @@ import {Redirect} from "react-router-dom";
 import {Button, Nav, Navbar} from "react-bootstrap";
 import mapa from './img/portfolio/fullsize/mapascreen.PNG'; // with import
 import oferta from './img/portfolio/fullsize/ofertyscreen.PNG'; // with import
-import telefon from './img/portfolio/fullsize/app2.jpg'; // with import
+import block from './img/portfolio/fullsize/blockscreen.PNG'; // with import
+import logowanie from './img/portfolio/fullsize/logowaniescreen.PNG'; // with import
+import dodawanie from './img/portfolio/fullsize/dodawaniescreen.PNG'; // with import
+import telefon from './img/portfolio/fullsize/app2.png'; // with import
+import telefon2 from './img/portfolio/fullsize/app3.png'; // with import
+import telefon3 from './img/portfolio/fullsize/app5.png'; // with import
 import marcin from './img/team/marcin.jpg'; // with import
 import ewa from './img/team/ewa.jpg'; // with import
 import maciek from './img/team/maciek.jpg'; // with import
@@ -206,9 +211,17 @@ class App extends Component {
                                 <hr className="divider light my-4"/>
                                 <p className="text-white-50 mb-4">Projekt aplikacji webowej "CharytatywniRazem" powstał w reamach realizacji przedsięwzięcia
                                     na kursie Zespołowe Przedsięwzięcie Inżynierskie na Politechnice Wrocławskiej.
+                                </p>
+                                <p className="text-white-50 mb-4">
                                     Aplikacja wykorzystuje środowisko NodeJS od strony back-endowej oraz React od strony front-endowej.
+                                </p>
+                                <p className="text-white-50 mb-4">
                                     Baza danych produktów i użytkowników umieszczona jest w chmurze platformy Azure, zarządzana przez SZBD PostgreSQL.
+                                </p>
+                                <p className="text-white-50 mb-4">
                                     Dodatkowo aplikacja wykorzystuje technologię PWA (progressive web apps).
+                                </p>
+                                <p className="text-white-50 mb-4">
                                     Transakcja rezerwacji produktu z oferty oparta na smart contractach w technologii Ethereum blockchain
                                 </p>
                                 <a className="btn btn-light btn-xl js-scroll-trigger" href="#services">Przyjrzyj się
@@ -261,8 +274,8 @@ class App extends Component {
                             <div className="col-lg-3 col-md-6 text-center">
                                 <div className="mt-5">
                                     <i className="fab fa-4x fa-ethereum text-primary mb-4"></i>
-                                    <h3 className="h4 mb-2">Zbieraj odznaczenia</h3>
-                                    <p className="text-muted mb-0">Zbieraj odznaczenia super bohatera</p>
+                                    <h3 className="h4 mb-2">Ethereum blockchain</h3>
+                                    <p className="text-muted mb-0">Rezerwuj oferty przy użyciu nowoczesnej technologii Ethereum blockchain</p>
                                 </div>
                             </div>
                             <div className="col-lg-3 col-md-6 text-center">
@@ -320,15 +333,31 @@ class App extends Component {
                             <div className="col-lg-4 col-sm-6">
                                 <a className="portfolio-box" id="img1">
                                     <img className="img-fluid"
+                                         //src={"https://images.pexels.com/photos/34587/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"}
+                                         src={logowanie}
+                                         alt=""/>
+                                    <div className="portfolio-box-caption">
+                                        <div className="project-category text-white-50">
+                                            Logowanie
+                                        </div>
+                                        <div className="project-name">
+                                            Zaloguj się przy użyciu Google
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div className="col-lg-4 col-sm-6">
+                                <a className="portfolio-box" id="img1">
+                                    <img className="img-fluid"
                                          //src={"https://images.pexels.com/photos/34753/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"}
-                                         src={telefon}
+                                         src={block}
                                          alt=""/>
                                     <div className="portfolio-box-caption">
                                         <div className="project-category text-white-50">
-                                            Dostępność
+                                            Ethereum blockchain
                                         </div>
                                         <div className="project-name">
-                                            Korzystaj ze strony przez telefon
+                                            Rezerwuj oferty przy użyciu nowoczesnej technologii Ethereum blockchain
                                         </div>
                                     </div>
                                 </a>
@@ -336,48 +365,37 @@ class App extends Component {
                             <div className="col-lg-4 col-sm-6">
                                 <a className="portfolio-box" id="img1">
                                     <img className="img-fluid"
-                                         src={"https://images.pexels.com/photos/1122403/pexels-photo-1122403.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"}
-                                         alt=""/>
-                                    <div className="portfolio-box-caption">
-                                        <div className="project-category text-white-50">
-                                            Pomoc
-                                        </div>
-                                        <div className="project-name">
-                                            Znajdź pomoc dla siebie
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div className="col-lg-4 col-sm-6">
-                                <a className="portfolio-box" id="img1">
-                                    <img className="img-fluid"
-                                         src={"https://images.pexels.com/photos/34587/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"}
-                                         alt=""/>
-                                    <div className="portfolio-box-caption">
-                                        <div className="project-category text-white-50">
-                                            Wiadomości
-                                        </div>
-                                        <div className="project-name">
-                                            Rozmawaj ze swoim bliźnim
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div className="col-lg-4 col-sm-6">
-                                <a className="portfolio-box" id="img1">
-                                    <img className="img-fluid"
-                                         src={"https://images.pexels.com/photos/688017/pexels-photo-688017.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"}
+                                        //src={"https://images.pexels.com/photos/688017/pexels-photo-688017.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"}
+                                         src={dodawanie}
                                          alt=""/>
                                     <div className="portfolio-box-caption p-3">
                                         <div className="project-category text-white-50">
-                                            Nagrody
+                                            Dodawanie ofert
                                         </div>
                                         <div className="project-name">
-                                            Zdobywaj odznaki za pomoc!
+                                            Dodawaj nowe oferty i dziel się z innymi
                                         </div>
                                     </div>
                                 </a>
                             </div>
+                            <div className="col-lg-4 col-sm-6">
+                                <a className="portfolio-box" id="img1">
+                                    <img className="img-fluid"
+                                         //src={"https://images.pexels.com/photos/1122403/pexels-photo-1122403.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"}
+                                         src={telefon3}
+                                         alt=""/>
+                                    <div className="portfolio-box-caption">
+                                        <div className="project-category text-white-50">
+                                            Aplikacja
+                                        </div>
+                                        <div className="project-name">
+                                            Korzystaj ze strony jak z aplikacji
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+
                         </div>
                     </div>
                 </section>
