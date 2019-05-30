@@ -23,7 +23,12 @@ import {Redirect} from "react-router-dom";
 import {Button, Nav, Navbar} from "react-bootstrap";
 import mapa from './img/portfolio/fullsize/mapascreen.PNG'; // with import
 import oferta from './img/portfolio/fullsize/ofertyscreen.PNG'; // with import
-import telefon from './img/portfolio/fullsize/app.jpg'; // with import
+import telefon from './img/portfolio/fullsize/app2.jpg'; // with import
+import marcin from './img/team/marcin.jpg'; // with import
+import ewa from './img/team/ewa.jpg'; // with import
+import maciek from './img/team/maciek.jpg'; // with import
+import maciekagata from './img/team/agatamaciek.jpg'; // with import
+import agata from './img/team/agata.jpg'; // with import
 
 class App extends Component {
 
@@ -138,7 +143,9 @@ class App extends Component {
     render() {
         return (
             <div className="App">
+
                 <body id="page-top">
+
                 <Navbar collapseOnSelect fixed="top" expand="lg" bg="dark" variant="dark">
                     <Navbar.Brand href="/">CharytatywniRazem.pl</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
@@ -202,6 +209,7 @@ class App extends Component {
                                     Aplikacja wykorzystuje środowisko NodeJS od strony back-endowej oraz React od strony front-endowej.
                                     Baza danych produktów i użytkowników umieszczona jest w chmurze platformy Azure, zarządzana przez SZBD PostgreSQL.
                                     Dodatkowo aplikacja wykorzystuje technologię PWA (progressive web apps).
+                                    Transakcja rezerwacji produktu z oferty oparta na smart contractach w technologii Ethereum blockchain
                                 </p>
                                 <a className="btn btn-light btn-xl js-scroll-trigger" href="#services">Przyjrzyj się
                                     funkcjonalnościom!</a>
@@ -238,6 +246,13 @@ class App extends Component {
                             </div>
                             <div className="col-lg-3 col-md-6 text-center">
                                 <div className="mt-5">
+                                    <i className="fas fa-4x fa-sort-alpha-down text-primary mb-4"></i>
+                                    <h3 className="h4 mb-2">Szybkie wyszukiwanie</h3>
+                                    <p className="text-muted mb-0">Szybsze przeszukiwanie ofert dzięki filtrom</p>
+                                </div>
+                            </div>
+                            <div className="col-lg-3 col-md-6 text-center">
+                                <div className="mt-5">
                                     <i className="fab fa-4x fa-google text-primary mb-4"></i>
                                     <h3 className="h4 mb-2">Łatwa rejestracja</h3>
                                     <p className="text-muted mb-0">Bezpośrednia rejestracja poprzez formularz lub z wykorzystaniem autoryzacji Google</p>
@@ -245,7 +260,7 @@ class App extends Component {
                             </div>
                             <div className="col-lg-3 col-md-6 text-center">
                                 <div className="mt-5">
-                                    <i className="fas fa-4x fa-heart text-primary mb-4"></i>
+                                    <i className="fab fa-4x fa-ethereum text-primary mb-4"></i>
                                     <h3 className="h4 mb-2">Zbieraj odznaczenia</h3>
                                     <p className="text-muted mb-0">Zbieraj odznaczenia super bohatera</p>
                                 </div>
@@ -366,6 +381,72 @@ class App extends Component {
                         </div>
                     </div>
                 </section>
+
+                <section className="bg-light page-section" id="team">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-lg-12 text-center">
+                                <h3 className="text-center mt-0">Autorzy strony</h3>
+                                <hr className="divider my-4"/>
+                            </div>
+                        </div>
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-md-3 col-sm-6">
+                                    <div className="our-team">
+                                        <div className="pic"><img src={marcin} alt=""/></div>
+                                        <h3 className="title">Marcin Horak</h3>
+                                        <span className="post">Student PWr</span>
+                                        <ul className="icon">
+                                            <li><a href="https://www.facebook.com/marcin.horak" ><i className="fab fa-facebook"></i></a></li>
+                                            <li><a href="https://www.linkedin.com/in/marcin-horak-a3887a15b/"><i  className="fab fa-linkedin"></i></a></li>
+                                            <li><a href="https://github.com/marcinh97" ><i className="fab fa-github"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div className="col-md-3 col-sm-6">
+                                    <div className="our-team">
+                                        <div className="pic"><img src={ewa} alt=""/></div>
+                                        <h3 className="title">Ewa Łyko</h3>
+                                        <span className="post">Studentka PWr</span>
+                                        <ul className="icon">
+                                            <li><a href="https://www.facebook.com/ewa.lyko" ><i className="fab fa-facebook"></i></a></li>
+                                            <li><a href="https://www.linkedin.com/in/ewa-%C5%82yko-a12081156/"><i  className="fab fa-linkedin"></i></a></li>
+                                            <li><a href="https://github.com/effcixx/" ><i className="fab fa-github"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div className="col-md-3 col-sm-6">
+                                    <div className="our-team">
+                                        <div className="pic"><img src={agata} alt=""/></div>
+                                        <h3 className="title">Agata Rychter</h3>
+                                        <span className="post">Studentka PWr</span>
+                                        <ul className="icon">
+                                            <li><a href="https://www.facebook.com/agata.rychter.5" ><i className="fab fa-facebook"></i></a></li>
+                                            <li><a href="https://www.linkedin.com/in/agata-rychter-0a710817a/" ><i  className="fab fa-linkedin"></i></a></li>
+                                            <li><a href="https://github.com/agatarychter" ><i className="fab fa-github"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div className="col-md-3 col-sm-6">
+                                    <div className="our-team">
+                                        <div className="pic"><img src={maciek} alt=""/></div>
+                                        <h3 className="title">Maciek Sinicki</h3>
+                                        <span className="post">Student PWr</span>
+                                        <ul className="icon">
+                                            <li><a href="https://www.facebook.com/maciek.sinicki.5" ><i className="fab fa-facebook"></i></a></li>
+                                            <li><a href="https://www.linkedin.com/in/maciej-sinicki-9b973b185/" ><i  className="fab fa-linkedin"></i></a></li>
+                                            <li><a href="#" ><i className="fab fa-github"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
 
                 <section className="page-section bg-dark text-white">
                     <div className="container text-center">
