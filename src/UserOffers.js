@@ -25,6 +25,7 @@ import {AppContext} from './App';
 import { Redirect } from 'react-router-dom'
 import {Nav, Navbar} from "react-bootstrap";
 import Table from "react-bootstrap/Table";
+import Spinner from "react-bootstrap/Spinner";
 
 
 const axios = require('axios')
@@ -679,7 +680,9 @@ class UserOffers extends Component {
                         </ul>
                     </div>
                     <div className="container">
+
                         <div className="gallery_f_inner row imageGallery1">
+
                             {this.renderTableData1()}
 
 
@@ -688,9 +691,9 @@ class UserOffers extends Component {
                     </div>
                 </section>
                 <footer className="bg-light py-5My">
-                    <div className="container">
+
                         <div className="small text-center text-muted">Copyright &copy; 2019 - Horak & Łyko & Rychter & Sinicki
-                        </div>
+
                     </div>
                 </footer>
                 <script src="vendor/jquery/jquery.min.js"></script>
