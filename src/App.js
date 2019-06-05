@@ -42,6 +42,7 @@ import maciek from './img/team/maciek.jpg'; // with import
 import pwr from './img/portfolio/fullsize/pwr.png'; // with import
 import agata from './img/team/agata.jpg'; // with import
 
+
 class App extends Component {
 
     state = {

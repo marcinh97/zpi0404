@@ -4,6 +4,7 @@ import ReactDOM from "react-dom"
 import Map from './MapManager';
 import {Nav, Navbar} from "react-bootstrap";
 import './App.css'
+import Spinner from 'react-spinner-material';
 
 const axios = require('axios')
 
@@ -35,7 +36,8 @@ class MapApp extends Component {
         objectToUpdate: null,
         langlat: null,
         categoryToAdd: null,
-        checked: []
+        checked: [],
+        loadingMap: true
     };
 
 
@@ -89,7 +91,7 @@ class MapApp extends Component {
     getDataFromDb = () => {
         fetch("https://backendzpipwr.herokuapp.com/users")
             .then(data => data.json())
-            .then(res => {console.log(res); this.setState({ data: res })});
+            .then(res => {console.log(res); this.setState({ data: res, loadingMap: false })});
         console.log("Fetched");
     };
 
@@ -247,129 +249,96 @@ class MapApp extends Component {
                     </Navbar.Collapse>
                 </Navbar>
 
-                <header className="mapHeader">
-                    <div>
+                {this.state.loadingMap ?
+                    <div id="spinnerMap">
+                        <Spinner size={200} spinnerColor={"#333"} spinnerWidth={2} visible={true}/>
+                    </div> :
+
+                    <header className="mapHeader">
                         <div>
+                            <div>
                                 {
+
                                     this.state.data.length <= 0
                                         ? ""
                                         :
 
-                                                <div>
-                                                    <div id={"popup"} style={{
-                                                        color: "red",
-                                                        zIndex: 9999,
-                                                        fontSize: '2em'
-                                                    }}>
-                                                    </div>
-                                                    <div className={"mapContainer"}>
-                                                        <div id={"optionsMap"}>
-                                                            <div className={"dropdown"}>
-                                                                <div id={"optionsMapHeader"}>
-                                                                    Filtruj:
-                                                                </div>
-                                                                <div className="dropdown-content" ref={"kontent"} onChange={event => {
-                                                                this.change()}
-                                                                }>
-                                                                    <div>
-                                                                        <input type={"text"} id={"searchOffers"} />
-                                                                    </div>
-                                                                    <div><input type='checkbox'
-                                                                                className='filter'
-                                                                                name='filter' id='food'
-                                                                                value='food'/><label
-                                                                        htmlFor='food'>Jedzenie</label></div>
-                                                                    <div><input type='checkbox'
-                                                                                className='filter'
-                                                                                name='filter' id='toys'
-                                                                                value='toys'/><label
-                                                                        htmlFor='toys'>Zabawki</label></div>
-                                                                    <div><input type='checkbox'
-                                                                                className='filter'
-                                                                                name='filter' id='clothes'
-                                                                                value='clothes'/><label
-                                                                        htmlFor='bar'>Ubrania</label></div>
-                                                                    <div><input type='checkbox'
-                                                                                className='filter'
-                                                                                name='filter' id='sport'
-                                                                                value='sport'/><label
-                                                                        htmlFor='bar'>Sport</label></div>
-                                                                    <div><input type='checkbox'
-                                                                                className='filter'
-                                                                                name='filter' id='rtv'
-                                                                                value='rtv'/><label
-                                                                        htmlFor='bar'>RTV/AGD</label></div>
-                                                                    <div><input type='checkbox'
-                                                                                className='filter'
-                                                                                name='filter' id='futniture'
-                                                                                value='furniture'/><label
-                                                                        htmlFor='bar'>Meble</label></div>
-                                                                </div>
-                                                            </div>
+                                        <div>
+                                            <div id={"popup"} style={{
+                                                color: "red",
+                                                zIndex: 9999,
+                                                fontSize: '2em'
+                                            }}>
+                                            </div>
+                                            <div className={"mapContainer"}>
+                                                <div id={"optionsMap"}>
+                                                    <div className={"dropdown"}>
+                                                        <div id={"optionsMapHeader"}>
+                                                            Filtruj:
                                                         </div>
-                                                        <div>
-                                                            {console.log("Kalarepka: " + this.state.checked)}
-                                                            <Map id={"mojaMapa"} ref={this.myRef} locations={data} checked={this.state.checked}/>
+                                                        <div className="dropdown-content" ref={"kontent"}
+                                                             onChange={event => {
+                                                                 this.change()
+                                                             }
+                                                             }>
+                                                            <div>
+                                                                <input type={"text"} id={"searchOffers"}/>
+                                                            </div>
+                                                            <div><input type='checkbox'
+                                                                        className='filter'
+                                                                        name='filter' id='food'
+                                                                        value='food'/><label
+                                                                htmlFor='food'>Jedzenie</label></div>
+                                                            <div><input type='checkbox'
+                                                                        className='filter'
+                                                                        name='filter' id='toys'
+                                                                        value='toys'/><label
+                                                                htmlFor='toys'>Zabawki</label></div>
+                                                            <div><input type='checkbox'
+                                                                        className='filter'
+                                                                        name='filter' id='clothes'
+                                                                        value='clothes'/><label
+                                                                htmlFor='bar'>Ubrania</label></div>
+                                                            <div><input type='checkbox'
+                                                                        className='filter'
+                                                                        name='filter' id='sport'
+                                                                        value='sport'/><label
+                                                                htmlFor='bar'>Sport</label></div>
+                                                            <div><input type='checkbox'
+                                                                        className='filter'
+                                                                        name='filter' id='rtv'
+                                                                        value='rtv'/><label
+                                                                htmlFor='bar'>RTV/AGD</label></div>
+                                                            <div><input type='checkbox'
+                                                                        className='filter'
+                                                                        name='filter' id='futniture'
+                                                                        value='furniture'/><label
+                                                                htmlFor='bar'>Meble</label></div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div>
+                                                    {console.log("Kalarepka: " + this.state.checked)}
+                                                    <Map id={"mojaMapa"} ref={this.myRef} locations={data}
+                                                         checked={this.state.checked}/>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                        // data.map(loc => (
-                                        //     <li>
-                                        //         <div id={"popup"} style={{
-                                        //             color: "red",
-                                        //             zIndex: 9999,
-                                        //             fontSize: '2em'
-                                        //         }}>Hello there</div>
-                                        //         {/*<span>{loc.Latitude}, {loc.Longitude}, {loc.Description}</span>*/}
-                                        //         <Map locations={data}/>
-                                        //     </li>
-                                        // ))
-                                    // data.map(dat => (
-                                    //     <li style={{ padding: "10px" }} key={data.message}>
-                                    //         <span style={{ color: "gray" }}> id: </span> {dat.id} <br />
-                                    //         <span style={{ color: "gray" }}> data: </span>
-                                    //         {dat.message}
-                                    //     </li>
-                                    // ));
+
                                 }
-                            {/*<div style={{ padding: "10px" }}>*/}
-                                {/*<input*/}
-                                    {/*type="text"*/}
-                                    {/*onChange={e => this.setState({ message: e.target.value })}*/}
-                                    {/*placeholder="add something in the database"*/}
-                                    {/*style={{ width: "200px" }}*/}
-                                {/*/>*/}
 
-                                {/*<button onClick={() => this.putDataToDB(this.state.message)}>*/}
-                                    {/*ADD*/}
-                                {/*</button>*/}
-                            {/*</div>*/}
-                            {/*<div style={{ padding: "10px" }}>*/}
-                                {/*<input*/}
-                                    {/*type="text"*/}
-                                    {/*style={{ width: "200px" }}*/}
-                                    {/*onChange={e => this.setState({ idToDelete: e.target.value })}*/}
-                                    {/*placeholder="put id of item to delete here"*/}
-                                {/*/>*/}
-                                {/*onClick={() => this.deleteFromDB(this.state.idToDelete)}*/}
-                                {/*<button >*/}
-                                    {/*Wyślij*/}
-                                {/*</button>*/}
-                            {/*</div>*/}
-                            {/*<div>*/}
-                                {/*{this.state.data.length <= 0 ? <Map locations={this.state.data}/> : <div id={"testerid"}>Ahaa</div>}*/}
-                            {/*</div>*/}
-                            <div style={{ padding: "10px" }}>
+                                <div style={{padding: "10px"}}>
 
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </header>
-                <footer className="footerMap">
-                    <div className="container">
-                        <div className="small text-center text-muted">Copyright &copy; 2019 - Horak & Łyko & Rychter & Sinicki
-                        </div>
+                    </header>
+                }
+                <footer className="bg-light py-5My">
+
+                    <div className="small text-center text-muted">Copyright &copy; 2019 - Horak & Łyko & Rychter & Sinicki
+
                     </div>
                 </footer>
                 </body>

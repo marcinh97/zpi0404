@@ -27,6 +27,10 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import mapa from './img/bg-masthead1.jpg'; // with import
+import back from './img/back.jpg';
+import back1 from './img/back4.jpg';
+import Spinner from 'react-spinner-material';
 class AllOffers extends Component {
 
 
@@ -43,7 +47,8 @@ class AllOffers extends Component {
         isFurniture: false,
         isClothes: false,
         isSport: false,
-        isRtv: false
+        isRtv: false,
+        loading:true,
     };
     setFood = () => {
         this.setState({
@@ -210,7 +215,7 @@ class AllOffers extends Component {
                 id: localStorage.getItem('idUser'),
             }),
         }).then(data => data.json())
-            .then(res => {console.log(res); this.setState({ data: res })});
+            .then(res => {console.log(res); this.setState({ data: res , loading: false})});
     };
 
 
@@ -262,6 +267,16 @@ class AllOffers extends Component {
     }
 
     renderTableData1() {
+        if(this.state.loading)
+        {
+            return(
+
+                <div id="spinnerMy">
+                    <Spinner size={200} spinnerColor={"#333"} spinnerWidth={2} visible={true} />
+                </div>
+
+            )
+        }
         function getCatById(categoryNum) {
             return categoryNum===1 ? "Jedzenie" : categoryNum ===2 ? "Zabawki" : categoryNum==3 ? "RTV/AGD" : categoryNum==4 ? "Ubrania" : categoryNum==5 ? "Sport" : categoryNum==6 ? "Meble" :"Inne";
         }
@@ -313,14 +328,23 @@ class AllOffers extends Component {
                 var photo = getPhoto(url);
                 this.state.countItems++;
                 return (
-                    <div className="col-lg-4 col-md-4 col-sm-6 brand manipul design print">
-                        <div className="h_gallery_item">
+                    <div className="col-md-4 p-t-30">
+                        <div className="blo1">
+                            <div className="wrap-pic-blo1 bo-rad-10 hov-img-zoom">
+                                <a href="#"><img src={photo} width="350px" height="250px" alt="IMG-INTRO"/></a>
+                            </div>
 
-                            <img className="img-fluid" src={photo} width="350px" height="250px" alt=""/>
-                            <div className="g_item_text">
-                                <h4> <Nav.Link style={{paddingLeft:0}} onClick={() => goToSingleOffer(offerid)}>{name}</Nav.Link></h4>
-                                <h5>{cat}</h5>
-                                <p>{description}</p>
+                            <div className="wrap-text-blo1 p-t-35">
+                                <a href="#"><h4 className="txt5 color0-hov trans-0-4 m-b-13">
+                                    {name}
+                                </h4></a>
+
+                                <p><b>{cat}</b></p>
+                                <p className="m-b-20">
+                                   {description}
+                                </p>
+
+
                             </div>
                         </div>
                     </div>
@@ -566,7 +590,7 @@ class AllOffers extends Component {
 
                 </head>
 
-                <body className="back">
+                <body className="">
 
                 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                     <Navbar.Brand href="/">CharytatywniRazem.pl</Navbar.Brand>
@@ -583,32 +607,72 @@ class AllOffers extends Component {
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
-                <section className="home_gallery_area p_120">
-                    <div className="container">
-                        <div className="main_title">
-                            <h2>Wszystkie oferty</h2>
-                        </div>
+                <section className="section-intro">
+                    <div className="header-intro parallax100 t-center p-t-135 p-b-158"
+                         style={{backgroundImage: "url(" + back1 + ")"}}>
+			                <span className="tit2 p-l-15 p-r-15">
+				                WSZYSTKIE OFERTY
+			                </span>
                     </div>
+                    {/*<div className="header-intro parallax100 t-center p-t-135 p-b-50"*/}
+                   {/*>*/}
+                    {/*<span className="tit2 p-l-15 p-r-15">*/}
+                    {/*Wszystkie oferty*/}
+                    {/*</span>*/}
+                    {/*</div>*/}
                     <div className="isotope_fillter">
                         <ul className="gallery_filter list">
-                            <li data-filter="*" className="active" id="all"><a href="#" onClick={this.setAll}>Wszystkie</a></li>
-                            <li data-filter=".brand" id="food"><a href="#" onClick={this.setFood}>Jedzenie</a></li>
-                            <li data-filter=".manipul" id="toy"><a href="#" onClick={this.setToy}>Zabawki</a></li>
-                            <li data-filter=".manipul" id="clothes"><a href="#" onClick={this.setClothes}>Ubrania</a></li>
-                            <li data-filter=".manipul" id="sport"><a href="#" onClick={this.setSport}>Sport</a></li>
-                            <li data-filter=".manipul" id="rtv"><a href="#" onClick={this.setRtv}>RTV/AGD</a></li>
-                            <li data-filter=".manipul" id="furniture"><a href="#" onClick={this.setFurniture}>Meble</a></li>
+                        <li data-filter="*" className="active" id="all"><a href="#" onClick={this.setAll}>Wszystkie</a></li>
+                        <li data-filter=".brand" id="food"><a href="#" onClick={this.setFood}>Jedzenie</a></li>
+                        <li data-filter=".manipul" id="toy"><a href="#" onClick={this.setToy}>Zabawki</a></li>
+                        <li data-filter=".manipul" id="clothes"><a href="#" onClick={this.setClothes}>Ubrania</a></li>
+                        <li data-filter=".manipul" id="sport"><a href="#" onClick={this.setSport}>Sport</a></li>
+                        <li data-filter=".manipul" id="rtv"><a href="#" onClick={this.setRtv}>RTV/AGD</a></li>
+                        <li data-filter=".manipul" id="furniture"><a href="#" onClick={this.setFurniture}>Meble</a></li>
                         </ul>
                     </div>
-                    <div className="container">
-                        <div className="gallery_f_inner row imageGallery1">
-                            {this.renderTableData1()}
+
+                    <div className="content-intro bg-white p-t-77 p-b-133">
+                        <div className="container">
+                            <div className="row">
+
+                                {this.renderTableData1()}
 
 
+
+
+
+                            </div>
                         </div>
-
                     </div>
                 </section>
+                {/*<section className="home_gallery_area p_120">*/}
+                    {/*<div className="container">*/}
+                        {/*<div className="main_title">*/}
+                            {/*<h2 className="section-heading text-uppercase">Wszystkie oferty</h2>*/}
+                        {/*</div>*/}
+                    {/*</div>*/}
+
+                    {/*<div className="isotope_fillter">*/}
+                        {/*<ul className="gallery_filter list">*/}
+                            {/*<li data-filter="*" className="active" id="all"><a href="#" onClick={this.setAll}>Wszystkie</a></li>*/}
+                            {/*<li data-filter=".brand" id="food"><a href="#" onClick={this.setFood}>Jedzenie</a></li>*/}
+                            {/*<li data-filter=".manipul" id="toy"><a href="#" onClick={this.setToy}>Zabawki</a></li>*/}
+                            {/*<li data-filter=".manipul" id="clothes"><a href="#" onClick={this.setClothes}>Ubrania</a></li>*/}
+                            {/*<li data-filter=".manipul" id="sport"><a href="#" onClick={this.setSport}>Sport</a></li>*/}
+                            {/*<li data-filter=".manipul" id="rtv"><a href="#" onClick={this.setRtv}>RTV/AGD</a></li>*/}
+                            {/*<li data-filter=".manipul" id="furniture"><a href="#" onClick={this.setFurniture}>Meble</a></li>*/}
+                        {/*</ul>*/}
+                    {/*</div>*/}
+                    {/*<div className="container">*/}
+                        {/*<div className="gallery_f_inner row imageGallery1">*/}
+                            {/*{this.renderTableData1()}*/}
+
+
+                        {/*</div>*/}
+
+                    {/*</div>*/}
+                {/*</section>*/}
                 <footer className="bg-light py-5My">
                     <div className="container">
                         <div className="small text-center text-muted">Copyright &copy; 2019 - Horak & Łyko & Rychter & Sinicki

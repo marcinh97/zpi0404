@@ -25,7 +25,8 @@ import {AppContext} from './App';
 import { Redirect } from 'react-router-dom'
 import {Nav, Navbar} from "react-bootstrap";
 import Table from "react-bootstrap/Table";
-import Spinner from "react-bootstrap/Spinner";
+import back1 from './img/back4.jpg';
+import Spinner from 'react-spinner-material';
 
 
 const axios = require('axios')
@@ -44,7 +45,8 @@ class UserOffers extends Component {
         isFurniture: false,
         isClothes: false,
         isSport: false,
-        isRtv: false
+        isRtv: false,
+        loading:true,
     };
 
     setRedirect = () => {
@@ -275,7 +277,7 @@ class UserOffers extends Component {
                 id: localStorage.getItem('idUser'),
             }),
         }).then(data => data.json())
-            .then(res => {console.log(res); this.setState({ data: res })});
+            .then(res => {console.log(res); this.setState({ data: res,  loading: false })});
     };
 
 
@@ -328,6 +330,16 @@ class UserOffers extends Component {
     }
 
     renderTableData1() {
+        if(this.state.loading)
+        {
+            return(
+
+                <div id="spinnerMy">
+                    <Spinner size={200} spinnerColor={"#333"} spinnerWidth={2} visible={true} />
+                </div>
+
+            )
+        }
         function getCatById(categoryNum) {
             return categoryNum===1 ? "Jedzenie" : categoryNum ===2 ? "Zabawki" : categoryNum==3 ? "RTV/AGD" : categoryNum==4 ? "Ubrania" : categoryNum==5 ? "Sport" : categoryNum==6 ? "Meble" :"Inne";
         }
