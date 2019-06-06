@@ -28,6 +28,7 @@ import Carousel from "react-bootstrap/Carousel";
 import Popup from "reactjs-popup";
 import ReactMapboxGl from "react-mapbox-gl";
 import Web3 from 'web3'
+import Spinner from 'react-spinner-material';
 
 const Map = ReactMapboxGl({
     accessToken: 'pk.eyJ1Ijoib3pvbmVsYXllcjk3IiwiYSI6ImNqdDc5YW9majAyZjU0NXBscjJkMXR2OHQifQ.aQH1Wz9_4MG4xcC6Wr4NbQ'
@@ -141,7 +142,8 @@ class SeparateOfferNew extends Component {
     state={
         isGlassShown:false,
         offerId: -1,
-        data: ""
+        data: "",
+        loading: true
     };
 
     constructor(props){
@@ -326,7 +328,7 @@ class SeparateOfferNew extends Component {
                 id: localStorage.getItem('idUser'),
             }),
         }).then(data => data.json())
-            .then(res => {console.log(res); this.setState({ data: res })});
+            .then(res => {console.log(res); this.setState({ data: res, loading: false })});
     };
 
 
@@ -335,7 +337,7 @@ class SeparateOfferNew extends Component {
         var id = this.state.offerId.id;
         fetch("https://backendzpipwr.herokuapp.com/offer?id="+id)
             .then(data => data.json())
-            .then(res => {console.log("ssss " + res); this.setState({data: res})});
+            .then(res => {console.log("ssss " + res); this.setState({data: res, loading: false})});
     };
 
 
@@ -404,8 +406,6 @@ class SeparateOfferNew extends Component {
         return (
 
             <div>
-
-
                 <head>
                     <meta charSet="utf-8"/>
                     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -417,9 +417,9 @@ class SeparateOfferNew extends Component {
                     <link rel="stylesheet" href="carousel.css"/>
                 </head>
 
-                <body className="back">
+                <body>
 
-                <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+                <Navbar collapseOnSelect fixed="top" expand="lg" bg="dark" variant="dark">
                     <Navbar.Brand href="/">CharytatywniRazem.pl</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
@@ -434,63 +434,63 @@ class SeparateOfferNew extends Component {
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
-                <section className="home_banner_area">
-                    <div className="container box_1620">
-                        <div className="banner_inner d-flex align-items-center">
-                            <div className="banner_content">
-                                <div className="media">
-                                    <div className="d-flex">
-                                        <Carousel showArrows={true} interval={null}>
-                                            {/*<div>*/}
-                                                {/*<img id="myMainPicture" ref={elem => this.mainPicture = elem} src={mainPicture} />*/}
-                                            {/*</div>*/}
-                                            {/*{otherPictures.map(source =>*/}
-                                                {/*<div>*/}
+                {this.state.loading ?
+                    <div id="spinnerMap">
+                        <Spinner size={200} spinnerColor={"#333"} spinnerWidth={2} visible={true}/>
+                    </div> :
+                    <div id="mainOfferDiv">
+                        <div id="offerBigDiv">
 
-                                                        {/*<img src={source} onClick={this.changeMain}/>*/}
-                                                {/*</div>)}*/}
-                                            {allPictures.map(source =>
-                                            <div>
-
-                                            <img src={source}/>
-                                            </div>)}
-
-                                        </Carousel>
-
+                            <div id="carouselDiv">
+                                <Carousel showArrows={true} interval={null}>
+                                    {allPictures.map(source =>
+                                        <div id="carouselInsideDiv">
+                                            <div id="carouselInsideInsideDiv">
+                                                <img src={source} id="imageInCarousel"/>
+                                            </div>
+                                        </div>)}
+                                </Carousel>
+                            </div>
+                            <div id="textDivOffer">
+                                <div className="personal_text">
+                                    <div id="offerTitleHeader">
+                                        <h3>{name}</h3>
                                     </div>
-                                    <div className="media-body">
-                                        <div className="personal_text">
-
-                                            <h3>{name}</h3>
-                                            <h4>{categoryName}</h4>
-                                            <p>{description}</p>
-                                            <p><i class="fas fa-phone"></i>
-                                                {phone} </p>
-                                            <p> Status ofety: {statusName}</p>
-
-                                            <Popup trigger={<button className={"infoButton"}> Pokaż na mapie</button>} position="right center" modal
-                                                   closeOnDocumentClick>
-                                                <Map
-                                                    style="mapbox://styles/marcinhorak/cjvgz67wl00dv1drk7b71mcpx"
-                                                    containerStyle={{
-                                                        height: "45vh",
-                                                        width: "10  0vh"
-                                                    }}
-                                                    center={[17.036956, 51.110694]}
-                                                >
-                                                </Map>
-                                            </Popup>
-                                            <button id={"butonik"} onClick={this.reserveOffer}
-                                                    ref={this.reserveButton}>Rezerwuj</button>
-                                            {/*<button onClick={console.log("Yyyyy")}>Hallo</button>*/}
-
+                                    <h4>{categoryName}</h4>
+                                    <p>{description}</p>
+                                    <p> Status ofety: {statusName}</p>
+                                    <p><i class="fas fa-phone"></i>{phone}</p>
+                                    <div id="buttonsOfferDiv">
+                                        <Popup trigger={<div id="insideDivButton">
+                                            <button
+                                                className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"> Pokaż
+                                                na mapie
+                                            </button>
+                                        </div>} position="right center" modal
+                                               closeOnDocumentClick>
+                                            <Map
+                                                style="mapbox://styles/marcinhorak/cjvgz67wl00dv1drk7b71mcpx"
+                                                containerStyle={{
+                                                    height: "45vh",
+                                                    width: "10  0vh"
+                                                }}
+                                                center={[17.036956, 51.110694]}
+                                            >
+                                            </Map>
+                                        </Popup>
+                                        <div id="insideDivButton">
+                                            <button
+                                                className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
+                                                onClick={this.reserveOffer} ref={this.reserveButton}>
+                                                Rezerwuj
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
+                }
                 <footer className="bg-light py-5My">
                     <div className="container">
                         <div className="small text-center text-muted">Copyright &copy; 2019 - Horak & Łyko & Rychter & Sinicki

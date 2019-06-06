@@ -335,9 +335,8 @@ class AllOffers extends Component {
                             </div>
 
                             <div className="wrap-text-blo1 p-t-35">
-                                <a href="#"><h4 className="txt5 color0-hov trans-0-4 m-b-13">
-                                    {name}
-                                </h4></a>
+                                <h4 className="txt5 color0-hov trans-0-4 m-b-13"> <Nav.Link style={{paddingLeft:0}} onClick={() => goToSingleOffer(offerid)}>{name}</Nav.Link></h4>
+
 
                                 <p><b>{cat}</b></p>
                                 <p className="m-b-20">
