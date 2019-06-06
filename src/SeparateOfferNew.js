@@ -29,6 +29,7 @@ import Popup from "reactjs-popup";
 import ReactMapboxGl from "react-mapbox-gl";
 import Web3 from 'web3'
 import Spinner from 'react-spinner-material';
+import ikona from './img/care.png';
 
 const Map = ReactMapboxGl({
     accessToken: 'pk.eyJ1Ijoib3pvbmVsYXllcjk3IiwiYSI6ImNqdDc5YW9majAyZjU0NXBscjJkMXR2OHQifQ.aQH1Wz9_4MG4xcC6Wr4NbQ'
@@ -135,6 +136,120 @@ const abi = [
         "type": "function"
     }
 ]
+const votingAbi = [
+    {
+        "constant": true,
+        "inputs": [
+            {
+                "name": "integer",
+                "type": "uint256"
+            }
+        ],
+        "name": "intToStr",
+        "outputs": [
+            {
+                "name": "",
+                "type": "string"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "pure",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [],
+        "name": "Offer",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "name": "userId",
+                "type": "uint256"
+            }
+        ],
+        "name": "voteForUser",
+        "outputs": [],
+        "payable": true,
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [
+            {
+                "name": "userId",
+                "type": "uint256"
+            }
+        ],
+        "name": "getPointsOfUser",
+        "outputs": [
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "name": "rankingItems",
+        "outputs": [
+            {
+                "name": "userId",
+                "type": "uint256"
+            },
+            {
+                "name": "votesNumber",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "owner",
+        "outputs": [
+            {
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "getWholeRanking",
+        "outputs": [
+            {
+                "name": "",
+                "type": "string"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    }
+]
 
 class SeparateOfferNew extends Component {
 
@@ -152,10 +267,13 @@ class SeparateOfferNew extends Component {
         this.changeMain = this.changeMain.bind(this)
         this.mainPicture = React.createRef()
         this.reserveOffer = this.reserveOffer.bind(this)
+        this.superLike = this.superLike.bind(this)
+        this.superLikeInfo = this.superLikeInfo.bind(this)
 
         const value=queryString.parse(this.props.location.search);
 
         this.state.offerId = value;
+        this.state.user = "";
         this.getDataFromDb()
 
         // if (typeof window.web3 !== 'undefined'){
@@ -169,9 +287,13 @@ class SeparateOfferNew extends Component {
             //this.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"))
         }
         const MyContract = window.web3.eth.contract(abi)
+        const VotingContract = window.web3.eth.contract(votingAbi)
+
         this.state.ContractInstance = MyContract.at("0x0f7df62d6f8382eb312f09c6a86dbb1a5c2c17f2")
+        this.state.VotingContract = VotingContract.at("0x804728922813cc3488bc7b30ae43c83affc54bfa");
         this.loadData = this.loadData.bind(this)
         this.reserveButton = React.createRef()
+        this.superLikeButton = React.createRef()
         this.loadData().then(console.log("Jest dobrze"));
         this.state.isReserved = false
         this.offerStatusText = React.createRef();
@@ -388,6 +510,7 @@ class SeparateOfferNew extends Component {
             category = data[0].categoryNum;
             categoryName = getCatById(category);
             phone = data[0].phone;
+            this.state.user = data[0].userId;
             statusName = getStatusByID(status);
             allPictures.push(mainPicture);
             if (numberOfPictures > 1){
@@ -460,6 +583,22 @@ class SeparateOfferNew extends Component {
                                     <p>{description}</p>
                                     <p> Status ofety: {statusName}</p>
                                     <p><i class="fas fa-phone"></i>{phone}</p>
+                                    <Popup
+                                        trigger={
+                                            <img src={ikona} height={50} width={50} onClick={this.superLike}/>}
+                                        // <button id={"superLikeButton"} onClick={this.superLike}
+                                        //              ref={this.superLikeButton}>{ikona}</button>}
+                                        on={"hover"}
+                                        position="bottom"
+                                    >SuperLike - nagradzaj darczyńców, którzy na to szczególnie zasługują!
+                                        <br/>
+                                        <Popup trigger={<button className="link">Poznaj więcej szczegółów</button>}
+                                        position="right center" modal
+                                        closeOnDocumentClick>SUPER LIKE! Nagradzaj darczyńców, którzy szczególnie zasługują na uznanie. <br/>
+                                        System nagradzania darczyńców w ramach SuperLike'ów wykorzystuje technologię Ethereum blockchain.
+                                        </Popup>
+                                    </Popup>
+                                    {/*<p>Wystawiona przez: user:{this.state.user}</p>*/}
                                     <div id="buttonsOfferDiv">
                                         <Popup trigger={<div id="insideDivButton">
                                             <button
@@ -478,6 +617,7 @@ class SeparateOfferNew extends Component {
                                             >
                                             </Map>
                                         </Popup>
+
                                         <div id="insideDivButton">
                                             <button
                                                 className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
@@ -485,6 +625,7 @@ class SeparateOfferNew extends Component {
                                                 Rezerwuj
                                             </button>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -508,6 +649,7 @@ class SeparateOfferNew extends Component {
     async reserveOffer(){
         if (typeof window.web3 === 'undefined') {
             console.log("Nie podlaczono ethereum account")
+            window.alert("Brak ethereum")
             return;
         }
 
@@ -551,6 +693,24 @@ class SeparateOfferNew extends Component {
         console.log("Zarezerwowano kurwa")
         console.log(this.state.ContractInstance)
         console.log(window.web3.eth.accounts)
+    }
+
+    async superLike() {
+        if (typeof window.web3 === 'undefined') {
+            console.log("Nie podlaczono ethereum account")
+            return;
+        }
+        console.log("" + this.state.user)
+        await window.ethereum.enable();
+        var userAccount = window.web3.eth.defaultAccount;
+        this.state.VotingContract.voteForUser(this.state.user, {
+            gas: 300000,
+            from: userAccount
+        }, (err, result) => console.log("AAA : " + result));
+    }
+
+    superLikeInfo() {
+        //window.alert("AAAAAA")
     }
 }
 

@@ -14,6 +14,7 @@ import AddItem from "./AddItem";
 import AllOffers from "./AllOffers";
 import {PrivateRoute} from "./PrivateRoute";
 import SeparateOfferNew from "./SeparateOfferNew";
+import SuperlikeRanking from "./SuperlikeRanking";
 
 const routing = (
     <Router>
@@ -23,6 +24,7 @@ const routing = (
             <Route path="/logged" component = {AfterLogging}/>
             <Route path="/confirm" component = {LoginConfirmation}/>
             <Route path="/map" component = {MapApp}/>
+            <Route path="/ranking" component = {SuperlikeRanking}/>
             <Route path="/register" component ={RegisterToPortal}/>
             <PrivateRoute exact path="/myOffers" component ={UserOffers}/>
             <Route path="/offer" component ={SeparateOfferNew}/>

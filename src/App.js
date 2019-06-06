@@ -49,6 +49,7 @@ class App extends Component {
         redirect: false,
         redirectMap : false,
         redirectOffers: false,
+        redirectRanking: false
     }
     constructor() {
         super();
@@ -63,6 +64,12 @@ class App extends Component {
     setRedirectMap = () => {
         this.setState({
             redirectMap: true
+        })
+    }
+
+    setRedirectRanking = () => {
+        this.setState({
+            redirectRanking: true
         })
     }
 
@@ -170,6 +177,7 @@ class App extends Component {
                                                          <Nav><div id="portfolio"></div></Nav>
                                                          <Nav><div id="kontakt"></div></Nav>
                                                          <Nav><div id="map_button"></div></Nav>
+                                                         <Nav><div id="ranking_button"></div></Nav>
                                                         <Nav><div id="all_offer_button"></div></Nav>
                                                         <Nav><div id="offer_button"></div></Nav>
                                                    <Nav><div id="my_offer_button"></div></Nav>
@@ -595,6 +603,7 @@ class App extends Component {
 
         displayLogOut();
         displayMap();
+        displayRanking();
         displayAddOffer();
         displayMyOffers();
         displayAllOffers();
@@ -612,7 +621,9 @@ class App extends Component {
 function goToMap() {
     window.open("/map","_self");
 }
-
+function goToRanking() {
+    window.open("/ranking","_self");
+}
 function goToMyOffers() {
     window.open("/myOffers","_self");
 }
@@ -659,6 +670,14 @@ function displayMap()
     )
     ;
 }
+
+function displayRanking(){
+    ReactDOM.render(
+        <div><Nav.Link id="rankingId" onClick={goToRanking}>Ranking</Nav.Link></div>, document.getElementById("ranking_button")
+    )
+    ;
+}
+
 function displayAddOffer()
 {
     if(localStorage.getItem('isLogged')=='true') {
