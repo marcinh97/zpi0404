@@ -50,97 +50,91 @@ class Register extends Component {
 
         const style= this.state.hideText ? {display: 'none'} :{};
         return (
+
             <div className="LoginButton">
-                <head>
-                    <meta charSet="utf-8"/>
-                    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-                    <meta name="description" content=""/>
-                    <meta name="author" content=""/>
-                    <meta name='google-signin-client_id'
-                          content='545384910825-14gu3jrktnjfcjrntbv4t3akclpk2hn2.apps.googleusercontent.com'/>
-                    <title>Charytatywni</title>
-                    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
-                          type="text/css"/>
-                    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700"
-                          rel="stylesheet"/>
-                    <link
-                        href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic'
-                        rel='stylesheet' type='text/css'/>
-                    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet"/>
+            <head>
+            <meta charSet="utf-8"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+            <meta name="description" content=""/>
+            <meta name="author" content=""/>
+            <meta name='google-signin-client_id'
+        content='545384910825-14gu3jrktnjfcjrntbv4t3akclpk2hn2.apps.googleusercontent.com'/>
+            <title>Charytatywni</title>
+        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
+              type="text/css"/>
+        <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700"
+        rel="stylesheet"/>
+            <link
+        href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic'
+        rel='stylesheet' type='text/css'/>
+            <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet"/>
 
-                    <link href="css/creative.min.css" rel="stylesheet"/>
-                    <link href="cssForLogin.css" rel="stylesheet"/>
+            <link href="css/creative.min.css" rel="stylesheet"/>
+            <link href="cssForLogin.css" rel="stylesheet"/>
 
-                </head>
-                <body id="page-top">
+            </head>
+        <body>
 
-                <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                    <Navbar.Brand href="/">CharytatywniRazem.pl</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                    <Navbar.Collapse id="responsive-navbar-nav">
-                        <Nav className="mr-auto"></Nav>
-                        <Nav>
-                            <div id="log_in"></div>
-                        </Nav>
-                    </Navbar.Collapse>
-                </Navbar>
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+            <Navbar.Brand href="/">CharytatywniRazem.pl</Navbar.Brand>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
+                <Nav className="mr-auto"></Nav>
+                <Nav>
+                    <div id="log_in"></div>
+                </Nav>
+            </Navbar.Collapse>
+        </Navbar>
 
-                <header className="masthead">
+        <div id = "formPhoto">
+            <div id="cos">
+            <div id="formDiv">
+                <h3 className="login-heading mb-4">Formularz rejestracyjny</h3>
+                <form method="post" onSubmit={this.pies}>
 
-                    <div id = "marginTopStylIdMy" className="container_loginMy">
-                        {/*<div className="container_login" style="margin-top: 10%">*/}
-                        <div className="row_loginMy">
-                            {/*<div>*/}
-                            <div className="col-md-9 col-lg-8 mx-auto myHeader">
-                                <h3 className="login-heading mb-4">Formularz rejestracyjny</h3>
-                                <form method="post" onSubmit={this.pies}>
-
-                                    <div className="form-label-group">
-                                        <input type="text" id="inputName" className="form-control"
-                                               placeholder="Imię" required autoFocus/>
-                                        <label htmlFor="inputName">Imię</label>
-                                    </div>
-                                    <div className="form-label-group">
-                                        <input type="text" id="inputSurname" className="form-control"
-                                               placeholder="Nazwisko" required autoFocus/>
-                                        <label htmlFor="inputSurName">Nazwisko</label>
-                                    </div>
-                                    <div className="form-label-group">
-                                        <input type="email" id="inputEmail" className="form-control"
-                                               placeholder="Adres email" required autoFocus/>
-                                        <label htmlFor="inputEmail">Adres email</label>
-                                    </div>
-
-                                    <div className="form-label-group">
-                                        <input type="password" id="inputPassword" className="form-control"
-                                               placeholder="Hasło" required/>
-                                        <label htmlFor="inputPassword">Hasło</label>
-                                    </div>
-
-                                    <button
-                                        className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
-                                        type="submit">
-                                        Zarejestruj
-                                    </button>
-                                    <div className="App" style={style} id="textToShow">
-                                        {this.alreadyRegistered}
-                                    </div>
-                                </form>
-
-
-                            </div>
-                        </div>
+                    <div className="form-label-group">
+                        <input type="text" id="inputName" className="form-control"
+                               placeholder="Imię" required autoFocus/>
+                        <label htmlFor="inputName"></label>
                     </div>
-                </header>
-
-                <footer className="bg-light py-5My">
-                    <div className="container">
-                        <div className="small text-center text-muted">Copyright &copy; 2019 - Horak & Łyko & Rychter & Sinicki
-                        </div>
+                    <div className="form-label-group">
+                        <input type="text" id="inputSurname" className="form-control"
+                               placeholder="Nazwisko" required autoFocus/>
+                        <label htmlFor="inputSurName"></label>
                     </div>
-                </footer>
-                </body>
+                    <div className="form-label-group">
+                        <input type="email" id="inputEmail" className="form-control"
+                               placeholder="Adres email" required autoFocus/>
+                        <label htmlFor="inputEmail"></label>
+                    </div>
+
+                    <div className="form-label-group">
+                        <input type="password" id="inputPassword" className="form-control"
+                               placeholder="Hasło" required/>
+                        <label htmlFor="inputPassword"></label>
+                    </div>
+
+                    <button
+                        className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
+                        type="submit">
+                        Zarejestruj
+                    </button>
+                    <div className="App" style={style} id="textToShow">
+                        {this.alreadyRegistered}
+                    </div>
+                </form>
             </div>
+            </div>
+        </div>
+
+        <footer className="bg-light py-5My">
+            <div className="container">
+                <div className="small text-center text-muted">Copyright &copy; 2019 - Horak & Łyko & Rychter & Sinicki
+                </div>
+            </div>
+        </footer>
+        </body>
+        </div>
 
         );
 

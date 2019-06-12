@@ -1,3 +1,75 @@
+#carouselDiv{
+    border-radius: 2%;
+    float: left;
+    width: 500px;
+    height: 400px;
+    margin-right: auto;
+    text-align: center;
+}
+
+#textDivOffer{
+    padding: 20px;
+    float: left;
+    width: 500px;
+}
+
+#offerBigDiv{
+    background-color: rgba(255,255,255,0.7);
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 80px;
+    margin-bottom: 200px;
+    margin-left: 10%;
+    margin-right: 10%;
+    overflow: auto;
+    width: 80%;
+}
+
+#buttonsOfferDiv{
+    overflow: auto;
+}
+
+#insideDivButton{
+    padding-right: 4px;
+    width: 50%;
+    float: left;
+}
+
+#offerTitleHeader{
+    border-bottom-color: #d6370c;
+    border-bottom-width: medium;
+}
+
+#carouselInsideDiv{
+    width: 500px;
+    height: 390px;
+}
+
+#carouselInsideInsideDiv{
+    border-radius: 2%;
+    width: 500px;
+}
+
+#imageInCarousel{
+    width: auto;
+    height: 390px;
+    border-radius: 2%;
+}
+
+#mainOfferDiv{
+    background-image: url("./img/bg-masthead1.jpg");
+    background-position: center;
+    background-repeat: repeat;
+    background-size: cover;
+    margin-top: 0px;
+    margin-left: 0;
+    margin-bottom: auto;
+    padding: 10px;
+}
+
 #footerSection{
     height: 50px;
     background: #a5a5a5;
@@ -501,7 +573,7 @@ Form Label
 #optionsMapHeader{
     margin: 0px;
     text-align: center;
-    background-color: rgba(169, 169, 169);
+    background-color: rgba(169, 169, 169, 1.0);
     width: 100%;
     height: 100%;
     padding: 0;

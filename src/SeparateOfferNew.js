@@ -28,6 +28,8 @@ import Carousel from "react-bootstrap/Carousel";
 import Popup from "reactjs-popup";
 import ReactMapboxGl from "react-mapbox-gl";
 import Web3 from 'web3'
+import Spinner from 'react-spinner-material';
+import ikona from './img/care.png';
 
 const Map = ReactMapboxGl({
     accessToken: 'pk.eyJ1Ijoib3pvbmVsYXllcjk3IiwiYSI6ImNqdDc5YW9majAyZjU0NXBscjJkMXR2OHQifQ.aQH1Wz9_4MG4xcC6Wr4NbQ'
@@ -134,6 +136,120 @@ const abi = [
         "type": "function"
     }
 ]
+const votingAbi = [
+    {
+        "constant": true,
+        "inputs": [
+            {
+                "name": "integer",
+                "type": "uint256"
+            }
+        ],
+        "name": "intToStr",
+        "outputs": [
+            {
+                "name": "",
+                "type": "string"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "pure",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [],
+        "name": "Offer",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "name": "userId",
+                "type": "uint256"
+            }
+        ],
+        "name": "voteForUser",
+        "outputs": [],
+        "payable": true,
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [
+            {
+                "name": "userId",
+                "type": "uint256"
+            }
+        ],
+        "name": "getPointsOfUser",
+        "outputs": [
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "name": "rankingItems",
+        "outputs": [
+            {
+                "name": "userId",
+                "type": "uint256"
+            },
+            {
+                "name": "votesNumber",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "owner",
+        "outputs": [
+            {
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "getWholeRanking",
+        "outputs": [
+            {
+                "name": "",
+                "type": "string"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    }
+]
 
 class SeparateOfferNew extends Component {
 
@@ -141,7 +257,8 @@ class SeparateOfferNew extends Component {
     state={
         isGlassShown:false,
         offerId: -1,
-        data: ""
+        data: "",
+        loading: true
     };
 
     constructor(props){
@@ -150,10 +267,13 @@ class SeparateOfferNew extends Component {
         this.changeMain = this.changeMain.bind(this)
         this.mainPicture = React.createRef()
         this.reserveOffer = this.reserveOffer.bind(this)
+        this.superLike = this.superLike.bind(this)
+        this.superLikeInfo = this.superLikeInfo.bind(this)
 
         const value=queryString.parse(this.props.location.search);
 
         this.state.offerId = value;
+        this.state.user = "";
         this.getDataFromDb()
 
         // if (typeof window.web3 !== 'undefined'){
@@ -167,9 +287,13 @@ class SeparateOfferNew extends Component {
             //this.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"))
         }
         const MyContract = window.web3.eth.contract(abi)
+        const VotingContract = window.web3.eth.contract(votingAbi)
+
         this.state.ContractInstance = MyContract.at("0x0f7df62d6f8382eb312f09c6a86dbb1a5c2c17f2")
+        this.state.VotingContract = VotingContract.at("0x804728922813cc3488bc7b30ae43c83affc54bfa");
         this.loadData = this.loadData.bind(this)
         this.reserveButton = React.createRef()
+        this.superLikeButton = React.createRef()
         this.loadData().then(console.log("Jest dobrze"));
         this.state.isReserved = false
         this.offerStatusText = React.createRef();
@@ -326,7 +450,7 @@ class SeparateOfferNew extends Component {
                 id: localStorage.getItem('idUser'),
             }),
         }).then(data => data.json())
-            .then(res => {console.log(res); this.setState({ data: res })});
+            .then(res => {console.log(res); this.setState({ data: res, loading: false })});
     };
 
 
@@ -335,7 +459,7 @@ class SeparateOfferNew extends Component {
         var id = this.state.offerId.id;
         fetch("https://backendzpipwr.herokuapp.com/offer?id="+id)
             .then(data => data.json())
-            .then(res => {console.log("ssss " + res); this.setState({data: res})});
+            .then(res => {console.log("ssss " + res); this.setState({data: res, loading: false})});
     };
 
 
@@ -386,6 +510,7 @@ class SeparateOfferNew extends Component {
             category = data[0].categoryNum;
             categoryName = getCatById(category);
             phone = data[0].phone;
+            this.state.user = data[0].userId;
             statusName = getStatusByID(status);
             allPictures.push(mainPicture);
             if (numberOfPictures > 1){
@@ -404,8 +529,6 @@ class SeparateOfferNew extends Component {
         return (
 
             <div>
-
-
                 <head>
                     <meta charSet="utf-8"/>
                     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -417,9 +540,9 @@ class SeparateOfferNew extends Component {
                     <link rel="stylesheet" href="carousel.css"/>
                 </head>
 
-                <body className="back">
+                <body>
 
-                <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+                <Navbar collapseOnSelect fixed="top" expand="lg" bg="dark" variant="dark">
                     <Navbar.Brand href="/">CharytatywniRazem.pl</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
@@ -434,63 +557,81 @@ class SeparateOfferNew extends Component {
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
-                <section className="home_banner_area">
-                    <div className="container box_1620">
-                        <div className="banner_inner d-flex align-items-center">
-                            <div className="banner_content">
-                                <div className="media">
-                                    <div className="d-flex">
-                                        <Carousel showArrows={true} interval={null}>
-                                            {/*<div>*/}
-                                                {/*<img id="myMainPicture" ref={elem => this.mainPicture = elem} src={mainPicture} />*/}
-                                            {/*</div>*/}
-                                            {/*{otherPictures.map(source =>*/}
-                                                {/*<div>*/}
+                {this.state.loading ?
+                    <div id="spinnerMap">
+                        <Spinner size={200} spinnerColor={"#333"} spinnerWidth={2} visible={true}/>
+                    </div> :
+                    <div id="mainOfferDiv">
+                        <div id="offerBigDiv">
 
-                                                        {/*<img src={source} onClick={this.changeMain}/>*/}
-                                                {/*</div>)}*/}
-                                            {allPictures.map(source =>
-                                            <div>
-
-                                            <img src={source}/>
-                                            </div>)}
-
-                                        </Carousel>
-
+                            <div id="carouselDiv">
+                                <Carousel showArrows={true} interval={null}>
+                                    {allPictures.map(source =>
+                                        <div id="carouselInsideDiv">
+                                            <div id="carouselInsideInsideDiv">
+                                                <img src={source} id="imageInCarousel"/>
+                                            </div>
+                                        </div>)}
+                                </Carousel>
+                            </div>
+                            <div id="textDivOffer">
+                                <div className="personal_text">
+                                    <div id="offerTitleHeader">
+                                        <h3>{name}</h3>
                                     </div>
-                                    <div className="media-body">
-                                        <div className="personal_text">
+                                    <h4>{categoryName}</h4>
+                                    <p>{description}</p>
+                                    <p> Status ofety: {statusName}</p>
+                                    <p><i class="fas fa-phone"></i>{phone}</p>
+                                    <Popup
+                                        trigger={
+                                            <img src={ikona} height={50} width={50} onClick={this.superLike}/>}
+                                        // <button id={"superLikeButton"} onClick={this.superLike}
+                                        //              ref={this.superLikeButton}>{ikona}</button>}
+                                        on={"hover"}
+                                        position="bottom"
+                                    >SuperLike - nagradzaj darczyńców, którzy na to szczególnie zasługują!
+                                        <br/>
+                                        <Popup trigger={<button className="link">Poznaj więcej szczegółów</button>}
+                                        position="right center" modal
+                                        closeOnDocumentClick>SUPER LIKE! Nagradzaj darczyńców, którzy szczególnie zasługują na uznanie. <br/>
+                                        System nagradzania darczyńców w ramach SuperLike'ów wykorzystuje technologię Ethereum blockchain.
+                                        </Popup>
+                                    </Popup>
+                                    {/*<p>Wystawiona przez: user:{this.state.user}</p>*/}
+                                    <div id="buttonsOfferDiv">
+                                        <Popup trigger={<div id="insideDivButton">
+                                            <button
+                                                className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"> Pokaż
+                                                na mapie
+                                            </button>
+                                        </div>} position="right center" modal
+                                               closeOnDocumentClick>
+                                            <Map
+                                                style="mapbox://styles/marcinhorak/cjvgz67wl00dv1drk7b71mcpx"
+                                                containerStyle={{
+                                                    height: "45vh",
+                                                    width: "10  0vh"
+                                                }}
+                                                center={[17.036956, 51.110694]}
+                                            >
+                                            </Map>
+                                        </Popup>
 
-                                            <h3>{name}</h3>
-                                            <h4>{categoryName}</h4>
-                                            <p>{description}</p>
-                                            <p><i class="fas fa-phone"></i>
-                                                {phone} </p>
-                                            <p> Status ofety: {statusName}</p>
-
-                                            <Popup trigger={<button className={"infoButton"}> Pokaż na mapie</button>} position="right center" modal
-                                                   closeOnDocumentClick>
-                                                <Map
-                                                    style="mapbox://styles/marcinhorak/cjvgz67wl00dv1drk7b71mcpx"
-                                                    containerStyle={{
-                                                        height: "45vh",
-                                                        width: "10  0vh"
-                                                    }}
-                                                    center={[17.036956, 51.110694]}
-                                                >
-                                                </Map>
-                                            </Popup>
-                                            <button id={"butonik"} onClick={this.reserveOffer}
-                                                    ref={this.reserveButton}>Rezerwuj</button>
-                                            {/*<button onClick={console.log("Yyyyy")}>Hallo</button>*/}
-
+                                        <div id="insideDivButton">
+                                            <button
+                                                className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
+                                                onClick={this.reserveOffer} ref={this.reserveButton}>
+                                                Rezerwuj
+                                            </button>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
+                }
                 <footer className="bg-light py-5My">
                     <div className="container">
                         <div className="small text-center text-muted">Copyright &copy; 2019 - Horak & Łyko & Rychter & Sinicki
@@ -508,6 +649,7 @@ class SeparateOfferNew extends Component {
     async reserveOffer(){
         if (typeof window.web3 === 'undefined') {
             console.log("Nie podlaczono ethereum account")
+            window.alert("Brak ethereum")
             return;
         }
 
@@ -551,6 +693,24 @@ class SeparateOfferNew extends Component {
         console.log("Zarezerwowano kurwa")
         console.log(this.state.ContractInstance)
         console.log(window.web3.eth.accounts)
+    }
+
+    async superLike() {
+        if (typeof window.web3 === 'undefined') {
+            console.log("Nie podlaczono ethereum account")
+            return;
+        }
+        console.log("" + this.state.user)
+        await window.ethereum.enable();
+        var userAccount = window.web3.eth.defaultAccount;
+        this.state.VotingContract.voteForUser(this.state.user, {
+            gas: 300000,
+            from: userAccount
+        }, (err, result) => console.log("AAA : " + result));
+    }
+
+    superLikeInfo() {
+        //window.alert("AAAAAA")
     }
 }
 
